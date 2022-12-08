@@ -63,14 +63,19 @@ const Governance = ({
         <TextBox>
           {`
 ### Terra Transaction 
-should be filled
+in this page we review all information about Terra Transaction in three topic:
+- Transaction Count and Status
+- Transaction Fee
+- Transaction Per Second (TPS)
+- Age of Blocks
+but before deep dive into chart i prepare some statics to see status of network at the glance.
 `}
         </TextBox>
         <Box pt={"4"}></Box>
         <TextBox>
           {`
 #### Glance
-should be filled
+according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
         </TextBox>
         <SimpleGrid
@@ -139,7 +144,7 @@ should be filled
         <TextBox>
           {`
 #### Transaction Count and Status 
-some info
+transaction status define as whether a transaction successfully done or transaction doesn't completed of failed. the reasons for failing transaction are varying from lack of gas fee and authorization problem.
 `}
         </TextBox>
         <SimpleGrid
@@ -176,7 +181,7 @@ some info
             data={transactionsTxCountAndSuccess.data}
             queryLink={transactionsTxCountAndSuccess.key}
             title={transactionsTxCountAndSuccessNames[1]}
-            modelInfo="is this info"
+            // modelInfo="is this info"
             baseSpan={3}
             infoSizePercentage={25}
             barDataKey={"tx count"}
@@ -187,7 +192,7 @@ some info
           <TextBox>
             {`
 #### Transaction Fee
-some info
+one of most important problem blockchain is fee and gas that paid for transaction. amount of transaction fee is very important, some times this fee cause one user goes to another blockchains.
 `}
           </TextBox>
           <LineChartWithBar
@@ -208,7 +213,7 @@ some info
             data={transactionsFee.data}
             queryLink={transactionsFee.key}
             title={transactionsFeeNames[1]}
-            modelInfo="is this info"
+            // modelInfo="is this info"
             baseSpan={3}
             infoSizePercentage={25}
             barDataKey={"AVG tx fee"}
@@ -219,7 +224,7 @@ some info
           <TextBox>
             {`
 #### Transaction Per Second (TPS)
-some info
+TPS shows speed of blockchain and each this number is higher the blockchain is faster. this number doesn't have relation with number or power validators and defined in protocol and network
 `}
           </TextBox>
           <LineChartWithBar
@@ -228,7 +233,7 @@ some info
             data={transactionsTPS.data}
             queryLink={transactionsTPS.key}
             title={transactionsTPSNames[1]}
-            modelInfo="is this info"
+            // modelInfo="is this info"
             baseSpan={3}
             infoSizePercentage={25}
             barDataKey={"TPS"}
@@ -238,7 +243,7 @@ some info
           <TextBox>
             {`
 #### Age of Blocks
-some info
+each block contain multiple transactions that these transaction chained together and create blockchain. like TPS, age of blocks defined by protocol and donesn't change so much
 `}
           </TextBox>
           <LineChartWithBar
@@ -260,7 +265,7 @@ some info
             data={transactionsBlockAge.data}
             queryLink={transactionsBlockAge.key}
             title={transactionsBlockAgeNames[3]}
-            modelInfo="is this info"
+            // modelInfo="is this info"
             baseSpan={3}
             infoSizePercentage={"full"}
             barDataKey={"block age"}

@@ -55,14 +55,17 @@ const Governance = ({
         <TextBox>
           {`
 ### Terra Wallet 
-should be filled
+in this page we review all information users(addresses) that currently done t transaction in Terra to see what is status of Terra from user side. terra addresses reviewed from two side:
+- Active wallets
+- new wallets
+all of above information calculated as weekly timeframe.
 `}
         </TextBox>
         <Box pt={"4"}></Box>
         <TextBox>
           {`
 #### Glance
-should be filled
+according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
         </TextBox>
         <SimpleGrid
@@ -97,7 +100,7 @@ should be filled
           <TextBox>
             {`
 #### Active Wallets
-some info
+number of active wallets is one of most important metrics for reviewing is one network work currently and has wired function
 `}
           </TextBox>
           <LineChartWithBar
@@ -108,26 +111,34 @@ some info
             title={walletsActiveNames[1]}
             baseSpan={3}
             infoSizePercentage={25}
+            modelInfo={`as we see in data clearly shows number of users reduces in last month like other blockchains and (all platform in web3) but in two point number of active user go up. 
+
+- first in start of Terra and this is usually and people want to try new Terra and 
+- second in middle of Sep and after Terra price go up but after that this number go down
+
+Q4 is worst quatre for crypto and Terra isn't only one. in these month's we see all of blockchain record worse record of their
+            `}
             barDataKey={"Active wallet"}
             lineDataKey="AVG active wallet"
             xAxisDataKey="Day"
           />
+          <TextBox>
+            {`
+#### New Wallets
+every blockchain to growth and expand and adapted to the real world need new user.
+`}
+          </TextBox>
           <ChartBox
             data={walletsNew.data}
             queryLink={walletsNew.key}
             baseSpan={3}
-            modelInfo="3234"
+            infoSizePercentage={25}
             areaDataKey="Cum new wallet"
             xAxisDataKey="Day"
             oyLabel="Count"
             title={walletsNewNames[0]}
           />
-          <TextBox>
-            {`
-#### New Wallets
-some info
-`}
-          </TextBox>
+
           <LineChartWithBar
             customColor={colors[3]}
             barColor={colors[3]}
@@ -136,7 +147,7 @@ some info
             title={walletsNewNames[1]}
             baseSpan={3}
             infoSizePercentage="full"
-            modelInfo="3234"
+            modelInfo="as data shows in last day of may and with start of the new Terra lot's of new user join but as time goes we see this growth reduced.this is not new thing and if review new user in all blockchain available patternS effect shown it self and like active wallets in mid of Sep and as Terra price go lot's of new wallet join Terra but after price drop these users reduces "
             barDataKey={"New wallet"}
             lineDataKey="AVG new wallet"
             xAxisDataKey="Day"
