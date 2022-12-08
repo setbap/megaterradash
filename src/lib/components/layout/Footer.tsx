@@ -1,49 +1,13 @@
 import {
   Box,
-  chakra,
   Container,
   Link,
   Stack,
   Text,
   useColorModeValue,
-  VisuallyHidden,
 } from "@chakra-ui/react";
 import { FaGithub } from "react-icons/fa";
-import { CgWebsite } from "react-icons/cg";
-import { ReactNode } from "react";
-import { FlipSideIcon } from "../basic/FlipSideIcon";
-
-const SocialButton = ({
-  children,
-  label,
-  href,
-}: {
-  children: ReactNode;
-  label: string;
-  href: string;
-}) => {
-  return (
-    <chakra.button
-      bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}
-      rounded={"full"}
-      w={8}
-      h={8}
-      cursor={"pointer"}
-      as={"a"}
-      href={href}
-      display={"inline-flex"}
-      alignItems={"center"}
-      justifyContent={"center"}
-      transition={"background 0.3s ease"}
-      _hover={{
-        bg: useColorModeValue("blackAlpha.200", "whiteAlpha.200"),
-      }}
-    >
-      <VisuallyHidden>{label}</VisuallyHidden>
-      {children}
-    </chakra.button>
-  );
-};
+import { FlipSideIcon, MetricsDoa } from "../basic/FlipSideIcon";
 
 export default function Footer() {
   const baseColor = useColorModeValue("gray.700", "whiteAlpha.700");
@@ -60,14 +24,42 @@ export default function Footer() {
       >
         <Stack direction={"row"} spacing={2}>
           <Text>Powered by</Text>
-          <Link style={{marginInlineStart: '0.25em'}} href={"https://flipsidecrypto.xyz/"} isExternal display={'inline-flex'}>
-            Flipside Crypto <Box style={{marginTop: '-0.05em'}} ml={'1'}><FlipSideIcon fill={baseColor} /></Box>
+          <Link
+            style={{ marginInlineStart: "0.25em" }}
+            href={"https://flipsidecrypto.xyz/"}
+            isExternal
+            display={"inline-flex"}
+          >
+            Flipside Crypto{" "}
+            <Box style={{ marginTop: "-0.05em" }} ml={"1"}>
+              <FlipSideIcon fill={baseColor} />
+            </Box>
           </Link>
-          <Text style={{marginInlineStart: '0.3em'}}>&</Text>
-          <Link style={{marginInlineStart: '0.25em'}} href={"http://github.com/setbap"} isExternal display={'inline-flex'}>
-            SetBap <Box mt={'1'} ml={'1'}><FaGithub /></Box>
+          <Text style={{ marginInlineStart: "0.3em" }}>&</Text>
+          <Link
+            style={{ marginInlineStart: "0.25em" }}
+            href={"https://metricsdao.xyz/"}
+            isExternal
+            display={"inline-flex"}
+          >
+            Metrics Dao{" "}
+            <Box style={{ marginTop: "-0.05em" }} ml={"1"}>
+              <MetricsDoa />
+            </Box>
           </Link>
 
+          <Text style={{ marginInlineStart: "0.3em" }}>&</Text>
+          <Link
+            style={{ marginInlineStart: "0.25em" }}
+            href={"http://github.com/setbap"}
+            isExternal
+            display={"inline-flex"}
+          >
+            SetBap{" "}
+            <Box mt={"1"} ml={"1"}>
+              <FaGithub />
+            </Box>
+          </Link>
 
           {/* 
           <SocialButton label={"Flipside Website"} href={"http://flipsidecrypto.xyz/"}>
