@@ -82,11 +82,13 @@ const ChartBox = ({
   };
   const maxDate = isNotDate ? null : getMaxDate();
   const [selectedDate, setSelectedDate] = useState<number | string>(
-    Math.round(
-      (maxDate!.toDate().getTime() -
-        new Date(maxDate!.toDate().getFullYear(), 0, 1).getTime()) /
-        (1000 * 60 * 60 * 24)
-    ) + 1
+    isNotDate
+      ? ""
+      : Math.round(
+          (maxDate!.toDate().getTime() -
+            new Date(maxDate!.toDate().getFullYear(), 0, 1).getTime()) /
+            (1000 * 60 * 60 * 24)
+        ) + 1
   );
   const [chartData, setChartData] = useState(data);
   const [savedDailyChart, setSavedDailyChart] = useState(data);
