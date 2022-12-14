@@ -10,6 +10,7 @@ import { StakingProps } from "pages/staking";
 import BarGraph from "lib/components/charts/BarGraph";
 import DonutChart from "lib/components/charts/DonutChart";
 import StackedAreaChart from "lib/components/charts/StackedAreaGraph";
+import { StateCardRemoteData } from "lib/components/charts/StateCardRemoteData";
 
 const colors = [
   "#ff5722",
@@ -93,6 +94,38 @@ according section defined in above, i prepare some of static about these topics.
             hasArrowIcon={false}
             link={walletsNew.key}
           /> */}
+
+          <StateCardRemoteData
+            url="https://phoenix-lcd.terra.dev/cosmos/bank/v1beta1/supply/uluna"
+            link="https://docs.terra.money/develop/swagger"
+            status="unchanged"
+            title={"Total Supply"}
+            getStat={(data) => data["amount"].amount / 1e6}
+          />
+
+          <StateCardRemoteData
+            url="https://phoenix-lcd.terra.dev/cosmos/staking/v1beta1/pool"
+            link="https://docs.terra.money/develop/swagger"
+            status="unchanged"
+            title={"Not Bonded Token In Pool"}
+            getStat={(data) => data.pool.not_bonded_tokens / 1e6}
+          />
+
+          <StateCardRemoteData
+            url="https://phoenix-lcd.terra.dev/cosmos/staking/v1beta1/pool"
+            link="https://docs.terra.money/develop/swagger"
+            status="unchanged"
+            title={"Bonded Token In Pool"}
+            getStat={(data) => data.pool.bonded_tokens / 1e6}
+          />
+
+          <StateCardRemoteData
+            url="https://phoenix-lcd.terra.dev/cosmos/mint/v1beta1/inflation"
+            link="https://docs.terra.money/develop/swagger"
+            status="unchanged"
+            title={"Inflation Rate"}
+            getStat={(data) => data.inflation}
+          />
         </SimpleGrid>
         <SimpleGrid
           position={"relative"}
