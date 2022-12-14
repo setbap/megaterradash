@@ -180,7 +180,7 @@ number of active wallets is one of most important metrics for reviewing is one n
             modalInfo="show data of top 30 validators in Terra and Amount Delegate Luna"
             title={top30ValidatorBasedOnCurrentBalance.title}
             baseSpan={3}
-            dataKey="Validator name"
+            dataKey="Validators"
             oyLabel="Current delegate amount"
             oxLabel="Validator Name"
             infoSizePercentage={25}
