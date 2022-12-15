@@ -121,7 +121,7 @@ according section defined in above, i prepare some of static about these topics.
             url="https://node-api.flipsidecrypto.com/api/v2/queries/97433b80-49d0-45d6-8e2a-b1a23adb06cb/data/latest"
             link="https://app.flipsidecrypto.com/velocity/queries/97433b80-49d0-45d6-8e2a-b1a23adb06cb"
             status="unchanged"
-            title={"Total supply"}
+            title={"Circulate supply"}
             getStat={(data) => data[0]["Total supply"]}
           />
         </SimpleGrid>
