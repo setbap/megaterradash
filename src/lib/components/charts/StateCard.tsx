@@ -154,7 +154,7 @@ export const StatsCard = (props: StatsCardProps) => {
         <>
           <Link
             href={
-              props.isExternalLink
+              isExternalLink
                 ? props.link
                 : `https://app.flipsidecrypto.com/velocity/queries/${props.link}`
             }

@@ -172,10 +172,15 @@ according section defined in above, i prepare some of static about these topics.
           <StatsCard
             stat={totalInfo.data.stakingReturn}
             title={"Staking Return "}
-            status="inc"
+            change={totalInfo.data.stakingReturnChange}
             unit=" %"
             isExternalLink
-            hasArrowIcon={false}
+            decimal={2}
+            comment={"30D change"}
+            hasArrowIcon={true}
+            status={
+              totalInfo.data.stakingReturnChange > 0 ? "inc" : "unchanged"
+            }
             link={totalInfo.key}
           />
         </SimpleGrid>

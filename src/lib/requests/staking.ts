@@ -146,12 +146,13 @@ export const getTotalInfo = async () => {
       )
     ).pool[0].amount / 1e6;
 
-  const supplyTotal: number =
-    (
-      await getSimpleOutSourceData<any>(
-        "https://phoenix-lcd.terra.dev/cosmos/bank/v1beta1/supply?pagination.reverse=true"
-      )
-    ).supply.at(-1).amount / 1e6;
+  const supplyTotalArr: any[] = (
+    await getSimpleOutSourceData<any>(
+      "https://phoenix-lcd.terra.dev/cosmos/bank/v1beta1/supply?pagination.reverse=true"
+    )
+  ).supply;
+
+  const supplyTotal = supplyTotalArr.at(-1).amount / 1e6;
 
   const supplyPool = (
     await getSimpleOutSourceData<{
@@ -159,12 +160,13 @@ export const getTotalInfo = async () => {
     }>("https://phoenix-lcd.terra.dev/cosmos/staking/v1beta1/pool")
   ).pool;
 
-  const stakingReturn: number =
-    (
-      await getSimpleOutSourceData<any>(
-        "https://phoenix-api.terra.dev/chart/staking-return/annualized"
-      )
-    ).at(-1).value * 100;
+  const stakingReturnArr: any[] = await getSimpleOutSourceData<any>(
+    "https://phoenix-api.terra.dev/chart/staking-return/annualized"
+  );
+
+  const stakingReturn = stakingReturnArr.at(-1).value * 100;
+  const stakingReturnChange =
+    (stakingReturnArr.at(-1).value - stakingReturnArr.at(-30).value) * 100;
 
   const stakingRatio: number = (supplyPool.bonded_tokens * 100) / supplyTotal;
   const data = {
@@ -173,6 +175,7 @@ export const getTotalInfo = async () => {
     stakingRatio,
     communityPool,
     stakingReturn,
+    stakingReturnChange,
   };
 
   return {

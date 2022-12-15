@@ -120,5 +120,6 @@ export interface StakingProps {
     stakingRatio: number;
     communityPool: number;
     stakingReturn: number;
+    stakingReturnChange: number;
   }>;
 }
