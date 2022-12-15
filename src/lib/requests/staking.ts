@@ -16,6 +16,7 @@ import {
 } from "lib/types/types/staking";
 import {
   getSimpleArrayData,
+  getSimpleOutSourceData,
   pivotData,
   summerizeRow,
   summerizeRow2Item,
@@ -134,6 +135,52 @@ export const getTop100Richlist = () =>
     "Top 100 LUNA holders",
     "Balance"
   );
+
+export const getTotalInfo = async () => {
+  const communityPool =
+    (
+      await getSimpleOutSourceData<{
+        pool: [{ denum: string; amount: number }];
+      }>(
+        "https://phoenix-lcd.terra.dev/cosmos/distribution/v1beta1/community_pool"
+      )
+    ).pool[0].amount / 1e6;
+
+  const supplyTotal: number =
+    (
+      await getSimpleOutSourceData<any>(
+        "https://phoenix-lcd.terra.dev/cosmos/bank/v1beta1/supply?pagination.reverse=true"
+      )
+    ).supply.at(-1).amount / 1e6;
+
+  const supplyPool = (
+    await getSimpleOutSourceData<{
+      pool: { not_bonded_tokens: number; bonded_tokens: number };
+    }>("https://phoenix-lcd.terra.dev/cosmos/staking/v1beta1/pool")
+  ).pool;
+
+  const stakingReturn: number =
+    (
+      await getSimpleOutSourceData<any>(
+        "https://phoenix-api.terra.dev/chart/staking-return/annualized"
+      )
+    ).at(-1).value * 100;
+
+  const stakingRatio: number = (supplyPool.bonded_tokens * 100) / supplyTotal;
+  const data = {
+    supplyTotal,
+    bonded: supplyPool.bonded_tokens / 1e6,
+    stakingRatio,
+    communityPool,
+    stakingReturn,
+  };
+
+  return {
+    data,
+    title: "",
+    key: "https://station.terra.money/",
+  };
+};
 
 export const _getBridgeTransactions = () =>
   getSimpleArrayData<BridgeTransactions, BridgeTransactions>(

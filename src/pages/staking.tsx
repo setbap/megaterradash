@@ -13,6 +13,7 @@ import {
   getDistributionOfStakingRewards,
   getStakingrewards,
   getBridgeTransactions,
+  getTotalInfo,
 } from "lib/requests/staking";
 import { ReturnDataType } from "lib/types/base";
 import {
@@ -46,6 +47,7 @@ export async function getStaticProps() {
     distributionOfStakingRewards,
     top100Richlist,
     bridgeTransactions,
+    totalInfo,
   ] = await Promise.all([
     getTop30ValidatorBasedOnCurrentBalance(),
     getTop10validatorbasedontotalvolumeofdelegatetothem(),
@@ -61,6 +63,8 @@ export async function getStaticProps() {
     getDistributionOfStakingRewards(),
     getTop100Richlist(),
     getBridgeTransactions(),
+
+    getTotalInfo(),
   ]);
   return {
     props: {
@@ -78,6 +82,8 @@ export async function getStaticProps() {
       distributionOfStakingRewards,
       top100Richlist,
       bridgeTransactions,
+
+      totalInfo,
     },
     revalidate: 10 * 60,
   };
@@ -108,4 +114,11 @@ export interface StakingProps {
   >;
   weeklytxcounttxvolumeanduniqueusers: ReturnDataType<any>;
   bridgeTransactions: ReturnDataType<any>;
+  totalInfo: ReturnDataType<{
+    supplyTotal: number;
+    bonded: number;
+    stakingRatio: number;
+    communityPool: number;
+    stakingReturn: number;
+  }>;
 }

@@ -21,6 +21,7 @@ interface StatsCardProps {
   stat: number;
   status?: "inc" | "dec" | "unchanged" | "custom";
   link?: string;
+  isExternalLink?: boolean;
   comment?: string;
   unit?: string;
   decimal?: number;
@@ -40,6 +41,7 @@ export const StatsCard = (props: StatsCardProps) => {
     hasArrowIcon = true,
     rotate = "0deg",
     top = "20%",
+    isExternalLink = false,
     stat,
     status = "unchanged",
     forceDecimal = false,
@@ -151,7 +153,11 @@ export const StatsCard = (props: StatsCardProps) => {
       ) : (
         <>
           <Link
-            href={`https://app.flipsidecrypto.com/velocity/queries/${props.link}`}
+            href={
+              props.isExternalLink
+                ? props.link
+                : `https://app.flipsidecrypto.com/velocity/queries/${props.link}`
+            }
             isExternal
           >
             <StatLabel fontWeight="medium" display={"inline-flex"} isTruncated>

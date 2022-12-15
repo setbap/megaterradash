@@ -41,6 +41,7 @@ const Staking = ({
   stakingrewards,
   top100Richlist,
   bridgeTransactions,
+  totalInfo,
 }: StakingProps): JSX.Element => {
   const averageweeklytxcounttxvolumeanduniqueusersNames =
     averageweeklytxcounttxvolumeanduniqueusers.title.split(",");
@@ -92,22 +93,6 @@ according section defined in above, i prepare some of static about these topics.
           columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
           spacing={{ base: 5, lg: 8 }}
         >
-          {/* <StatsCard
-            stat={walletsNew.data.at(-1)?.["AVG New wallet"]!}
-            title={walletsNewNames[2]}
-            status="inc"
-            hasArrowIcon={false}
-            link={walletsNew.key}
-          /> */}
-
-          <StateCardRemoteData
-            url="https://phoenix-lcd.terra.dev/cosmos/bank/v1beta1/supply/uluna"
-            link="https://docs.terra.money/develop/swagger"
-            status="unchanged"
-            title={"Total Supply"}
-            getStat={(data) => data["amount"].amount / 1e6}
-          />
-
           <StateCardRemoteData
             url="https://phoenix-lcd.terra.dev/cosmos/staking/v1beta1/pool"
             link="https://docs.terra.money/develop/swagger"
@@ -138,6 +123,60 @@ according section defined in above, i prepare some of static about these topics.
             status="unchanged"
             title={"Total supply"}
             getStat={(data) => data[0]["Total supply"]}
+          />
+        </SimpleGrid>
+        <SimpleGrid
+          my={"6"}
+          columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
+          spacing={{ base: 5, lg: 8 }}
+        >
+          <StatsCard
+            stat={totalInfo.data.supplyTotal}
+            title={"Total Supply"}
+            status="inc"
+            unit=""
+            isExternalLink
+            hasArrowIcon={false}
+            link={totalInfo.key}
+          />
+
+          <StatsCard
+            stat={totalInfo.data.bonded}
+            title={"Staked Amount"}
+            status="inc"
+            unit=""
+            isExternalLink
+            hasArrowIcon={false}
+            link={totalInfo.key}
+          />
+
+          <StatsCard
+            stat={totalInfo.data.stakingRatio}
+            title={"Staking Ratio"}
+            status="inc"
+            unit="%"
+            isExternalLink
+            hasArrowIcon={false}
+            link={totalInfo.key}
+          />
+          <StatsCard
+            stat={totalInfo.data.communityPool}
+            title={"Community Pool"}
+            status="inc"
+            unit=""
+            isExternalLink
+            hasArrowIcon={false}
+            link={totalInfo.key}
+          />
+
+          <StatsCard
+            stat={totalInfo.data.stakingReturn}
+            title={"Staking Return "}
+            status="inc"
+            unit=" %"
+            isExternalLink
+            hasArrowIcon={false}
+            link={totalInfo.key}
           />
         </SimpleGrid>
         <SimpleGrid

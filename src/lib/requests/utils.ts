@@ -12,6 +12,12 @@ export const getSimpleInfo = async <T>(
   return { data, title, key: velocityKey };
 };
 
+export const getSimpleOutSourceData = async <T>(link: string) => {
+  const fetchedData = await fetch(link);
+  const parsedData: T = await fetchedData.json();
+  return parsedData;
+};
+
 export const getSimpleArrayData = async <T, R = null>(
   velocityKey: string,
   title: string,

@@ -35,7 +35,7 @@ interface Props {
   xAxisDataKey: string;
   showSeprate?: boolean;
   lineDataKey: string;
-  hideLine: boolean;
+  hideLine?: boolean;
   barDataKey: string;
   title: string;
   data: any[];
