@@ -97,3 +97,13 @@ export interface Top100Richlist {
   Wallet: string;
   Balance: number;
 }
+
+// a7fb6d3b-d85b-4903-b8af-6cb7111c5839
+export interface BridgeTransactions {
+  Day: string;
+  "Destination chain": string;
+  "tx count": number;
+  "Unique wallet": number;
+  Volume: number;
+  "AVG volume": number;
+}
