@@ -391,12 +391,6 @@ const LineChartWithBar = ({
                 stroke={`red`}
               />
             )}
-
-            {/* <Legend
-              verticalAlign="top"
-              fontSize={"8px"}
-              style={{ fontSize: "7px" }}
-            /> */}
           </ComposedChart>
         </ResponsiveContainer>
         <AnimatePresence>

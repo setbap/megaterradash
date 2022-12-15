@@ -402,27 +402,28 @@ number of active wallets is one of most important metrics for reviewing is one n
             lineDataKey="fake"
           />
 
-          {["outflowEachChainTxCount", "outflowEachChainVolume"].map(
-            (item, index) => (
-              <StackedAreaChart
-                key={item}
-                values={bridgeTransactions.data[item]}
-                queryLink={bridgeTransactions.key}
-                modalInfo=""
-                title={bridgeTransactionsNames[4 + index]}
-                baseSpan={3}
-                dataKey="Name"
-                oyLabel="$Luna"
-                oxLabel="Action"
-                labels={bridgeTransactions.data.chains.map(
-                  (item: string, index: number) => ({
-                    key: item,
-                    color: colors[index % colors.length],
-                  })
-                )}
-              />
-            )
-          )}
+          {[
+            { name: "outflowEachChainTxCount", label: "TX count" },
+            { name: "outflowEachChainVolume", label: "$Luna" },
+          ].map((item, index) => (
+            <StackedAreaChart
+              key={item.name}
+              values={bridgeTransactions.data[item.name]}
+              queryLink={bridgeTransactions.key}
+              modalInfo=""
+              title={bridgeTransactionsNames[4 + index]}
+              baseSpan={3}
+              dataKey="Name"
+              oyLabel={item.label}
+              oxLabel="Action"
+              labels={bridgeTransactions.data.chains.map(
+                (item: string, index: number) => ({
+                  key: item,
+                  color: colors[index % colors.length],
+                })
+              )}
+            />
+          ))}
           {/* 
           <TextBox>
             {`
