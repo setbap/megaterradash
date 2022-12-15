@@ -9,6 +9,9 @@ import {
   getWeeklytop10validatorbasedonvolumeofdelegatetothem,
   getAverageweeklytxcounttxvolumeanduniqueusers,
   getWeeklytxcounttxvolumeanduniqueusers,
+  getTop100Richlist,
+  getDistributionOfStakingRewards,
+  getStakingrewards,
 } from "lib/requests/staking";
 import { ReturnDataType } from "lib/types/base";
 import {
@@ -21,6 +24,9 @@ import {
   Averageweeklytxcounttxvolumeanduniqueusers,
   Weeklytxcounttxvolumeanduniqueusers,
   Top30validatorsbasedoncurrentbalance,
+  DistributionOfStakingRewards,
+  Stakingrewards,
+  Top100Richlist,
 } from "lib/types/types/staking";
 import Transaction from "pages";
 
@@ -35,6 +41,9 @@ export async function getStaticProps() {
     weeklytop10validatorbasedonvolumeofdelegatetothem,
     averageweeklytxcounttxvolumeanduniqueusers,
     weeklytxcounttxvolumeanduniqueusers,
+    stakingrewards,
+    distributionOfStakingRewards,
+    top100Richlist,
   ] = await Promise.all([
     getTop30ValidatorBasedOnCurrentBalance(),
     getTop10validatorbasedontotalvolumeofdelegatetothem(),
@@ -45,6 +54,10 @@ export async function getStaticProps() {
     getWeeklytop10validatorbasedonvolumeofdelegatetothem(),
     getAverageweeklytxcounttxvolumeanduniqueusers(),
     getWeeklytxcounttxvolumeanduniqueusers(),
+
+    getStakingrewards(),
+    getDistributionOfStakingRewards(),
+    getTop100Richlist(),
   ]);
   return {
     props: {
@@ -57,12 +70,19 @@ export async function getStaticProps() {
       weeklytop10validatorbasedonvolumeofdelegatetothem,
       averageweeklytxcounttxvolumeanduniqueusers,
       weeklytxcounttxvolumeanduniqueusers,
+
+      stakingrewards,
+      distributionOfStakingRewards,
+      top100Richlist,
     },
     revalidate: 10 * 60,
   };
 }
 export default Staking;
 export interface StakingProps {
+  top100Richlist: ReturnDataType<Top100Richlist[]>;
+  distributionOfStakingRewards: ReturnDataType<DistributionOfStakingRewards[]>;
+  stakingrewards: ReturnDataType<Stakingrewards[]>;
   top30ValidatorBasedOnCurrentBalance: ReturnDataType<
     Top30validatorsbasedoncurrentbalance[]
   >;

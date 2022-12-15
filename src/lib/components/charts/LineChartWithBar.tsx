@@ -35,6 +35,7 @@ interface Props {
   xAxisDataKey: string;
   showSeprate?: boolean;
   lineDataKey: string;
+  hideLine: boolean;
   barDataKey: string;
   title: string;
   data: any[];
@@ -62,6 +63,7 @@ const LineChartWithBar = ({
   barColor,
   isNotDate = false,
   extraDecimal = 4,
+  hideLine = false,
   lineDataKey,
   barDataKey,
   xAxisDataKey,
@@ -374,6 +376,7 @@ const LineChartWithBar = ({
             />
 
             <Area
+              hide={hideLine}
               dataKey={lineDataKey}
               yAxisId="left"
               strokeWidth={"2"}

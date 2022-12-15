@@ -9,6 +9,9 @@ import {
   Weeklytop10validatorbasedonvolumeofdelegatetothem,
   Averageweeklytxcounttxvolumeanduniqueusers,
   Weeklytxcounttxvolumeanduniqueusers,
+  DistributionOfStakingRewards,
+  Stakingrewards,
+  Top100Richlist,
 } from "lib/types/types/staking";
 import { getSimpleArrayData, pivotData } from "./utils";
 
@@ -100,6 +103,30 @@ export const _getWeeklytxcounttxvolumeanduniqueusers = () =>
     "e61958f7-d387-48af-8b41-9d4d20a99c2d",
     "Cumulative volume of staking transactions,Weekly total volume of staking transactions,Weekly number of unique users,Cumulative number of staking transactions,Weekly number of staking transactions",
     "Actions"
+  );
+
+export const getStakingrewards = () =>
+  getSimpleArrayData<Stakingrewards, Stakingrewards>(
+    "fc27af03-03d6-4cc3-82fc-5580169bb9ce",
+    "Weekly staking rewards",
+    "Day"
+  );
+
+export const getDistributionOfStakingRewards = () =>
+  getSimpleArrayData<
+    DistributionOfStakingRewards,
+    DistributionOfStakingRewards
+  >(
+    "ac813125-c5f2-4dac-83c6-f3f704eef44d",
+    "Distribution of staking rewards",
+    "Count"
+  );
+
+export const getTop100Richlist = () =>
+  getSimpleArrayData<Top100Richlist, Top100Richlist>(
+    "d5e35fae-75a5-4008-8a7b-3c076ce0eaff",
+    "Top 100 LUNA holders",
+    "Balance"
   );
 
 export const getWeeklytop10validatorbasedonnumberofdelegatetothem: () => Promise<any> =

@@ -78,3 +78,22 @@ export interface Weeklytxcounttxvolumeanduniqueusers {
   "Cum tx count": number;
   "Cum volume": number;
 }
+
+// fc27af03-03d6-4cc3-82fc-5580169bb9ce
+export interface Stakingrewards {
+  Day: string;
+  "Staking rewards $LUNA": number;
+  "Staking rewards $": number;
+}
+
+// ac813125-c5f2-4dac-83c6-f3f704eef44d
+export interface DistributionOfStakingRewards {
+  category: string;
+  Count: number;
+}
+
+// d5e35fae-75a5-4008-8a7b-3c076ce0eaff
+export interface Top100Richlist {
+  Wallet: string;
+  Balance: number;
+}

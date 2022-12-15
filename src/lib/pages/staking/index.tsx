@@ -37,6 +37,9 @@ const Staking = ({
   weeklytop10validatorbasedonvolumeofdelegatetothem,
   averageweeklytxcounttxvolumeanduniqueusers,
   weeklytxcounttxvolumeanduniqueusers,
+  distributionOfStakingRewards,
+  stakingrewards,
+  top100Richlist,
 }: StakingProps): JSX.Element => {
   const averageweeklytxcounttxvolumeanduniqueusersNames =
     averageweeklytxcounttxvolumeanduniqueusers.title.split(",");
@@ -126,6 +129,14 @@ according section defined in above, i prepare some of static about these topics.
             title={"Inflation Rate"}
             getStat={(data) => data.inflation}
           />
+
+          <StateCardRemoteData
+            url="https://node-api.flipsidecrypto.com/api/v2/queries/97433b80-49d0-45d6-8e2a-b1a23adb06cb/data/latest"
+            link="https://app.flipsidecrypto.com/velocity/queries/97433b80-49d0-45d6-8e2a-b1a23adb06cb"
+            status="unchanged"
+            title={"Total supply"}
+            getStat={(data) => data[0]["Total supply"]}
+          />
         </SimpleGrid>
         <SimpleGrid
           position={"relative"}
@@ -146,8 +157,8 @@ number of active wallets is one of most important metrics for reviewing is one n
           <DonutChart
             queryLink={top10validatorbasedontotalvolumeofdelegatetothem.key}
             data={top10validatorbasedontotalvolumeofdelegatetothem.data}
-            modalInfo="another"
-            baseSpan={1}
+            modalInfo=""
+            baseSpan={2}
             title={top10validatorbasedontotalvolumeofdelegatetothem.title}
             nameKey="Validator name"
             dataKey="Volume"
@@ -156,7 +167,7 @@ number of active wallets is one of most important metrics for reviewing is one n
           <DonutChart
             queryLink={top10validatorbasedonuniqueuserdelegatetothem.key}
             data={top10validatorbasedonuniqueuserdelegatetothem.data}
-            modalInfo="another"
+            modalInfo=""
             baseSpan={1}
             title={top10validatorbasedonuniqueuserdelegatetothem.title}
             nameKey="Validator name"
@@ -166,11 +177,39 @@ number of active wallets is one of most important metrics for reviewing is one n
           <DonutChart
             queryLink={top10validatorbasedontotalnumberofdelegatetothem.key}
             data={top10validatorbasedontotalnumberofdelegatetothem.data}
-            modalInfo="another"
+            modalInfo=""
             baseSpan={1}
             title={top10validatorbasedontotalnumberofdelegatetothem.title}
             nameKey="Validator name"
             dataKey="Volume"
+          />
+
+          <DonutChart
+            queryLink={distributionOfStakingRewards.key}
+            data={distributionOfStakingRewards.data}
+            modalInfo=""
+            baseSpan={2}
+            title={distributionOfStakingRewards.title}
+            nameKey="category"
+            dataKey="Count"
+          />
+
+          <BarGraph
+            isNotDate
+            values={top100Richlist.data}
+            queryLink={top100Richlist.key}
+            modalInfo=""
+            title={top100Richlist.title}
+            baseSpan={3}
+            dataKey="Wallet"
+            oyLabel="$Luna"
+            oxLabel=""
+            labels={[
+              {
+                key: "Balance",
+                color: colors[0],
+              },
+            ]}
           />
 
           <BarGraph
@@ -295,25 +334,22 @@ number of active wallets is one of most important metrics for reviewing is one n
               />
             )
           )}
-          {/* <LineChartWithBar
+          <LineChartWithBar
             customColor={colors[3]}
             barColor={colors[3]}
-            data={walletsActive.data}
-            queryLink={walletsActive.key}
-            title={walletsActiveNames[1]}
+            data={stakingrewards.data}
+            queryLink={stakingrewards.key}
+            title={stakingrewards.title}
             baseSpan={3}
             infoSizePercentage={25}
-            modelInfo={`as we see in data clearly shows number of users reduces in last month like other blockchains and (all platform in web3) but in two point number of active user go up. 
-
-- first in start of Terra and this is usually and people want to try new Terra and 
-- second in middle of Sep and after Terra price go up but after that this number go down
-
-Q4 is worst quatre for crypto and Terra isn't only one. in these month's we see all of blockchain record worse record of their
-            `}
-            barDataKey={"Active wallet"}
-            lineDataKey="AVG active wallet"
+            modelInfo={``}
+            barDataKey={"Staking rewards $LUNA"}
+            additionalLineKey={["Staking rewards $"]}
+            lineDataKey="FAKEFIELD"
+            hideLine
             xAxisDataKey="Day"
           />
+          {/* 
           <TextBox>
             {`
 #### New Wallets
