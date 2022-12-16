@@ -1,11 +1,9 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
-import ChartBox from "lib/components/charts/LineChart";
 import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
 import TextBox from "lib/components/charts/TextBox";
 import LineChartWithBar from "lib/components/charts/LineChartWithBar";
-import { WalletProps } from "pages/wallet";
 import { StakingProps } from "pages/staking";
 import BarGraph from "lib/components/charts/BarGraph";
 import DonutChart from "lib/components/charts/DonutChart";
@@ -195,8 +193,8 @@ according section defined in above, i prepare some of static about these topics.
         >
           <TextBox>
             {`
-#### Active Wallets
-number of active wallets is one of most important metrics for reviewing is one network work currently and has wired function
+#### Tops 
+review top information or actor or validators in Terra
 `}
           </TextBox>
 
@@ -204,7 +202,7 @@ number of active wallets is one of most important metrics for reviewing is one n
             queryLink={top10validatorbasedontotalvolumeofdelegatetothem.key}
             data={top10validatorbasedontotalvolumeofdelegatetothem.data}
             modalInfo=""
-            baseSpan={2}
+            baseSpan={1}
             title={top10validatorbasedontotalvolumeofdelegatetothem.title}
             nameKey="Validator name"
             dataKey="Volume"
@@ -228,52 +226,6 @@ number of active wallets is one of most important metrics for reviewing is one n
             title={top10validatorbasedontotalnumberofdelegatetothem.title}
             nameKey="Validator name"
             dataKey="Volume"
-          />
-
-          <DonutChart
-            queryLink={distributionOfStakingRewards.key}
-            data={distributionOfStakingRewards.data}
-            modalInfo=""
-            baseSpan={2}
-            title={distributionOfStakingRewards.title}
-            nameKey="category"
-            dataKey="Count"
-          />
-          <DonutChart
-            queryLink={bridgeTransactions.key}
-            data={bridgeTransactions.data.valueChain}
-            modalInfo=""
-            baseSpan={2}
-            title={bridgeTransactionsNames[0]}
-            nameKey="Destination chain"
-            dataKey="Volume"
-          />
-
-          <DonutChart
-            queryLink={bridgeTransactions.key}
-            data={bridgeTransactions.data.txChain}
-            modalInfo=""
-            baseSpan={1}
-            title={bridgeTransactionsNames[1]}
-            nameKey="Destination chain"
-            dataKey="tx count"
-          />
-
-          <BarGraph
-            values={bridgeTransactions.data.dailyValueChain}
-            queryLink={bridgeTransactions.key}
-            modalInfo=""
-            title={bridgeTransactionsNames[2]}
-            baseSpan={3}
-            dataKey="Day"
-            oyLabel="$Luna"
-            oxLabel=""
-            labels={[
-              {
-                key: "Volume",
-                color: colors[0],
-              },
-            ]}
           />
 
           <BarGraph
@@ -368,6 +320,92 @@ number of active wallets is one of most important metrics for reviewing is one n
               })
             )}
           />
+
+          <TextBox>
+            {`
+#### IBC Transfer and Bridge Inforamtion
+`}
+          </TextBox>
+          <DonutChart
+            queryLink={bridgeTransactions.key}
+            data={bridgeTransactions.data.valueChain}
+            modalInfo=""
+            baseSpan={2}
+            title={bridgeTransactionsNames[0]}
+            nameKey="Destination chain"
+            dataKey="Volume"
+          />
+
+          <DonutChart
+            queryLink={bridgeTransactions.key}
+            data={bridgeTransactions.data.txChain}
+            modalInfo=""
+            baseSpan={1}
+            title={bridgeTransactionsNames[1]}
+            nameKey="Destination chain"
+            dataKey="tx count"
+          />
+
+          <BarGraph
+            values={bridgeTransactions.data.dailyValueChain}
+            queryLink={bridgeTransactions.key}
+            modalInfo=""
+            title={bridgeTransactionsNames[2]}
+            baseSpan={3}
+            dataKey="Day"
+            oyLabel="$Luna"
+            oxLabel=""
+            labels={[
+              {
+                key: "Volume",
+                color: colors[0],
+              },
+            ]}
+          />
+          <LineChartWithBar
+            data={bridgeTransactions.data.dailyTXAndUnique}
+            queryLink={bridgeTransactions.key}
+            title={bridgeTransactionsNames[3]}
+            baseSpan={3}
+            customColor={colors[3]}
+            barColor={colors[3]}
+            hideLine
+            xAxisDataKey="Day"
+            barDataKey={"tx count"}
+            additionalLineKey={["Unique wallet"]}
+            lineDataKey="fake"
+          />
+
+          {[
+            { name: "outflowEachChainTxCount", label: "TX count" },
+            { name: "outflowEachChainVolume", label: "$Luna" },
+          ].map((item, index) => (
+            <StackedAreaChart
+              key={item.name}
+              values={bridgeTransactions.data[item.name]}
+              queryLink={bridgeTransactions.key}
+              modalInfo=""
+              title={bridgeTransactionsNames[4 + index]}
+              baseSpan={3}
+              dataKey="Name"
+              oyLabel={item.label}
+              oxLabel="Action"
+              labels={bridgeTransactions.data.chains.map(
+                (item: string, index: number) => ({
+                  key: item,
+                  color: colors[index % colors.length],
+                })
+              )}
+            />
+          ))}
+
+          <TextBox>
+            {`
+#### Staking and Stake Transactions and Rewards
+
+`}
+          </TextBox>
+
           {/* --- */}
           {[
             "AVG TX volume",
@@ -394,7 +432,15 @@ number of active wallets is one of most important metrics for reviewing is one n
               ]}
             />
           ))}
-          {/* s-----------s */}
+          <DonutChart
+            queryLink={distributionOfStakingRewards.key}
+            data={distributionOfStakingRewards.data}
+            modalInfo=""
+            baseSpan={2}
+            title={distributionOfStakingRewards.title}
+            nameKey="category"
+            dataKey="Count"
+          />
           {["cumVolume", "volume", "uniqueWallet", "cumTXCount", "tXCount"].map(
             (item, index) => (
               <StackedAreaChart
@@ -432,42 +478,6 @@ number of active wallets is one of most important metrics for reviewing is one n
             xAxisDataKey="Day"
           />
 
-          <LineChartWithBar
-            data={bridgeTransactions.data.dailyTXAndUnique}
-            queryLink={bridgeTransactions.key}
-            title={bridgeTransactionsNames[3]}
-            baseSpan={3}
-            customColor={colors[3]}
-            barColor={colors[3]}
-            hideLine
-            xAxisDataKey="Day"
-            barDataKey={"tx count"}
-            additionalLineKey={["Unique wallet"]}
-            lineDataKey="fake"
-          />
-
-          {[
-            { name: "outflowEachChainTxCount", label: "TX count" },
-            { name: "outflowEachChainVolume", label: "$Luna" },
-          ].map((item, index) => (
-            <StackedAreaChart
-              key={item.name}
-              values={bridgeTransactions.data[item.name]}
-              queryLink={bridgeTransactions.key}
-              modalInfo=""
-              title={bridgeTransactionsNames[4 + index]}
-              baseSpan={3}
-              dataKey="Name"
-              oyLabel={item.label}
-              oxLabel="Action"
-              labels={bridgeTransactions.data.chains.map(
-                (item: string, index: number) => ({
-                  key: item,
-                  color: colors[index % colors.length],
-                })
-              )}
-            />
-          ))}
           {/* 
           <TextBox>
             {`
