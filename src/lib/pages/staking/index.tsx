@@ -398,7 +398,6 @@ review top information or actor or validators in Terra
               )}
             />
           ))}
-
           <TextBox>
             {`
 #### Staking and Stake Transactions and Rewards
@@ -478,37 +477,13 @@ review top information or actor or validators in Terra
             xAxisDataKey="Day"
           />
 
-          {/* 
           <TextBox>
             {`
-#### New Wallets
-every blockchain to growth and expand and adapted to the real world need new user.
+#### Luna Vesting Schadule
+![luna vesting image](/lunavesting.webp)
 `}
           </TextBox>
-          <ChartBox
-            data={walletsNew.data}
-            queryLink={walletsNew.key}
-            baseSpan={3}
-            infoSizePercentage={25}
-            areaDataKey="Cum new wallet"
-            xAxisDataKey="Day"
-            oyLabel="Count"
-            title={walletsNewNames[0]}
-          />
 
-          <LineChartWithBar
-            customColor={colors[3]}
-            barColor={colors[3]}
-            data={walletsNew.data}
-            queryLink={walletsNew.key}
-            title={walletsNewNames[1]}
-            baseSpan={3}
-            infoSizePercentage="full"
-            modelInfo="as data shows in last day of may and with start of the new Terra lot's of new user join but as time goes we see this growth reduced.this is not new thing and if review new user in all blockchain available patternS effect shown it self and like active wallets in mid of Sep and as Terra price go lot's of new wallet join Terra but after price drop these users reduces "
-            barDataKey={"New wallet"}
-            lineDataKey="AVG new wallet"
-            xAxisDataKey="Day"
-          /> */}
         </SimpleGrid>
       </Box>
     </>
