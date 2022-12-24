@@ -4,6 +4,7 @@ import {
   getDevelopmentAXLUSDTestination,
   getDevelopmentMostUniqueUser,
   getDevelopmentMostUsedContracts,
+  getDevelopmentStablecoinsDestination,
   getDevelopmentTotalNumberOfContracts,
   getDevelopmentWeeklyActiveContract,
   getDevelopmentWeeklyInflowTransaction,
@@ -30,6 +31,7 @@ export async function getStaticProps() {
     developmentWeeklyOutflowTransaction,
     developmentAXLUSDCestination,
     developmentAXLUSDTestination,
+    developmentStablecoinsDestination,
   ] = await Promise.all([
     getDevelopmentWeeklyActiveContract(),
     getDevelopmentMostUsedContracts(),
@@ -40,6 +42,7 @@ export async function getStaticProps() {
     getDevelopmentWeeklyOutflowTransaction(),
     getDevelopmentAXLUSDTestination(),
     getDevelopmentAXLUSDCestination(),
+    getDevelopmentStablecoinsDestination(),
   ]);
 
   return {
@@ -53,6 +56,7 @@ export async function getStaticProps() {
       developmentWeeklyOutflowTransaction,
       developmentAXLUSDCestination,
       developmentAXLUSDTestination,
+      developmentStablecoinsDestination,
     },
     revalidate: 10 * 60,
   };
@@ -70,6 +74,7 @@ export interface DevelopmentProps {
   developmentWeeklyOutflowTransaction: ReturnDataType<any>;
   developmentAXLUSDCestination: ReturnDataType<DevelopmentAXLUSDDestination[]>;
   developmentAXLUSDTestination: ReturnDataType<DevelopmentAXLUSDDestination[]>;
+  developmentStablecoinsDestination: ReturnDataType<any>;
 }
 
 export default Development;

@@ -3,6 +3,7 @@ import {
   DevelopmentAXLUSDDestination,
   DevelopmentMostUniqueUser,
   DevelopmentMostUsedContracts,
+  DevelopmentStablecoinsDestination,
   DevelopmentWeeklyActiveContract,
   DevelopmentWeeklyInflowTransaction,
   DevelopmentWeeklyNewContract,
@@ -90,6 +91,68 @@ export const getDevelopmentAXLUSDTestination = () =>
     "6fa46cf0-4d04-4f88-b2bc-2de3dc835a19",
     "Popular destination for axlUSDT based on volume of transactions,Popular destination for axlUSDT based on number of unique users,Popular destination for axlUSDT based on number of transactions"
   );
+
+export const _getDevelopmentStablecoinsDestination = () =>
+  getSimpleArrayData<
+    DevelopmentStablecoinsDestination,
+    DevelopmentStablecoinsDestination
+  >(
+    "e36e9730-cbdd-476c-b7ef-44405873d294",
+    "Popular destination of stablecoins based on volume,Popular destination of stablecoins based on unique users,Popular destination of stablecoins based on count"
+  );
+
+export const getDevelopmentStablecoinsDestination: () => Promise<any> =
+  async () => {
+    const rawData = await _getDevelopmentStablecoinsDestination();
+    const chainsSet = Array.from(
+      new Set(
+        rawData.data.map((item) => {
+          return item["Destination chain"];
+        })
+      )
+    );
+
+    const stablecoinVolume = pivotData(
+      rawData.data,
+      "STABLECOINS",
+      "Destination chain",
+      "Volume",
+      chainsSet,
+      0,
+      false
+    );
+
+    const stablecoinUniqueUser = pivotData(
+      rawData.data,
+      "STABLECOINS",
+      "Destination chain",
+      "Unique wallet",
+      chainsSet,
+      0,
+      false
+    );
+
+    const stablecoinCount = pivotData(
+      rawData.data,
+      "STABLECOINS",
+      "Destination chain",
+      "tx count",
+      chainsSet,
+      0,
+      false
+    );
+    console.log(stablecoinVolume);
+    return {
+      data: {
+        stablecoinVolume,
+        stablecoinUniqueUser,
+        stablecoinCount,
+        chainsSet,
+      },
+      key: rawData.key,
+      title: rawData.title,
+    } as ReturnDataType<any>;
+  };
 
 const complexInOutFlowDataGetter: (
   dataGetter: () => Promise<

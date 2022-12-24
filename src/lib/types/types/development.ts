@@ -36,3 +36,13 @@ export interface DevelopmentAXLUSDDestination {
   Volume: number;
   "AVG volume": number;
 }
+
+export interface DevelopmentStablecoinsDestination {
+  STABLECOINS: string;
+  "Destination chain": string;
+  TRANSFER_TYPE: string;
+  "tx count": number;
+  "Unique wallet": number;
+  Volume: number;
+  "AVG volume": number;
+}

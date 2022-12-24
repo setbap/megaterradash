@@ -33,6 +33,7 @@ const Development = ({
   developmentWeeklyOutflowTransaction,
   developmentAXLUSDCestination,
   developmentAXLUSDTestination,
+  developmentStablecoinsDestination,
 }: DevelopmentProps): JSX.Element => {
   const developmentMostUsedContractsNames =
     developmentMostUsedContracts.title.split(",");
@@ -52,7 +53,10 @@ const Development = ({
     developmentAXLUSDCestination.title.split(",");
 
   const developmentAXLUSDTestinationNames =
-    developmentAXLUSDCestination.title.split(",");
+    developmentAXLUSDTestination.title.split(",");
+
+  const developmentStablecoinsDestinationNames =
+    developmentStablecoinsDestination.title.split(",");
   return (
     <>
       <NextSeo
@@ -263,6 +267,7 @@ Development of Contracts show how much of compebility of one network is used by 
                 .stablecoinAverageInflowTransaction
             }
             isSeprate
+            isNotDate
             queryLink={developmentWeeklyInflowTransaction.key}
             modalInfo=""
             title={developmentWeeklyInflowTransactionNames[2]}
@@ -647,6 +652,68 @@ Development of Contracts show how much of compebility of one network is used by 
             title={developmentAXLUSDTestinationNames[2]}
             nameKey="Destination chain"
             dataKey="tx count"
+          />
+
+          <TextBox>
+            {`
+#### Stablecoins Destination
+`}
+          </TextBox>
+          <BarGraph
+            values={developmentStablecoinsDestination.data.stablecoinVolume}
+            isSeprate
+            isNotDate
+            queryLink={developmentStablecoinsDestination.key}
+            modalInfo=""
+            title={developmentStablecoinsDestinationNames[0]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentStablecoinsDestination.data.chainsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={developmentStablecoinsDestination.data.stablecoinUniqueUser}
+            isSeprate
+            isNotDate
+            queryLink={developmentStablecoinsDestination.key}
+            modalInfo=""
+            title={developmentStablecoinsDestinationNames[1]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentStablecoinsDestination.data.chainsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={developmentStablecoinsDestination.data.stablecoinCount}
+            isSeprate
+            isNotDate
+            queryLink={developmentStablecoinsDestination.key}
+            modalInfo=""
+            title={developmentStablecoinsDestinationNames[2]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentStablecoinsDestination.data.chainsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
           />
         </SimpleGrid>
       </Box>
