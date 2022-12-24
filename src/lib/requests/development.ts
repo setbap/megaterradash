@@ -54,7 +54,7 @@ export const getDevelopmentMostUniqueUser = () =>
   );
 
 // START: development: Weekly inflow transactions
-export const _getDevelopmentWeeklyInflowTransaction = () =>
+export const _getDevelopmentWeeklyInflowTransactionDataGetter = () =>
   getSimpleArrayData<
     DevelopmentWeeklyInflowTransaction,
     DevelopmentWeeklyInflowTransaction
@@ -63,80 +63,101 @@ export const _getDevelopmentWeeklyInflowTransaction = () =>
     "Share of each stablecoin in total inflow volume of transactions,Share of each stablecoin in total inflow volume of transactions,Weekly average volume of inflow transactions,Weekly volume of inflow transactions,Weekly number of unique inflow users,Weekly number of inflow transactions"
   );
 
-export const getDevelopmentWeeklyInflowTransaction: () => Promise<any> =
-  async () => {
-    const rawData = await _getDevelopmentWeeklyInflowTransaction();
-    const stablecoinsSet = Array.from(
-      new Set(
-        rawData.data.map((item) => {
-          return item["STABLECOINS"];
-        })
-      )
-    );
+export const _getDevelopmentWeeklyOutflowTransactionDataGetter = () =>
+  getSimpleArrayData<
+    DevelopmentWeeklyInflowTransaction,
+    DevelopmentWeeklyInflowTransaction
+  >(
+    "b805c939-ee92-40a1-9f3e-cf5dfa57f31e",
+    "Share of each stablecoin in total outflow volume of transactions,Share of each stablecoin in total outflow volume of transactions,Weekly average volume of outflow transactions,Weekly volume of outflow transactions,Weekly number of unique outflow users,Weekly number of outflow transactions"
+  );
 
-    const shareStablecoinInflowShareVolume = summerizeRow(
-      rawData.data,
-      "STABLECOINS",
-      "Volume"
-    );
+const complexInOutFlowDataGetter: (
+  dataGetter: () => Promise<
+    ReturnDataType<DevelopmentWeeklyInflowTransaction[]>
+  >
+) => Promise<any> = async (dataGetter) => {
+  const rawData = await dataGetter();
+  const stablecoinsSet = Array.from(
+    new Set(
+      rawData.data.map((item) => {
+        return item["STABLECOINS"];
+      })
+    )
+  );
 
-    const shareStablecoinInflowShareTXCount = summerizeRow(
-      rawData.data,
-      "STABLECOINS",
-      "tx count"
-    );
+  const shareStablecoinInflowShareVolume = summerizeRow(
+    rawData.data,
+    "STABLECOINS",
+    "Volume"
+  );
 
-    const stablecoinAverageInflowTransaction = pivotData(
-      rawData.data,
-      "Day",
-      "STABLECOINS",
-      "AVG volume",
+  const shareStablecoinInflowShareTXCount = summerizeRow(
+    rawData.data,
+    "STABLECOINS",
+    "tx count"
+  );
+
+  const stablecoinAverageInflowTransaction = pivotData(
+    rawData.data,
+    "Day",
+    "STABLECOINS",
+    "AVG volume",
+    stablecoinsSet,
+    0
+  );
+
+  const stablecoinInflowTransaction = pivotData(
+    rawData.data,
+    "Day",
+    "STABLECOINS",
+    "Volume",
+    stablecoinsSet,
+    0
+  );
+
+  const stablecoinInflowUniqueUser = pivotData(
+    rawData.data,
+    "Day",
+    "STABLECOINS",
+    "Unique wallet",
+    stablecoinsSet,
+    0
+  );
+
+  const stablecoinInflowTXCount = pivotData(
+    rawData.data,
+    "Day",
+    "STABLECOINS",
+    "tx count",
+    stablecoinsSet,
+    0
+  );
+
+  return {
+    data: {
+      shareStablecoinInflowShareVolume,
+      shareStablecoinInflowShareTXCount,
+      stablecoinAverageInflowTransaction,
+      stablecoinInflowTransaction,
+      stablecoinInflowUniqueUser,
+      stablecoinInflowTXCount,
       stablecoinsSet,
-      0
-    );
+    },
+    key: rawData.key,
+    title: rawData.title,
+  } as ReturnDataType<any>;
+};
 
-    const stablecoinInflowTransaction = pivotData(
-      rawData.data,
-      "Day",
-      "STABLECOINS",
-      "Volume",
-      stablecoinsSet,
-      0
-    );
+export const getDevelopmentWeeklyInflowTransaction = async () =>
+  await complexInOutFlowDataGetter(
+    _getDevelopmentWeeklyInflowTransactionDataGetter
+  );
 
-    const stablecoinInflowUniqueUser = pivotData(
-      rawData.data,
-      "Day",
-      "STABLECOINS",
-      "Unique wallet",
-      stablecoinsSet,
-      0
-    );
-
-    const stablecoinInflowTXCount = pivotData(
-      rawData.data,
-      "Day",
-      "STABLECOINS",
-      "tx count",
-      stablecoinsSet,
-      0
-    );
-
-    return {
-      data: {
-        shareStablecoinInflowShareVolume,
-        shareStablecoinInflowShareTXCount,
-        stablecoinAverageInflowTransaction,
-        stablecoinInflowTransaction,
-        stablecoinInflowUniqueUser,
-        stablecoinInflowTXCount,
-        stablecoinsSet,
-      },
-      key: rawData.key,
-      title: rawData.title,
-    } as ReturnDataType<any>;
-  };
-
+export const getDevelopmentWeeklyOutflowTransaction = async () =>
+  await complexInOutFlowDataGetter(
+    _getDevelopmentWeeklyOutflowTransactionDataGetter
+  );
 // START: development: Weekly inflow transactions
 
 // export const getTransactionsTPS = () =>

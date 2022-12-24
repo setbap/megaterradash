@@ -30,6 +30,7 @@ const Development = ({
   developmentTotalNumberOfContracts,
   developmentMostUniqueUser,
   developmentWeeklyInflowTransaction,
+  developmentWeeklyOutflowTransaction,
 }: DevelopmentProps): JSX.Element => {
   const developmentMostUsedContractsNames =
     developmentMostUsedContracts.title.split(",");
@@ -41,6 +42,9 @@ const Development = ({
 
   const developmentWeeklyInflowTransactionNames =
     developmentWeeklyInflowTransaction.title.split(",");
+
+  const developmentWeeklyOutflowTransactionNames =
+    developmentWeeklyOutflowTransaction.title.split(",");
   return (
     <>
       <NextSeo
@@ -258,7 +262,6 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="Name"
             oyLabel=""
             oxLabel="Day"
-            hideLegend
             labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
               (item: string, index: number) => ({
                 key: item,
@@ -293,7 +296,6 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="Name"
             oyLabel=""
             oxLabel="Day"
-            hideLegend
             labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
               (item: string, index: number) => ({
                 key: item,
@@ -314,7 +316,6 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="Name"
             oyLabel=""
             oxLabel="Day"
-            hideLegend
             labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
               (item: string, index: number) => ({
                 key: item,
@@ -335,8 +336,234 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="Name"
             oyLabel=""
             oxLabel="Day"
-            hideLegend
             labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <TextBox>
+            {`
+#### Weekly inflow transactions
+`}
+          </TextBox>
+          <DonutChart
+            queryLink={developmentWeeklyInflowTransaction.key}
+            data={
+              developmentWeeklyInflowTransaction.data
+                .shareStablecoinInflowShareVolume
+            }
+            modalInfo=""
+            baseSpan={1}
+            title={developmentWeeklyInflowTransactionNames[0]}
+            nameKey="STABLECOINS"
+            dataKey="Volume"
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data
+                .stablecoinAverageInflowTransaction
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[2]}
+            baseSpan={2}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <DonutChart
+            queryLink={developmentWeeklyInflowTransaction.key}
+            data={
+              developmentWeeklyInflowTransaction.data
+                .shareStablecoinInflowShareTXCount
+            }
+            modalInfo=""
+            baseSpan={1}
+            title={developmentWeeklyInflowTransactionNames[1]}
+            nameKey="STABLECOINS"
+            dataKey="tx count"
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data
+                .stablecoinInflowTransaction
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[3]}
+            baseSpan={2}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data.stablecoinInflowUniqueUser
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[4]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data.stablecoinInflowTXCount
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[5]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <TextBox>
+            {`
+#### Weekly outflow transactions
+`}
+          </TextBox>
+          <DonutChart
+            queryLink={developmentWeeklyOutflowTransaction.key}
+            data={
+              developmentWeeklyOutflowTransaction.data
+                .shareStablecoinInflowShareVolume
+            }
+            modalInfo=""
+            baseSpan={1}
+            title={developmentWeeklyOutflowTransactionNames[0]}
+            nameKey="STABLECOINS"
+            dataKey="Volume"
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyOutflowTransaction.data
+                .stablecoinAverageInflowTransaction
+            }
+            isSeprate
+            queryLink={developmentWeeklyOutflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyOutflowTransactionNames[2]}
+            baseSpan={2}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyOutflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <DonutChart
+            queryLink={developmentWeeklyOutflowTransaction.key}
+            data={
+              developmentWeeklyOutflowTransaction.data
+                .shareStablecoinInflowShareTXCount
+            }
+            modalInfo=""
+            baseSpan={1}
+            title={developmentWeeklyOutflowTransactionNames[1]}
+            nameKey="STABLECOINS"
+            dataKey="tx count"
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyOutflowTransaction.data
+                .stablecoinInflowTransaction
+            }
+            isSeprate
+            queryLink={developmentWeeklyOutflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyOutflowTransactionNames[3]}
+            baseSpan={2}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyOutflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyOutflowTransaction.data
+                .stablecoinInflowUniqueUser
+            }
+            isSeprate
+            queryLink={developmentWeeklyOutflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyOutflowTransactionNames[4]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyOutflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyOutflowTransaction.data.stablecoinInflowTXCount
+            }
+            isSeprate
+            queryLink={developmentWeeklyOutflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyOutflowTransactionNames[5]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            labels={developmentWeeklyOutflowTransaction.data.stablecoinsSet.map(
               (item: string, index: number) => ({
                 key: item,
                 color: colors[index % colors.length],
