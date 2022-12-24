@@ -141,7 +141,7 @@ export const getDevelopmentStablecoinsDestination: () => Promise<any> =
       0,
       false
     );
-    console.log(stablecoinVolume);
+
     return {
       data: {
         stablecoinVolume,
