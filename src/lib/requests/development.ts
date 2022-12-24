@@ -1,5 +1,6 @@
 import { ReturnDataType } from "lib/types/base";
 import {
+  DevelopmentAXLUSDDestination,
   DevelopmentMostUniqueUser,
   DevelopmentMostUsedContracts,
   DevelopmentWeeklyActiveContract,
@@ -70,6 +71,24 @@ export const _getDevelopmentWeeklyOutflowTransactionDataGetter = () =>
   >(
     "b805c939-ee92-40a1-9f3e-cf5dfa57f31e",
     "Share of each stablecoin in total outflow volume of transactions,Share of each stablecoin in total outflow volume of transactions,Weekly average volume of outflow transactions,Weekly volume of outflow transactions,Weekly number of unique outflow users,Weekly number of outflow transactions"
+  );
+//
+export const getDevelopmentAXLUSDCestination = () =>
+  getSimpleArrayData<
+    DevelopmentAXLUSDDestination,
+    DevelopmentAXLUSDDestination
+  >(
+    "af4dabd8-4155-42d5-99b6-2677d6dba954",
+    "Popular destination for axlUSDC based on volume of transactions,Popular destination for axlUSDC based on number of unique users,Popular destination for axlUSDC based on number of transactions"
+  );
+
+export const getDevelopmentAXLUSDTestination = () =>
+  getSimpleArrayData<
+    DevelopmentAXLUSDDestination,
+    DevelopmentAXLUSDDestination
+  >(
+    "6fa46cf0-4d04-4f88-b2bc-2de3dc835a19",
+    "Popular destination for axlUSDT based on volume of transactions,Popular destination for axlUSDT based on number of unique users,Popular destination for axlUSDT based on number of transactions"
   );
 
 const complexInOutFlowDataGetter: (

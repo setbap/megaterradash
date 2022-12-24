@@ -27,3 +27,12 @@ export interface DevelopmentWeeklyInflowTransaction {
   Volume: number;
   "AVG volume": number;
 }
+
+export interface DevelopmentAXLUSDDestination {
+  "Destination chain": string;
+  TRANSFER_TYPE: string;
+  "tx count": number;
+  "Unique wallet": number;
+  Volume: number;
+  "AVG volume": number;
+}

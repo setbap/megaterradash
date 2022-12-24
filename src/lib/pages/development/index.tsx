@@ -31,6 +31,8 @@ const Development = ({
   developmentMostUniqueUser,
   developmentWeeklyInflowTransaction,
   developmentWeeklyOutflowTransaction,
+  developmentAXLUSDCestination,
+  developmentAXLUSDTestination,
 }: DevelopmentProps): JSX.Element => {
   const developmentMostUsedContractsNames =
     developmentMostUsedContracts.title.split(",");
@@ -45,6 +47,12 @@ const Development = ({
 
   const developmentWeeklyOutflowTransactionNames =
     developmentWeeklyOutflowTransaction.title.split(",");
+
+  const developmentAXLUSDCestinationNames =
+    developmentAXLUSDCestination.title.split(",");
+
+  const developmentAXLUSDTestinationNames =
+    developmentAXLUSDCestination.title.split(",");
   return (
     <>
       <NextSeo
@@ -569,6 +577,76 @@ Development of Contracts show how much of compebility of one network is used by 
                 color: colors[index % colors.length],
               })
             )}
+          />
+
+          <TextBox>
+            {`
+#### axlUSDC Destination
+`}
+          </TextBox>
+          <DonutChart
+            queryLink={developmentAXLUSDCestination.key}
+            data={developmentAXLUSDCestination.data}
+            modalInfo=""
+            baseSpan={1}
+            title={developmentAXLUSDCestinationNames[0]}
+            nameKey="Destination chain"
+            dataKey="Volume"
+          />
+
+          <DonutChart
+            queryLink={developmentAXLUSDCestination.key}
+            data={developmentAXLUSDCestination.data}
+            modalInfo=""
+            baseSpan={1}
+            title={developmentAXLUSDCestinationNames[1]}
+            nameKey="Destination chain"
+            dataKey="Unique wallet"
+          />
+
+          <DonutChart
+            queryLink={developmentAXLUSDCestination.key}
+            data={developmentAXLUSDCestination.data}
+            modalInfo=""
+            baseSpan={1}
+            title={developmentAXLUSDCestinationNames[2]}
+            nameKey="Destination chain"
+            dataKey="tx count"
+          />
+
+          <TextBox>
+            {`
+#### axlUSDT Destination
+`}
+          </TextBox>
+          <DonutChart
+            queryLink={developmentAXLUSDTestination.key}
+            data={developmentAXLUSDTestination.data}
+            modalInfo=""
+            baseSpan={1}
+            title={developmentAXLUSDTestinationNames[0]}
+            nameKey="Destination chain"
+            dataKey="Volume"
+          />
+
+          <DonutChart
+            queryLink={developmentAXLUSDTestination.key}
+            data={developmentAXLUSDTestination.data}
+            modalInfo=""
+            baseSpan={1}
+            title={developmentAXLUSDTestinationNames[1]}
+            nameKey="Destination chain"
+            dataKey="Unique wallet"
+          />
+
+          <DonutChart
+            queryLink={developmentAXLUSDTestination.key}
+            data={developmentAXLUSDTestination.data}
+            modalInfo=""
+            baseSpan={1}
+            title={developmentAXLUSDTestinationNames[2]}
+            nameKey="Destination chain"
+            dataKey="tx count"
           />
         </SimpleGrid>
       </Box>

@@ -1,5 +1,7 @@
 import Development from "lib/pages/development";
 import {
+  getDevelopmentAXLUSDCestination,
+  getDevelopmentAXLUSDTestination,
   getDevelopmentMostUniqueUser,
   getDevelopmentMostUsedContracts,
   getDevelopmentTotalNumberOfContracts,
@@ -10,6 +12,7 @@ import {
 } from "lib/requests/development";
 import { ReturnDataType } from "lib/types/base";
 import {
+  DevelopmentAXLUSDDestination,
   DevelopmentMostUniqueUser,
   DevelopmentMostUsedContracts,
   DevelopmentWeeklyActiveContract,
@@ -25,6 +28,8 @@ export async function getStaticProps() {
     developmentMostUniqueUser,
     developmentWeeklyInflowTransaction,
     developmentWeeklyOutflowTransaction,
+    developmentAXLUSDCestination,
+    developmentAXLUSDTestination,
   ] = await Promise.all([
     getDevelopmentWeeklyActiveContract(),
     getDevelopmentMostUsedContracts(),
@@ -33,6 +38,8 @@ export async function getStaticProps() {
     getDevelopmentMostUniqueUser(),
     getDevelopmentWeeklyInflowTransaction(),
     getDevelopmentWeeklyOutflowTransaction(),
+    getDevelopmentAXLUSDTestination(),
+    getDevelopmentAXLUSDCestination(),
   ]);
 
   return {
@@ -44,6 +51,8 @@ export async function getStaticProps() {
       developmentMostUniqueUser,
       developmentWeeklyInflowTransaction,
       developmentWeeklyOutflowTransaction,
+      developmentAXLUSDCestination,
+      developmentAXLUSDTestination,
     },
     revalidate: 10 * 60,
   };
@@ -59,6 +68,8 @@ export interface DevelopmentProps {
   developmentMostUniqueUser: ReturnDataType<DevelopmentMostUniqueUser[]>;
   developmentWeeklyInflowTransaction: ReturnDataType<any>;
   developmentWeeklyOutflowTransaction: ReturnDataType<any>;
+  developmentAXLUSDCestination: ReturnDataType<DevelopmentAXLUSDDestination[]>;
+  developmentAXLUSDTestination: ReturnDataType<DevelopmentAXLUSDDestination[]>;
 }
 
 export default Development;
