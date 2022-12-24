@@ -133,7 +133,7 @@ Development of Contracts show how much of compebility of one network is used by 
             data={developmentMostUsedContracts.data}
             modalInfo=""
             baseSpan={1}
-            title={developmentMostUsedContracts.title}
+            title={developmentMostUsedContractsNames[0]}
             nameKey="Contract Name"
             dataKey="Count"
           />
@@ -143,7 +143,7 @@ Development of Contracts show how much of compebility of one network is used by 
             values={developmentMostUsedContracts.data}
             queryLink={developmentMostUsedContracts.key}
             modalInfo=""
-            title={developmentMostUsedContracts.title}
+            title={developmentMostUsedContractsNames[1]}
             baseSpan={2}
             dataKey="Contract Name"
             oyLabel=""
@@ -190,13 +190,13 @@ Development of Contracts show how much of compebility of one network is used by 
             xAxisDataKey="Day"
             oyLabel=""
             customColor={colors[2]}
-            title={developmentWeeklyNewContracts.title}
+            title={developmentWeeklyNewContractsNames[0]}
           />
           <BarGraph
             values={developmentWeeklyNewContracts.data}
             queryLink={developmentWeeklyNewContracts.key}
             modalInfo=""
-            title={developmentWeeklyNewContracts.title}
+            title={developmentWeeklyNewContractsNames[1]}
             baseSpan={2}
             dataKey="Day"
             oyLabel=""

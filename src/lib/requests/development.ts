@@ -22,7 +22,7 @@ export const getDevelopmentMostUsedContracts = () =>
     DevelopmentMostUsedContracts
   >(
     "c889da2a-01fa-496a-831a-c1eff5f22130",
-    "Share of each Contract in total transactions,TOtal number of contracts deployed"
+    "Share of each Contract in total transactions,Total number of contracts deployed"
   );
 
 export const getDevelopmentTotalNumberOfContracts = () =>
@@ -37,7 +37,7 @@ export const getDevelopmentWeeklyActiveContract = () =>
     DevelopmentWeeklyActiveContract
   >(
     "db79b38c-b18e-4f97-963c-693e88995c2a",
-    "Share of each Contract in total transactions,TOtal number of contracts deployed"
+    "Share of each Contract in total transactions,Total number of contracts deployed"
   );
 
 export const getDevelopmentWeeklyNewContracts = () =>
