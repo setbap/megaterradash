@@ -1,12 +1,9 @@
-
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import ChartBox from "lib/components/charts/LineChart";
 import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
 import TextBox from "lib/components/charts/TextBox";
-import { TransactionsProps } from "pages";
-import LineChartWithBar from "lib/components/charts/LineChartWithBar";
 import { DevelopmentProps } from "pages/development";
 import DonutChart from "lib/components/charts/DonutChart";
 import BarGraph from "lib/components/charts/BarGraph";
@@ -30,11 +27,20 @@ const Development = ({
   developmentMostUsedContracts,
   developmentWeeklyNewContracts,
   developmentWeeklyActiveContract,
-  developmentTotalNumberOfContracts
+  developmentTotalNumberOfContracts,
+  developmentMostUniqueUser,
+  developmentWeeklyInflowTransaction,
 }: DevelopmentProps): JSX.Element => {
-  const developmentMostUsedContractsNames = developmentMostUsedContracts.title.split(",")
-  const developmentWeeklyNewContractsNames = developmentWeeklyNewContracts.title.split(",")
+  const developmentMostUsedContractsNames =
+    developmentMostUsedContracts.title.split(",");
+  const developmentWeeklyNewContractsNames =
+    developmentWeeklyNewContracts.title.split(",");
 
+  const developmentMostUniqueUserNames =
+    developmentMostUniqueUser.title.split(",");
+
+  const developmentWeeklyInflowTransactionNames =
+    developmentWeeklyInflowTransaction.title.split(",");
   return (
     <>
       <NextSeo
@@ -81,7 +87,9 @@ according section defined in above, i prepare some of static about these topics.
         >
           <StatsCard
             stat={
-              +(developmentTotalNumberOfContracts as any).data["Total Contracts Deployed"] as any
+              +(developmentTotalNumberOfContracts as any).data[
+                "Total Contracts Deployed"
+              ] as any
             }
             title={developmentTotalNumberOfContracts.title}
             status="inc"
@@ -104,7 +112,6 @@ Development of Contracts show how much of compebility of one network is used by 
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
-
           <DonutChart
             queryLink={developmentMostUsedContracts.key}
             data={developmentMostUsedContracts.data}
@@ -133,7 +140,6 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-
           <TextBox>
             {`
 #### Weekly Active Contract
@@ -155,7 +161,6 @@ Development of Contracts show how much of compebility of one network is used by 
               },
             ]}
           />
-
 
           <TextBox>
             {`
@@ -186,6 +191,157 @@ Development of Contracts show how much of compebility of one network is used by 
                 color: colors[2],
               },
             ]}
+          />
+
+          <TextBox>
+            {`
+#### Contract With Most Unique User
+`}
+          </TextBox>
+
+          <DonutChart
+            queryLink={developmentMostUniqueUser.key}
+            data={developmentMostUniqueUser.data}
+            modalInfo=""
+            baseSpan={1}
+            title={developmentMostUniqueUserNames[1]}
+            nameKey="Contract Name"
+            dataKey="Unique user"
+          />
+
+          <BarGraph
+            isNotDate
+            values={developmentMostUniqueUser.data}
+            queryLink={developmentMostUniqueUser.key}
+            modalInfo=""
+            title={developmentMostUniqueUserNames[0]}
+            baseSpan={2}
+            dataKey="Contract Name"
+            oyLabel=""
+            oxLabel=""
+            labels={[
+              {
+                key: "Unique user",
+                color: colors[3],
+              },
+            ]}
+          />
+
+          <TextBox>
+            {`
+#### Weekly inflow transactions
+`}
+          </TextBox>
+          <DonutChart
+            queryLink={developmentWeeklyInflowTransaction.key}
+            data={
+              developmentWeeklyInflowTransaction.data
+                .shareStablecoinInflowShareVolume
+            }
+            modalInfo=""
+            baseSpan={1}
+            title={developmentWeeklyInflowTransactionNames[0]}
+            nameKey="STABLECOINS"
+            dataKey="Volume"
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data
+                .stablecoinAverageInflowTransaction
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[2]}
+            baseSpan={2}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            hideLegend
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <DonutChart
+            queryLink={developmentWeeklyInflowTransaction.key}
+            data={
+              developmentWeeklyInflowTransaction.data
+                .shareStablecoinInflowShareTXCount
+            }
+            modalInfo=""
+            baseSpan={1}
+            title={developmentWeeklyInflowTransactionNames[1]}
+            nameKey="STABLECOINS"
+            dataKey="tx count"
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data
+                .stablecoinInflowTransaction
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[3]}
+            baseSpan={2}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            hideLegend
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data.stablecoinInflowUniqueUser
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[4]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            hideLegend
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={
+              developmentWeeklyInflowTransaction.data.stablecoinInflowTXCount
+            }
+            isSeprate
+            queryLink={developmentWeeklyInflowTransaction.key}
+            modalInfo=""
+            title={developmentWeeklyInflowTransactionNames[5]}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel=""
+            oxLabel="Day"
+            hideLegend
+            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
           />
         </SimpleGrid>
       </Box>
