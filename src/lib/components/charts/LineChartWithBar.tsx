@@ -226,7 +226,7 @@ const LineChartWithBar = ({
         display="flex"
         flexDir={"column"}
         alignItems="center"
-        height={"440px"}
+        height={"480px"}
         // height={"400px"}
         id={title}
       >

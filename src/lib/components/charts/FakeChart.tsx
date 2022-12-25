@@ -81,7 +81,7 @@ const FakeChart = ({
         display="flex"
         flexDir={"column"}
         alignItems="center"
-        height={"440px"}
+        height={"480px"}
         id={title}
       >
         <ChartHeader

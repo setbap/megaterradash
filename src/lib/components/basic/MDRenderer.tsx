@@ -1,4 +1,4 @@
-import { Box, Link, chakra, Image } from "@chakra-ui/react";
+import { Box, Link, chakra, Image, Heading } from "@chakra-ui/react";
 import React from "react";
 import { FiExternalLink } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
@@ -26,6 +26,27 @@ export default function MDRenderer({ children }: any) {
             src={props.src}
             alt={props.alt}
           />
+        ),
+        h3: (props) => (
+          <Heading
+            as="h3"
+            size="xl"
+            py={"0.5"}
+            style={{ fontFamily: "'Carter One', cursive" }}
+          >
+            {props.children}
+          </Heading>
+        ),
+
+        h4: (props) => (
+          <Heading
+            py={"0.5"}
+            as="h4"
+            size="lg"
+            style={{ fontFamily: "'Carter One', cursive" }}
+          >
+            {props.children}
+          </Heading>
         ),
       })}
     >

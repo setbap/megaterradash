@@ -21,6 +21,17 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
 
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="true"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Carter+One&display=swap"
+            rel="stylesheet"
+          />
+
           <meta name="application-name" content={APP_NAME} />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta

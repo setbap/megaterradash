@@ -75,6 +75,7 @@ export default function SidebarWithHeader({
         </DrawerContent>
       </Drawer>
       <MobileNav onOpen={onOpen} />
+      <DesktopLinkNav />
       <Box mx="auto">{children}</Box>
     </MotionBox>
   );
@@ -184,6 +185,40 @@ const NavItem = ({ icon, isActive, path, children, ...rest }: NavItemProps) => {
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
+
+const DesktopLinkNav = () => {
+  const router = useRouter();
+  return (
+    <Box
+      width={"100%"}
+      py="2"
+      display={{ base: "none", md: "flex" }}
+      position={"sticky"}
+      top="0"
+      borderBottomRadius={"2xl"}
+      borderBottomWidth="1px"
+      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
+      zIndex={"popover"}
+      bg={"#191919"}
+      justifyContent={"center"}
+      overflowX={"auto"}
+      experimental_spaceX="2"
+      flexWrap="nowrap"
+    >
+      {sideMenuItems.map((link, index) => (
+        <Button
+          variant={router.pathname === link.path ? "solid" : "outline"}
+          onClick={() => {
+            router.push(link.path);
+          }}
+          key={link.name}
+        >
+          {link.name}
+        </Button>
+      ))}
+    </Box>
+  );
+};
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
   const router = useRouter();
   return (
@@ -193,59 +228,33 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
       height="14"
       alignItems="center"
       bg={useColorModeValue("white", "#191919")}
-      borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
       justifyContent={{ base: "space-between", md: "flex-end" }}
       {...rest}
     >
       <Box
-        display={{ base: "none", md: "fixed" }}
-        pos="fixed"
-        zIndex={10000000}
-        w="full"
-        h={"14"}
-        borderBottom="1px solid var(--chakra-colors-gray-900)"
-        right={"0"}
-        top="0px"
-        bg="rgb(20 20 20)"
+        width={"full"}
+        justifyContent={"space-between"}
+        alignItems="center"
+        display={{ base: "none", md: "flex" }}
       >
-        <Box
-          d="flex"
-          width={"full"}
-          justifyContent={"space-between"}
-          alignItems="center"
-          display={{ base: "none", md: "flex" }}
+        <Text
+          mx={"12"}
+          fontFamily="sans-serif"
+          fontSize="2xl"
+          fontWeight={"extrabold"}
         >
-          <Text
-            mx={"12"}
-            fontFamily="sans-serif"
-            fontSize="2xl"
-            fontWeight={"extrabold"}
-          >
-            {names.APP_NAME}
-          </Text>
-          <Box experimental_spaceX={"3"}>
-            {sideMenuItems.map((link, index) => (
-              <Button
-                variant={router.pathname === link.path ? "solid" : "outline"}
-                onClick={() => {
-                  router.push(link.path);
-                }}
-                key={link.name}
-              >
-                {link.name}
-              </Button>
-            ))}
-          </Box>
-          <Box mx={"12"} textAlign="end">
-            <IconButton
-              onClick={() => router.push("/about")}
-              aria-label="About"
-              icon={<FiInfo />}
-            />
-          </Box>
+          {names.APP_NAME}
+        </Text>
+
+        <Box mx={"12"} textAlign="end">
+          <IconButton
+            onClick={() => router.push("/about")}
+            aria-label="About"
+            icon={<FiInfo />}
+          />
         </Box>
       </Box>
+
       <Box display={{ base: "flex", md: "none" }} marginEnd={"4"}>
         <IconButton
           onClick={onOpen}
