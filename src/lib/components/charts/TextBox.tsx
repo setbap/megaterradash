@@ -2,7 +2,7 @@ import { Box, GridItem, useColorModeValue } from "@chakra-ui/react";
 import MDRenderer from "../basic/MDRenderer";
 import { GRID_ITEM_SIZE } from "./template";
 
-const TextBox = ({ children, hasPattern = false }: any) => {
+const TextBox = ({ children, hasPattern = false, spanSize = 3 }: any) => {
   const bgCard = useColorModeValue("white", "#191919");
   const textColor = useColorModeValue("gray.900", "gray.100");
 
@@ -18,7 +18,7 @@ const TextBox = ({ children, hasPattern = false }: any) => {
       _hover={{ boxShadow: "var(--chakra-shadows-lg)", borderColor: "#444" }}
       borderRadius={"2xl"}
       width="100%"
-      colSpan={GRID_ITEM_SIZE[2]}
+      colSpan={GRID_ITEM_SIZE[spanSize - 1]}
     >
       <Box px="4" pb="3" pt={"1"}>
         <MDRenderer>{children}</MDRenderer>

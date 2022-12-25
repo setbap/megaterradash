@@ -60,6 +60,19 @@ export default function MDRenderer({ children }: any) {
             {props.children}
           </Heading>
         ),
+
+        h5: (props) => (
+          <Heading
+            py={"1"}
+            as="h5"
+            size="md"
+            fontWeight={"normal"}
+            letterSpacing="wider"
+            style={{ fontFamily: "'Carter One', cursive" }}
+          >
+            {props.children}
+          </Heading>
+        ),
       })}
     >
       {children}
