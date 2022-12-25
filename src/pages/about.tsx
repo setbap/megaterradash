@@ -25,7 +25,13 @@ const About = () => {
           position="relative"
         >
           <Box position={"absolute"} bottom="8px" width={"100%"} px="8px">
-            <TextBox hasPattern>## elSina</TextBox>
+            <TextBox hasPattern>
+              {`## elSina
+
+
+  [Page Source by elSina(SETBAP)](https://github.com/setbap/terradashprime)
+`}
+            </TextBox>
           </Box>
         </GridItem>
         <TextBox hasPattern spanSize={1}>
