@@ -170,7 +170,7 @@ const BarGraph = ({
         display="flex"
         flexDir={"column"}
         alignItems="center"
-        height={"480px"}
+        height={"440px"}
         id={title}
       >
         <ChartHeader

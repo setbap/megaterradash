@@ -146,9 +146,8 @@ const DonutChart = ({
         bgColor={bgCard}
         shadow="base"
         transition={"all 0.5s "}
-        _hover={{
-          boxShadow: "var(--chakra-shadows-lg)",
-        }}
+        border={"2px solid transparent"}
+        _hover={{ boxShadow: "var(--chakra-shadows-lg)", borderColor: "#444" }}
         borderRadius={"2xl"}
         width="100%"
       >

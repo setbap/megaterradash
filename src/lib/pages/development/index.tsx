@@ -92,7 +92,7 @@ but before deep dive into chart i prepare some statics to see status of network 
         <Box pt={"4"}></Box>
         <TextBox>
           {`
-#### Glance
+### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
         </TextBox>
@@ -115,7 +115,7 @@ according section defined in above, i prepare some of static about these topics.
         </SimpleGrid>
         <TextBox>
           {`
-#### Development Contracts 
+### Development Contracts 
 Development of Contracts show how much of compebility of one network is used by developers. increasing number of new smart contract show windwos of new idea in network and help growth faster 
 `}
         </TextBox>
@@ -158,7 +158,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### Weekly Active Contract
+### Weekly Active Contract
 `}
           </TextBox>
           <BarGraph
@@ -180,7 +180,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### Weekly New Contract
+### Weekly New Contract
 `}
           </TextBox>
           <ChartBox
@@ -211,7 +211,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### Contract With Most Unique User
+### Contract With Most Unique User
 `}
           </TextBox>
 
@@ -245,7 +245,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### Weekly inflow transactions
+### Weekly inflow transactions
 `}
           </TextBox>
           <DonutChart
@@ -359,7 +359,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### Weekly inflow transactions
+### Weekly inflow transactions
 `}
           </TextBox>
           <DonutChart
@@ -472,7 +472,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### Weekly outflow transactions
+### Weekly outflow transactions
 `}
           </TextBox>
           <DonutChart
@@ -586,7 +586,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### axlUSDC Destination
+### axlUSDC Destination
 `}
           </TextBox>
           <DonutChart
@@ -621,7 +621,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### axlUSDT Destination
+### axlUSDT Destination
 `}
           </TextBox>
           <DonutChart
@@ -656,7 +656,7 @@ Development of Contracts show how much of compebility of one network is used by 
 
           <TextBox>
             {`
-#### Stablecoins Destination
+### Stablecoins Destination
 `}
           </TextBox>
           <BarGraph
