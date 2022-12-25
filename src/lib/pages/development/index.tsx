@@ -267,120 +267,6 @@ Development of Contracts show how much of compebility of one network is used by 
                 .stablecoinAverageInflowTransaction
             }
             isSeprate
-            isNotDate
-            queryLink={developmentWeeklyInflowTransaction.key}
-            modalInfo=""
-            title={developmentWeeklyInflowTransactionNames[2]}
-            baseSpan={2}
-            dataKey="Name"
-            oyLabel=""
-            oxLabel="Day"
-            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
-              (item: string, index: number) => ({
-                key: item,
-                color: colors[index % colors.length],
-              })
-            )}
-          />
-
-          <DonutChart
-            queryLink={developmentWeeklyInflowTransaction.key}
-            data={
-              developmentWeeklyInflowTransaction.data
-                .shareStablecoinInflowShareTXCount
-            }
-            modalInfo=""
-            baseSpan={1}
-            title={developmentWeeklyInflowTransactionNames[1]}
-            nameKey="STABLECOINS"
-            dataKey="tx count"
-          />
-
-          <BarGraph
-            values={
-              developmentWeeklyInflowTransaction.data
-                .stablecoinInflowTransaction
-            }
-            isSeprate
-            queryLink={developmentWeeklyInflowTransaction.key}
-            modalInfo=""
-            title={developmentWeeklyInflowTransactionNames[3]}
-            baseSpan={2}
-            dataKey="Name"
-            oyLabel=""
-            oxLabel="Day"
-            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
-              (item: string, index: number) => ({
-                key: item,
-                color: colors[index % colors.length],
-              })
-            )}
-          />
-
-          <BarGraph
-            values={
-              developmentWeeklyInflowTransaction.data.stablecoinInflowUniqueUser
-            }
-            isSeprate
-            queryLink={developmentWeeklyInflowTransaction.key}
-            modalInfo=""
-            title={developmentWeeklyInflowTransactionNames[4]}
-            baseSpan={3}
-            dataKey="Name"
-            oyLabel=""
-            oxLabel="Day"
-            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
-              (item: string, index: number) => ({
-                key: item,
-                color: colors[index % colors.length],
-              })
-            )}
-          />
-
-          <BarGraph
-            values={
-              developmentWeeklyInflowTransaction.data.stablecoinInflowTXCount
-            }
-            isSeprate
-            queryLink={developmentWeeklyInflowTransaction.key}
-            modalInfo=""
-            title={developmentWeeklyInflowTransactionNames[5]}
-            baseSpan={3}
-            dataKey="Name"
-            oyLabel=""
-            oxLabel="Day"
-            labels={developmentWeeklyInflowTransaction.data.stablecoinsSet.map(
-              (item: string, index: number) => ({
-                key: item,
-                color: colors[index % colors.length],
-              })
-            )}
-          />
-
-          <TextBox hasPattern>
-            {`
-### Weekly inflow transactions
-`}
-          </TextBox>
-          <DonutChart
-            queryLink={developmentWeeklyInflowTransaction.key}
-            data={
-              developmentWeeklyInflowTransaction.data
-                .shareStablecoinInflowShareVolume
-            }
-            modalInfo=""
-            baseSpan={1}
-            title={developmentWeeklyInflowTransactionNames[0]}
-            nameKey="STABLECOINS"
-            dataKey="Volume"
-          />
-
-          <BarGraph
-            values={
-              developmentWeeklyInflowTransaction.data
-                .stablecoinAverageInflowTransaction
-            }
-            isSeprate
             queryLink={developmentWeeklyInflowTransaction.key}
             modalInfo=""
             title={developmentWeeklyInflowTransactionNames[2]}
@@ -666,7 +552,7 @@ Development of Contracts show how much of compebility of one network is used by 
             queryLink={developmentStablecoinsDestination.key}
             modalInfo=""
             title={developmentStablecoinsDestinationNames[0]}
-            baseSpan={3}
+            baseSpan={1}
             dataKey="Name"
             oyLabel=""
             oxLabel="Day"
@@ -685,7 +571,7 @@ Development of Contracts show how much of compebility of one network is used by 
             queryLink={developmentStablecoinsDestination.key}
             modalInfo=""
             title={developmentStablecoinsDestinationNames[1]}
-            baseSpan={3}
+            baseSpan={1}
             dataKey="Name"
             oyLabel=""
             oxLabel="Day"
@@ -704,7 +590,7 @@ Development of Contracts show how much of compebility of one network is used by 
             queryLink={developmentStablecoinsDestination.key}
             modalInfo=""
             title={developmentStablecoinsDestinationNames[2]}
-            baseSpan={3}
+            baseSpan={1}
             dataKey="Name"
             oyLabel=""
             oxLabel="Day"

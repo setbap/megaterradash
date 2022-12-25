@@ -1,5 +1,4 @@
 import { Box, chakra, useColorModeValue } from "@chakra-ui/react";
-import MDRenderer from "lib/components/basic/MDRenderer";
 import TextBox from "lib/components/charts/TextBox";
 
 const About = () => {
@@ -7,18 +6,9 @@ const About = () => {
   return (
     <>
       <Box mx={"auto"} py="6" px={{ base: 6, sm: 2, md: 8 }}>
-        <Box
-          width={"100%"}
-          px="6"
-          py="2"
-          shadow="base"
-          borderRadius={"lg"}
-          backgroundColor={bgCard}
-          pb={8}
-          aria-label="about this dashboard"
-        >
-          <TextBox>
-            {`
+        <TextBox></TextBox>
+        <TextBox>
+          {`
 
 ## About
 
@@ -37,8 +27,7 @@ This dashboard is made with love by members of the Terra community, in partnersh
 
 Last Updated: __Dec 25, 2022__
 `}
-          </TextBox>
-        </Box>
+        </TextBox>
       </Box>
     </>
   );
