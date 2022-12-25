@@ -27,11 +27,23 @@ export default function MDRenderer({ children }: any) {
             alt={props.alt}
           />
         ),
+        h2: (props) => (
+          <Heading
+            as="h2"
+            size="2xl"
+            py={"1.5"}
+            style={{ fontFamily: "'Carter One', cursive" }}
+          >
+            {props.children}
+          </Heading>
+        ),
+
         h3: (props) => (
           <Heading
             as="h3"
             size="xl"
-            py={"0.5"}
+            pt={"0.5"}
+            pb={"1"}
             style={{ fontFamily: "'Carter One', cursive" }}
           >
             {props.children}

@@ -12,7 +12,11 @@ import { FlipSideIcon, MetricsDoa } from "../basic/FlipSideIcon";
 export default function Footer() {
   const baseColor = useColorModeValue("gray.700", "whiteAlpha.700");
   return (
-    <Box bg={useColorModeValue("white", "#191919")} color={baseColor}>
+    <Box
+      borderTopRadius="lg"
+      bg={useColorModeValue("white", "#191919")}
+      color={baseColor}
+    >
       <Container
         as={Stack}
         maxW={"100vw"}

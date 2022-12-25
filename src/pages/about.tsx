@@ -1,5 +1,6 @@
 import { Box, chakra, useColorModeValue } from "@chakra-ui/react";
 import MDRenderer from "lib/components/basic/MDRenderer";
+import TextBox from "lib/components/charts/TextBox";
 
 const About = () => {
   const bgCard = useColorModeValue("white", "#191919");
@@ -16,7 +17,7 @@ const About = () => {
           pb={8}
           aria-label="about this dashboard"
         >
-          <MDRenderer>
+          <TextBox>
             {`
 
 ## About
@@ -34,9 +35,9 @@ This dashboard is made with love by members of the Terra community, in partnersh
 -   For charts where data comes from Flipside’s data, a link to the underlying query is provided in the Settings gear wheel at the top right of each visualization.
     
 
-Last Updated: __Dec 8, 2022__
+Last Updated: __Dec 25, 2022__
 `}
-          </MDRenderer>
+          </TextBox>
         </Box>
       </Box>
     </>

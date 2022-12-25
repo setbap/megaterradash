@@ -55,3 +55,21 @@
     );
   background-position: 0 0, 24px 24px;
 }
+
+.gradient-box {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  
+  border: none;
+  font: normal 100%/normal Arial, Helvetica, sans-serif;
+  color: rgb(255, 255, 255);
+  -o-text-overflow: clip;
+  text-overflow: clip;
+  background: linear-gradient(135deg, rgba(84, 84, 84, 0) 0, rgba(84, 84, 84, 0) 40%, rgba(29, 29, 29, 1) 40%, rgba(60, 20, 0, 1) 59%, rgba(58, 58, 58, 0) 59%, rgba(63, 63, 63, 0) 100%), linear-gradient(135deg, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 7%, rgba(79, 79, 79, 0) 7%, rgba(63, 63, 63, 0) 100%), linear-gradient(315deg, rgba(0, 0, 0, 1) 0, rgba(0, 0, 0, 1) 7%, rgba(79, 79, 79, 0) 7%, rgba(63, 63, 63, 0) 100%), rgba(33, 29, 29, 1);
+  background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-background-size: 10px 10px;
+  background-size: 10px 10px;
+}

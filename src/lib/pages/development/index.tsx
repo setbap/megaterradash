@@ -80,7 +80,7 @@ const Development = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 ### Terra Development 
 in this page we review all information about Terra Smart Contract Development and increase usage of different smart contract in Terra Network 
@@ -90,7 +90,7 @@ but before deep dive into chart i prepare some statics to see status of network 
 `}
         </TextBox>
         <Box pt={"4"}></Box>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 ### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
@@ -113,7 +113,7 @@ according section defined in above, i prepare some of static about these topics.
             link={developmentTotalNumberOfContracts.key}
           />
         </SimpleGrid>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 ### Development Contracts 
 Development of Contracts show how much of compebility of one network is used by developers. increasing number of new smart contract show windwos of new idea in network and help growth faster 
@@ -156,7 +156,7 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### Weekly Active Contract
 `}
@@ -178,7 +178,7 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### Weekly New Contract
 `}
@@ -209,7 +209,7 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### Contract With Most Unique User
 `}
@@ -243,7 +243,7 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### Weekly inflow transactions
 `}
@@ -357,7 +357,7 @@ Development of Contracts show how much of compebility of one network is used by 
             )}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### Weekly inflow transactions
 `}
@@ -470,7 +470,7 @@ Development of Contracts show how much of compebility of one network is used by 
             )}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### Weekly outflow transactions
 `}
@@ -584,7 +584,7 @@ Development of Contracts show how much of compebility of one network is used by 
             )}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### axlUSDC Destination
 `}
@@ -619,7 +619,7 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="tx count"
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### axlUSDT Destination
 `}
@@ -654,7 +654,7 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="tx count"
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 ### Stablecoins Destination
 `}
