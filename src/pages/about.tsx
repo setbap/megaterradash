@@ -4,36 +4,36 @@ import TextBox from "lib/components/charts/TextBox";
 const About = () => {
   const bgCard = useColorModeValue("white", "#191919");
   return (
-    <>
+    <Box px={6} maxW="container.xl" mx={"auto"}>
+      <GridItem
+        mt={"6"}
+        colSpan={3}
+        height={"320px"}
+        style={{
+          backgroundImage:
+            "url(https://cdn.pixabay.com/photo/2015/01/08/18/25/desk-593327_960_720.jpg)",
+          backgroundPosition: "25% center",
+          backgroundSize: "cover",
+        }}
+        width="100%"
+        borderRadius={"lg"}
+        position="relative"
+      >
+        <Box position={"absolute"} bottom="8px" width={"100%"} px="8px">
+          <TextBox hasPattern>
+            {`## elSina
+
+
+  __[Page Source | elSina(SETBAP)](https://github.com/setbap/terradashprime)__
+`}
+          </TextBox>
+        </Box>
+      </GridItem>
       <SimpleGrid
         my={"6"}
-        px={6}
         columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
         spacing={{ base: 5, lg: 8 }}
       >
-        <GridItem
-          colSpan={3}
-          height={"320px"}
-          style={{
-            backgroundImage:
-              "url(https://cdn.pixabay.com/photo/2015/01/08/18/25/desk-593327_960_720.jpg)",
-            backgroundPosition: "25% center",
-            backgroundSize: "cover",
-          }}
-          width="100%"
-          borderRadius={"lg"}
-          position="relative"
-        >
-          <Box position={"absolute"} bottom="8px" width={"100%"} px="8px">
-            <TextBox hasPattern>
-              {`## elSina
-
-
-  [Page Source by elSina(SETBAP)](https://github.com/setbap/terradashprime)
-`}
-            </TextBox>
-          </Box>
-        </GridItem>
         <TextBox hasPattern spanSize={1}>
           {`
 __Twitter__
@@ -45,7 +45,7 @@ __Twitter__
           {`
 __Discord__
           
-##### [@elsina#6747](https://twitter.com/elsinaCrypto)
+##### @elsina#6747
 `}
         </TextBox>
         <TextBox hasPattern spanSize={1}>
@@ -55,8 +55,9 @@ __Github__
  ##### [ @SETBAP](https://github.com/setbap)
 `}
         </TextBox>
-        <TextBox>
-          {`
+      </SimpleGrid>
+      <TextBox>
+        {`
 
 ## About
 
@@ -75,9 +76,9 @@ This dashboard is made with love by members of the Terra community, in partnersh
 
 Last Updated: __Dec 25, 2022__
 `}
-        </TextBox>
-      </SimpleGrid>
-    </>
+      </TextBox>
+      <Box pb={"6"} />
+    </Box>
   );
 };
 

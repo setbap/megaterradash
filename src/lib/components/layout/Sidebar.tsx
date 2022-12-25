@@ -129,6 +129,13 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           {link.name}
         </NavItem>
       ))}
+      <NavItem
+        isActive={router.pathname === "/about"}
+        path={"about"}
+        icon={FiInfo}
+      >
+        About
+      </NavItem>
     </Box>
   );
 };
