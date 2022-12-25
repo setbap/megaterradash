@@ -71,7 +71,7 @@ const Staking = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 ### Terra Staking 
 in this page we review all information all about staking in Terra. after Terra fall and brith of Terra(2) most of Terra's Airdroped to old user and this airdropd token 
@@ -80,7 +80,7 @@ divided in 4 part and just 1/4 of that availble for user and remaining staked an
 `}
         </TextBox>
         <Box pt={"4"}></Box>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 #### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
@@ -191,7 +191,7 @@ according section defined in above, i prepare some of static about these topics.
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
-          <TextBox>
+          <TextBox hasPattern>
             {`
 #### Tops 
 review top information or actor or validators in Terra
@@ -321,7 +321,7 @@ review top information or actor or validators in Terra
             )}
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 #### IBC Transfer and Bridge Inforamtion
 `}
@@ -398,7 +398,7 @@ review top information or actor or validators in Terra
               )}
             />
           ))}
-          <TextBox>
+          <TextBox hasPattern>
             {`
 #### Staking and Stake Transactions and Rewards
 
@@ -477,13 +477,12 @@ review top information or actor or validators in Terra
             xAxisDataKey="Day"
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 #### Luna Vesting Schadule
 ![luna vesting image](/lunavesting.webp)
 `}
           </TextBox>
-
         </SimpleGrid>
       </Box>
     </>

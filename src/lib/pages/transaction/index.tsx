@@ -60,7 +60,7 @@ const Governance = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 ### Terra Transaction 
 in this page we review all information about Terra Transaction in three topic:
@@ -72,7 +72,7 @@ but before deep dive into chart i prepare some statics to see status of network 
 `}
         </TextBox>
         <Box pt={"4"}></Box>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 #### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
@@ -141,7 +141,7 @@ according section defined in above, i prepare some of static about these topics.
             link={transactionsBlockAge.key}
           />
         </SimpleGrid>
-        <TextBox>
+        <TextBox hasPattern>
           {`
 #### Transaction Count and Status 
 transaction status define as whether a transaction successfully done or transaction doesn't completed of failed. the reasons for failing transaction are varying from lack of gas fee and authorization problem.
@@ -189,7 +189,7 @@ transaction status define as whether a transaction successfully done or transact
             additionalLineKey={["MA7 tx count"]}
             xAxisDataKey="Day"
           />
-          <TextBox>
+          <TextBox hasPattern>
             {`
 #### Transaction Fee
 one of most important problem blockchain is fee and gas that paid for transaction. amount of transaction fee is very important, some times this fee cause one user goes to another blockchains.
@@ -221,7 +221,7 @@ one of most important problem blockchain is fee and gas that paid for transactio
             xAxisDataKey="Day"
           />
 
-          <TextBox>
+          <TextBox hasPattern>
             {`
 #### Transaction Per Second (TPS)
 TPS shows speed of blockchain and each this number is higher the blockchain is faster. this number doesn't have relation with number or power validators and defined in protocol and network
@@ -240,7 +240,7 @@ TPS shows speed of blockchain and each this number is higher the blockchain is f
             lineDataKey="AVG TPS"
             xAxisDataKey="Day"
           />
-          <TextBox>
+          <TextBox hasPattern>
             {`
 #### Age of Blocks
 each block contain multiple transactions that these transaction chained together and create blockchain. like TPS, age of blocks defined by protocol and donesn't change so much
