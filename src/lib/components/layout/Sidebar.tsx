@@ -19,6 +19,9 @@ import {
   Tab,
   TabList,
   Button,
+  DrawerBody,
+  DrawerOverlay,
+  DrawerHeader,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FiMenu, FiInfo } from "react-icons/fi";
@@ -61,18 +64,22 @@ export default function SidebarWithHeader({
       )}
     >
       <Drawer
-        autoFocus={false}
+        autoFocus={true}
         isOpen={isOpen}
-        placement="left"
+        placement="bottom"
         onClose={onClose}
         closeOnOverlayClick
         closeOnEsc
         returnFocusOnClose={false}
         onOverlayClick={onClose}
-        size="full"
+        size="xl"
       >
-        <DrawerContent>
-          <SidebarContent onClose={onClose} />
+        <DrawerOverlay />
+        <DrawerContent bg={useColorModeValue("#0046a8", "#1c1c1c")}>
+          <DrawerHeader borderBottomWidth="1px">{names.APP_NAME}</DrawerHeader>
+          <DrawerBody>
+            <SidebarContent onClose={onClose} />
+          </DrawerBody>
         </DrawerContent>
       </Drawer>
 
@@ -100,34 +107,10 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
     <Box
       overflowX={"hidden"}
       transition="0.7s ease"
-      bg={useColorModeValue("#0046a8", "#1c1c1c")}
       color={"white"}
-      borderRight="1px"
-      borderRightColor={useColorModeValue("gray.200", "gray.700")}
-      w={{ base: "full", md: 64 }}
-      pos="fixed"
-      h="full"
+      w="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="xl" fontWeight="semibold">
-          <NextLink href={"/"} passHref>
-            <>
-              <Box
-                display={"inline"}
-                fontFamily="sans-serif"
-                fontSize="2xl"
-                ps={"2"}
-                color="white"
-                fontWeight={"extrabold"}
-              >
-                {names.APP_NAME}
-              </Box>
-            </>
-          </NextLink>
-        </Text>
-        <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
-      </Flex>
       {sideMenuItems.map((link) => (
         <NavItem
           isActive={router.pathname === link.path}
@@ -149,48 +132,6 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
-const MobileNav = ({ onOpen }: MobileProps) => {
-  return (
-    <Flex
-      className="gradient-border"
-      ml={{ base: 0, md: 0 }}
-      px={{ base: 4, md: 4 }}
-      height="14"
-      alignItems="center"
-      bg={useColorModeValue("white", "#191919")}
-      justifyContent={{ base: "space-between", md: "flex-end" }}
-      display={{ base: "flex", md: "none" }}
-    >
-      <Box marginEnd={"4"}>
-        <IconButton
-          onClick={onOpen}
-          variant="outline"
-          aria-label="open menu"
-          icon={<FiMenu />}
-        />
-      </Box>
-      <Text
-        display={{ base: "flex", md: "none" }}
-        alignItems="baseline"
-        fontSize="xl"
-        fontWeight="semibold"
-      >
-        <NextLink href={"/"} passHref>
-          <>
-            <Box
-              display={"inline"}
-              fontFamily="sans-serif"
-              fontSize="2xl"
-              fontWeight={"extrabold"}
-            >
-              {names.APP_NAME}
-            </Box>
-          </>
-        </NextLink>
-      </Text>
-    </Flex>
-  );
-};
 const HeaderNav = ({ onOpen, ...rest }: MobileProps) => {
   return (
     <Box
@@ -313,6 +254,76 @@ const DesktopTopNav = () => {
   );
 };
 
+const MobileNav = ({ onOpen }: MobileProps) => {
+  return (
+    <Flex
+      className="gradient-border"
+      alignItems="center"
+      position={"sticky"}
+      top={0}
+      zIndex="banner"
+      bg={useColorModeValue("white", "#191919")}
+      display={{ base: "flex", md: "none" }}
+      flexDir="column"
+    >
+      <MobileTopNav onOpen={onOpen} />
+    </Flex>
+  );
+};
+const MobileTopNav = ({ onOpen }: { onOpen: () => void }) => {
+  const router = useRouter();
+  return (
+    <Flex
+      w={"full"}
+      p={1}
+      bg={useColorModeValue(
+        "white",
+        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
+      )}
+      width={"full"}
+      justifyContent={"space-between"}
+      alignItems="center"
+      position={"relative"}
+      overflow="hidden"
+      zIndex="1"
+    >
+      <Box mx={"1"} display={"flex"} alignItems="center">
+        <Image
+          style={{ transform: "scale(1.4)", zIndex: "1" }}
+          width={40}
+          height={40}
+          src={"/terra.svg"}
+        />
+        <Text
+          mx={"2"}
+          fontFamily="'Carter One', cursive"
+          fontSize="xl"
+          letterSpacing={"wide"}
+          fontWeight={"extrabold"}
+          zIndex="1"
+        >
+          {names.APP_NAME}
+        </Text>
+      </Box>
+      <Box
+        position={"absolute"}
+        inset="0"
+        zIndex={"0"}
+        filter=""
+        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+      />
+      <Box marginEnd={"4"}>
+        <IconButton
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          icon={<FiMenu />}
+        />
+      </Box>
+    </Flex>
+  );
+};
+
 interface NavItemProps extends FlexProps {
   icon: IconType;
   path: string;
@@ -326,9 +337,7 @@ const NavItem = ({ icon, isActive, path, children, ...rest }: NavItemProps) => {
       <Link style={{ textDecoration: "none" }}>
         <Flex
           align="center"
-          ps="4"
           py={"4"}
-          mx="3"
           mb={"1"}
           transition="all 0.7s ease"
           borderRadius="lg"
@@ -346,7 +355,7 @@ const NavItem = ({ icon, isActive, path, children, ...rest }: NavItemProps) => {
         >
           {icon && (
             <Icon
-              mr="4"
+              mx="4"
               fontSize="1rem"
               fontWeight={"bold"}
               _groupHover={{

@@ -13,6 +13,7 @@ export default function Footer() {
   const baseColor = useColorModeValue("gray.700", "whiteAlpha.700");
   return (
     <Box
+      fontSize={{ base: "0.7rem", md: "1rem" }}
       borderTopRadius="lg"
       bg={useColorModeValue("white", "#191919")}
       color={baseColor}

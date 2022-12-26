@@ -1,4 +1,4 @@
-import { Icon } from "@chakra-ui/react";
+import { Icon, Image } from "@chakra-ui/react";
 
 export const FlipSideIcon = (props: any) => (
   <Icon viewBox="0 0 76 80" {...props}>
@@ -11,10 +11,10 @@ export const FlipSideIcon = (props: any) => (
 );
 
 export const MetricsDoa = (props: any) => (
-  <img
-    width={16}
-    style={{ paddingTop: 4, filter: "grayscale(0.8)" }}
-    height={16}
+  <Image
+    width={{ base: "12px", md: "16px" }}
+    height={{ base: "14px", md: "18px" }}
+    style={{ paddingTop: 5, filter: "grayscale(1)" }}
     src="/metricsdao.png"
     alt="Metrics Dao Image"
   />
