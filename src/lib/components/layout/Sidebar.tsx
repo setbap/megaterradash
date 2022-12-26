@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import MotionBox from "../motion/Box";
 import names from "lib/utility/names";
 import sideMenuItems from "lib/utility/sideMenuItems";
+import Image from "next/image";
 
 export default function SidebarWithHeader({
   children,
@@ -53,7 +54,7 @@ export default function SidebarWithHeader({
       animate="enter" // Animated state to variants.enter
       exit="exit" // Exit state (used later) to variants.exit
       transition={{ type: "linear" }} // Set the transition to linear
-      minH="calc( 100vh - 56px )"
+      minH="calc( 100vh - 2px )"
       bg={useColorModeValue(
         " linear-gradient(to top, #e2ebf0 0% , #cfd9df  100%)",
         "linear-gradient(to top, #090909,#000000)"
@@ -74,8 +75,16 @@ export default function SidebarWithHeader({
           <SidebarContent onClose={onClose} />
         </DrawerContent>
       </Drawer>
+
+      <HeaderNav onOpen={onOpen} />
+
       <MobileNav onOpen={onOpen} />
-      <DesktopLinkNav />
+
+      {/* <HStack gap={"2"} spacing={{ base: "0", md: "6" }}>
+        <ConnectWallet />
+        <ThemeToggle /> 
+      </HStack> */}
+
       <Box mx="auto">{children}</Box>
     </MotionBox>
   );
@@ -140,6 +149,170 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   );
 };
 
+const MobileNav = ({ onOpen }: MobileProps) => {
+  return (
+    <Flex
+      className="gradient-border"
+      ml={{ base: 0, md: 0 }}
+      px={{ base: 4, md: 4 }}
+      height="14"
+      alignItems="center"
+      bg={useColorModeValue("white", "#191919")}
+      justifyContent={{ base: "space-between", md: "flex-end" }}
+      display={{ base: "flex", md: "none" }}
+    >
+      <Box marginEnd={"4"}>
+        <IconButton
+          onClick={onOpen}
+          variant="outline"
+          aria-label="open menu"
+          icon={<FiMenu />}
+        />
+      </Box>
+      <Text
+        display={{ base: "flex", md: "none" }}
+        alignItems="baseline"
+        fontSize="xl"
+        fontWeight="semibold"
+      >
+        <NextLink href={"/"} passHref>
+          <>
+            <Box
+              display={"inline"}
+              fontFamily="sans-serif"
+              fontSize="2xl"
+              fontWeight={"extrabold"}
+            >
+              {names.APP_NAME}
+            </Box>
+          </>
+        </NextLink>
+      </Text>
+    </Flex>
+  );
+};
+const HeaderNav = ({ onOpen, ...rest }: MobileProps) => {
+  return (
+    <Box
+      display={{ base: "none", md: "block" }}
+      px={"8"}
+      pb={"4"}
+      position="sticky"
+      top={"4"}
+      zIndex="dropdown"
+    >
+      <DesktopTopNav />
+
+      <DesktopLinkNav />
+    </Box>
+  );
+};
+const DesktopLinkNav = () => {
+  const router = useRouter();
+  return (
+    <Box
+      position={"relative"}
+      borderBottomRadius={"xl"}
+      pb="2px"
+      px={"3px"}
+      bg={useColorModeValue(
+        "white",
+        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
+      )}
+    >
+      <Box
+        position={"absolute"}
+        inset="0"
+        zIndex={"0"}
+        filter=""
+        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+      />
+      <Box
+        zIndex={"banner"}
+        position="relative"
+        width={"100%"}
+        borderRadius={"2xl"}
+        py={2}
+        px={3}
+        bg={useColorModeValue("white", "#1919197b")}
+        backdropBlur="2xl"
+        justifyContent={"center"}
+        overflowX={"auto"}
+        experimental_spaceX="2"
+        flexWrap="nowrap"
+      >
+        {sideMenuItems.map((link, index) => (
+          <Button
+            variant={router.pathname === link.path ? "solid" : "outline"}
+            size={"sm"}
+            onClick={() => {
+              router.push(link.path);
+            }}
+            key={link.name}
+          >
+            {link.name}
+          </Button>
+        ))}
+      </Box>
+    </Box>
+  );
+};
+const DesktopTopNav = () => {
+  const router = useRouter();
+  return (
+    <Flex
+      p={1}
+      bg={useColorModeValue(
+        "white",
+        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
+      )}
+      width={"full"}
+      justifyContent={"space-between"}
+      alignItems="center"
+      position={"relative"}
+      borderTopRadius={"xl"}
+      overflow="hidden"
+      zIndex="1"
+    >
+      <Box mx={"2"} display={"flex"} alignItems="center">
+        <Image
+          style={{ transform: "scale(1.7)", zIndex: "1" }}
+          width={40}
+          height={40}
+          src={"/terra.svg"}
+        />
+        <Text
+          mx={"2"}
+          fontFamily="'Carter One', cursive"
+          fontSize="2xl"
+          letterSpacing={"wide"}
+          fontWeight={"extrabold"}
+          zIndex="1"
+        >
+          {names.APP_NAME}
+        </Text>
+      </Box>
+      <Box
+        position={"absolute"}
+        inset="0"
+        zIndex={"0"}
+        filter=""
+        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+      />
+
+      <Box mr={"4"} textAlign="end">
+        <IconButton
+          zIndex={1}
+          size={"sm"}
+          onClick={() => router.push("/about")}
+          aria-label="About"
+          icon={<FiInfo />}
+        />
+      </Box>
+    </Flex>
+  );
+};
+
 interface NavItemProps extends FlexProps {
   icon: IconType;
   path: string;
@@ -192,108 +365,3 @@ const NavItem = ({ icon, isActive, path, children, ...rest }: NavItemProps) => {
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
-
-const DesktopLinkNav = () => {
-  const router = useRouter();
-  return (
-    <Box
-      width={"100%"}
-      py="2"
-      display={{ base: "none", md: "flex" }}
-      position={"sticky"}
-      top="0"
-      borderBottomRadius={"2xl"}
-      borderBottomWidth="1px"
-      borderBottomColor={useColorModeValue("gray.200", "gray.700")}
-      zIndex={"popover"}
-      bg={"#191919"}
-      justifyContent={"center"}
-      overflowX={"auto"}
-      experimental_spaceX="2"
-      flexWrap="nowrap"
-    >
-      {sideMenuItems.map((link, index) => (
-        <Button
-          variant={router.pathname === link.path ? "solid" : "outline"}
-          onClick={() => {
-            router.push(link.path);
-          }}
-          key={link.name}
-        >
-          {link.name}
-        </Button>
-      ))}
-    </Box>
-  );
-};
-const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const router = useRouter();
-  return (
-    <Flex
-      ml={{ base: 0, md: 0 }}
-      px={{ base: 4, md: 4 }}
-      height="14"
-      alignItems="center"
-      bg={useColorModeValue("white", "#191919")}
-      justifyContent={{ base: "space-between", md: "flex-end" }}
-      {...rest}
-    >
-      <Box
-        width={"full"}
-        justifyContent={"space-between"}
-        alignItems="center"
-        display={{ base: "none", md: "flex" }}
-      >
-        <Text
-          mx={"12"}
-          fontFamily="sans-serif"
-          fontSize="2xl"
-          fontWeight={"extrabold"}
-        >
-          {names.APP_NAME}
-        </Text>
-
-        <Box mx={"12"} textAlign="end">
-          <IconButton
-            onClick={() => router.push("/about")}
-            aria-label="About"
-            icon={<FiInfo />}
-          />
-        </Box>
-      </Box>
-
-      <Box display={{ base: "flex", md: "none" }} marginEnd={"4"}>
-        <IconButton
-          onClick={onOpen}
-          variant="outline"
-          aria-label="open menu"
-          icon={<FiMenu />}
-        />
-      </Box>
-      <Text
-        display={{ base: "flex", md: "none" }}
-        alignItems="baseline"
-        fontSize="xl"
-        fontWeight="semibold"
-      >
-        <NextLink href={"/"} passHref>
-          <>
-            <Box
-              display={"inline"}
-              fontFamily="sans-serif"
-              fontSize="2xl"
-              fontWeight={"extrabold"}
-            >
-              {names.APP_NAME}
-            </Box>
-          </>
-        </NextLink>
-      </Text>
-      <Box marginLeft="auto" />
-      <HStack gap={"2"} spacing={{ base: "0", md: "6" }}>
-        {/* <ConnectWallet />
-        <ThemeToggle /> */}
-      </HStack>
-    </Flex>
-  );
-};

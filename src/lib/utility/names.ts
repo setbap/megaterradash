@@ -1,5 +1,5 @@
 export default {
-  APP_NAME: "TerraDashPrime",
-  SITE_URL: "terradashPrime.vercel.app",
+  APP_NAME: "MegaTerraDash",
+  SITE_URL: "MegaTerraDash.vercel.app",
   BLOCKCHAIN: "Terra",
 };

@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 const NextSitemapConfig = {
-  siteUrl: "https://TerraDashPrime.vercel.app",
+  siteUrl: "https://MegaTerraDash.vercel.app",
   generateRobotsTxt: true,
 };
 

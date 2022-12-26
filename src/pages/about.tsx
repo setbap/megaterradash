@@ -24,7 +24,7 @@ const About = () => {
             {`## elSina
 
 
-  __[Page Source | elSina(SETBAP)](https://github.com/setbap/terradashprime)__
+  __[Page Source | elSina(SETBAP)](https://github.com/setbap/MegaTerraDash)__
 `}
           </TextBox>
         </Box>
