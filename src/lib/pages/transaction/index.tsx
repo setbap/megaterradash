@@ -270,7 +270,7 @@ in Proof of Work Blockchains like Terra we don't have competition for solving pr
 created by witch validator and so block age in these blockchains is fixed time and There is a small amount of difference, which is due to the distribution and speed of the Internet and lack of concentration
 `}
             baseSpan={3}
-            infoSizePercentage={25}
+            infoSizePercentage={50}
             barDataKey={"block age"}
             lineDataKey="AVG block age"
             xAxisDataKey="Day"

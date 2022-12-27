@@ -59,6 +59,7 @@ function CurrentStatusPage() {
               <MenuItem
                 onClick={() => scrollToItem(section.id)}
                 fontSize={"md"}
+                key={section.id}
               >
                 {section.id}
               </MenuItem>

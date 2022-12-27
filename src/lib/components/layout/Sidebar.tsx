@@ -271,14 +271,15 @@ const DesktopTopNav = () => {
 
 const MobileNav = ({ onOpen }: MobileProps) => {
   const { scrollY } = useScroll();
-  const scrollChange = useRef(0);
   const ref = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     scrollY.onChange(() => {
-      if (scrollY.getVelocity() > 0) {
-        ref.current?.classList.add("hide");
-      } else {
-        ref.current?.classList.remove("hide");
+      if (Math.abs(scrollY.getVelocity()) > 70) {
+        if (scrollY.getVelocity() > 0) {
+          ref.current?.classList.add("hide");
+        } else {
+          ref.current?.classList.remove("hide");
+        }
       }
     });
     return () => {};
