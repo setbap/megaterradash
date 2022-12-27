@@ -182,7 +182,6 @@ const DesktopLinkNav = () => {
         bg={useColorModeValue("white", "#1919197b")}
         backdropBlur="2xl"
         justifyContent={"space-between"}
-        overflowX={"auto"}
         experimental_spaceX="2"
         flexWrap="nowrap"
         display={"flex"}

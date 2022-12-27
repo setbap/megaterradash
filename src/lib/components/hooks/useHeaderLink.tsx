@@ -9,7 +9,6 @@ function useHeaderLink() {
   const router = useRouter();
   const [activeSection, setActiveSection] = useState<Element | null>(null);
   const [sectionText, setSectionText] = useState("");
-  const [allSections, setAllSections] = useState<string[]>([]);
 
   const handle = throttle(WaitInMs, () => {
     let currentSectionId = activeSection;
@@ -34,10 +33,7 @@ function useHeaderLink() {
       return;
     }
     handle();
-    const elements = document.querySelectorAll("[data-type]");
-    const data: string[] = [];
-    elements.forEach((element: any) => data.push(element.dataset.id));
-    setAllSections(data);
+
     return () => {};
   }, [router.route]);
 
@@ -48,7 +44,7 @@ function useHeaderLink() {
     const delayHandleChange = () => {
       setTimeout(() => {
         handle();
-      }, 1500);
+      }, 1300);
     };
     const scrollable = window;
     scrollable.addEventListener("scroll", handle);
@@ -67,7 +63,7 @@ function useHeaderLink() {
     return { sectionText: data[0], allSections: data, handler: handle };
   }
 
-  return { sectionText, allSections, handler: handle };
+  return { sectionText, handler: handle };
 }
 
 export default useHeaderLink;
