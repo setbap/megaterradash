@@ -55,13 +55,7 @@ export const TrendLine = ({ data, xKey, yKey }: Props) => {
   const trendData = () => {
     debugger;
     const trend = createTrend(data, xKey, yKey);
-    console.log([
-      { [yKey]: trend.calcY(data[0][xKey]), [xKey]: data[0][xKey] },
-      {
-        [yKey]: trend.calcY(data[data.length - 1][xKey]),
-        [xKey]: data[data.length - 1][xKey],
-      },
-    ]);
+
     return [
       { [yKey]: trend.calcY(data[0][xKey]), [xKey]: data[0][xKey] },
       {

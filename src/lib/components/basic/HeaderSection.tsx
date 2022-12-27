@@ -32,7 +32,7 @@ const HeaderSection = ({
       <Box px="4" pb="3" pt={"1"}>
         <Heading
           as="h2"
-          size="2xl"
+          size={"xl"}
           py={"1.5"}
           id={title}
           data-section

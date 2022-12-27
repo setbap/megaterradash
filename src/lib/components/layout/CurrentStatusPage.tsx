@@ -19,7 +19,6 @@ function CurrentStatusPage() {
     const data: string[] = [];
     elements.forEach((element: any) => data.push(element.dataset.id));
     setAllSections(allSections);
-    console.log(allSections);
   }, [sectionText]);
   const bgCard = useColorModeValue("white", "#191919");
   const scrollToItem = (item: string) => {
@@ -43,9 +42,15 @@ function CurrentStatusPage() {
         fontWeight="bold"
         position={"sticky"}
         style={{ fontFamily: "'Carter One', cursive" }}
-        rightIcon={<BiChevronDown />}
+        display={"inline-flex"}
+        flexDir={"row"}
       >
-        {sectionText}
+        <Box maxW={"64"} display={"inline-flex"}>
+          <Box pr="2" noOfLines={1} textOverflow="ellipsis">
+            {sectionText}
+          </Box>
+          <BiChevronDown display={"inline-flex"} />
+        </Box>
       </MenuButton>
       <MenuList bg={bgCard}>
         {typeof window !== "undefined" &&

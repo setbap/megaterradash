@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, useRef } from "react";
 import {
   IconButton,
   Box,
@@ -28,7 +28,13 @@ import MotionBox from "../motion/Box";
 import names from "lib/utility/names";
 import sideMenuItems from "lib/utility/sideMenuItems";
 import Image from "next/image";
-import { motion, useScroll } from "framer-motion";
+import {
+  motion,
+  useMotionTemplate,
+  useMotionValue,
+  useScroll,
+  useVelocity,
+} from "framer-motion";
 import CurrentStatusPage from "./CurrentStatusPage";
 import ThemeToggle from "./ThemeToggle";
 
@@ -264,9 +270,24 @@ const DesktopTopNav = () => {
 };
 
 const MobileNav = ({ onOpen }: MobileProps) => {
+  const { scrollY } = useScroll();
+  const scrollChange = useRef(0);
+  const ref = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    scrollY.onChange(() => {
+      if (scrollY.getVelocity() > 0) {
+        ref.current?.classList.add("hide");
+      } else {
+        ref.current?.classList.remove("hide");
+      }
+    });
+    return () => {};
+  }, []);
+
   return (
     <Flex
-      className="gradient-border"
+      ref={ref}
+      className="gradient-border base-anime"
       alignItems="center"
       position={"sticky"}
       top={0}
@@ -275,12 +296,12 @@ const MobileNav = ({ onOpen }: MobileProps) => {
       display={{ base: "flex", md: "none" }}
       flexDir="column"
     >
-      <MobileTopNav onOpen={onOpen} />
+      <MobileTopNavShow onOpen={onOpen} />
+      <MobileNavRow onOpen={onOpen} />
     </Flex>
   );
 };
-const MobileTopNav = ({ onOpen }: { onOpen: () => void }) => {
-  const router = useRouter();
+const MobileTopNavShow = ({ onOpen }: { onOpen: () => void }) => {
   return (
     <Flex
       w={"full"}
@@ -290,7 +311,7 @@ const MobileTopNav = ({ onOpen }: { onOpen: () => void }) => {
         "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
       )}
       width={"full"}
-      justifyContent={"space-between"}
+      justifyContent={"center"}
       alignItems="center"
       position={"relative"}
       overflow="hidden"
@@ -313,6 +334,35 @@ const MobileTopNav = ({ onOpen }: { onOpen: () => void }) => {
         >
           {names.APP_NAME}
         </Text>
+      </Box>
+      <Box
+        position={"absolute"}
+        inset="0"
+        zIndex={"0"}
+        filter=""
+        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+      />
+    </Flex>
+  );
+};
+const MobileNavRow = ({ onOpen }: { onOpen: () => void }) => {
+  return (
+    <Flex
+      w={"full"}
+      p={1}
+      bg={useColorModeValue(
+        "white",
+        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
+      )}
+      width={"full"}
+      justifyContent={"space-between"}
+      alignItems="center"
+      position={"relative"}
+      overflow="hidden"
+      zIndex="1"
+    >
+      <Box mx={"1"} zIndex="1" display={"flex"} alignItems="center">
+        <CurrentStatusPage />
       </Box>
       <Box
         position={"absolute"}
