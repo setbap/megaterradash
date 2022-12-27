@@ -1,8 +1,8 @@
 import { Box, GridItem, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
+import HeaderSection from "lib/components/basic/HeaderSection";
 import TextBox from "lib/components/charts/TextBox";
 
 const About = () => {
-  const bgCard = useColorModeValue("white", "#191919");
   return (
     <Box px={6} maxW="container.xl" mx={"auto"}>
       <GridItem
@@ -20,13 +20,11 @@ const About = () => {
         position="relative"
       >
         <Box position={"absolute"} bottom="8px" width={"100%"} px="8px">
-          <TextBox hasPattern>
-            {`## elSina
-
-
+          <HeaderSection title={"elSina"}>
+            {`
   __[Page Source | elSina(SETBAP)](https://github.com/setbap/MegaTerraDash)__
 `}
-          </TextBox>
+          </HeaderSection>
         </Box>
       </GridItem>
       <SimpleGrid
@@ -56,27 +54,24 @@ __Github__
 `}
         </TextBox>
       </SimpleGrid>
-      <TextBox>
+      <HeaderSection title={"About"}>
         {`
-
-## About
-
 This dashboard is made with love by members of the Terra community, in partnership with MetricsDao and Flipside Crypto. We hope it serves as a valuable window into high-level metrics that display the vitality and growth of the Terra Blockchain.
 
-  
-
-
-  
-### Methodology
+`}
+      </HeaderSection>
+      <Box mb={"5"} />
+      <HeaderSection title={"Methodology"}>
+        {`
 
 -   Data is drawn from a combination of Flipside Crypto’s Terra tables and existing APIs.
     
 -   For charts where data comes from Flipside’s data, a link to the underlying query is provided in the Settings gear wheel at the top right of each visualization.
     
 
-Last Updated: __Dec 25, 2022__
+Last Updated: __${new Date().toLocaleString("en", { dateStyle: "full" })}__
 `}
-      </TextBox>
+      </HeaderSection>
       <Box pb={"6"} />
     </Box>
   );

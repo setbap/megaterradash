@@ -3,10 +3,11 @@ import ChartBox from "lib/components/charts/LineChart";
 import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
-import TextBox from "lib/components/charts/TextBox";
+
 import { DevelopmentProps } from "pages/development";
 import DonutChart from "lib/components/charts/DonutChart";
 import BarGraph from "lib/components/charts/BarGraph";
+import HeaderSection from "lib/components/basic/HeaderSection";
 
 const colors = [
   "#ff5722",
@@ -80,22 +81,20 @@ const Development = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <TextBox hasPattern>
+        <HeaderSection title="Terra Development ">
           {`
-### Terra Development 
 in this page we review all information about Terra Smart Contract Development and increase usage of different smart contract in Terra Network 
 
 
 but before deep dive into chart i prepare some statics to see status of network at the glance.
 `}
-        </TextBox>
+        </HeaderSection>
         <Box pt={"4"}></Box>
-        <TextBox hasPattern>
+        <HeaderSection title="Glance">
           {`
-### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
-        </TextBox>
+        </HeaderSection>
         <SimpleGrid
           my={"6"}
           columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
@@ -113,12 +112,11 @@ according section defined in above, i prepare some of static about these topics.
             link={developmentTotalNumberOfContracts.key}
           />
         </SimpleGrid>
-        <TextBox hasPattern>
+        <HeaderSection title="Development Contracts ">
           {`
-### Development Contracts 
 Development of Contracts show how much of compebility of one network is used by developers. increasing number of new smart contract show windwos of new idea in network and help growth faster 
 `}
-        </TextBox>
+        </HeaderSection>
         <SimpleGrid
           position={"relative"}
           transition={"all 0.9s ease-in-out"}
@@ -156,11 +154,8 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox hasPattern>
-            {`
-### Weekly Active Contract
-`}
-          </TextBox>
+          <HeaderSection title="Weekly Active Contract" />
+
           <BarGraph
             values={developmentWeeklyActiveContract.data}
             queryLink={developmentWeeklyActiveContract.key}
@@ -178,11 +173,8 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox hasPattern>
-            {`
-### Weekly New Contract
-`}
-          </TextBox>
+          <HeaderSection title="Weekly New Contract" />
+
           <ChartBox
             data={developmentWeeklyNewContracts.data}
             queryLink={developmentWeeklyNewContracts.key}
@@ -209,11 +201,7 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox hasPattern>
-            {`
-### Contract With Most Unique User
-`}
-          </TextBox>
+          <HeaderSection title="Contract With Most Unique User" />
 
           <DonutChart
             queryLink={developmentMostUniqueUser.key}
@@ -243,11 +231,8 @@ Development of Contracts show how much of compebility of one network is used by 
             ]}
           />
 
-          <TextBox hasPattern>
-            {`
-### Weekly inflow transactions
-`}
-          </TextBox>
+          <HeaderSection title="Weekly inflow transactions" />
+
           <DonutChart
             queryLink={developmentWeeklyInflowTransaction.key}
             data={
@@ -356,11 +341,8 @@ Development of Contracts show how much of compebility of one network is used by 
             )}
           />
 
-          <TextBox hasPattern>
-            {`
-### Weekly outflow transactions
-`}
-          </TextBox>
+          <HeaderSection title="Weekly outflow transactions" />
+
           <DonutChart
             queryLink={developmentWeeklyOutflowTransaction.key}
             data={
@@ -470,11 +452,8 @@ Development of Contracts show how much of compebility of one network is used by 
             )}
           />
 
-          <TextBox hasPattern>
-            {`
-### axlUSDC Destination
-`}
-          </TextBox>
+          <HeaderSection title="axlUSDC Destination" />
+
           <DonutChart
             queryLink={developmentAXLUSDCestination.key}
             data={developmentAXLUSDCestination.data}
@@ -505,11 +484,8 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="tx count"
           />
 
-          <TextBox hasPattern>
-            {`
-### axlUSDT Destination
-`}
-          </TextBox>
+          <HeaderSection title="axlUSDT Destination" />
+
           <DonutChart
             queryLink={developmentAXLUSDTestination.key}
             data={developmentAXLUSDTestination.data}
@@ -540,11 +516,8 @@ Development of Contracts show how much of compebility of one network is used by 
             dataKey="tx count"
           />
 
-          <TextBox hasPattern>
-            {`
-### Stablecoins Destination
-`}
-          </TextBox>
+          <HeaderSection title="Stablecoins Destination" />
+
           <BarGraph
             values={developmentStablecoinsDestination.data.stablecoinVolume}
             isSeprate

@@ -6,6 +6,7 @@ import { NextSeo } from "next-seo";
 import TextBox from "lib/components/charts/TextBox";
 import { TransactionsProps } from "pages";
 import LineChartWithBar from "lib/components/charts/LineChartWithBar";
+import HeaderSection from "lib/components/basic/HeaderSection";
 
 const colors = [
   "#ff5722",
@@ -60,9 +61,8 @@ const Governance = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <TextBox hasPattern>
+        <HeaderSection title="Terra Transaction">
           {`
-### Terra Transaction 
 in this page we review all information about Terra Transaction in three topic:
 - Transaction Count and Status
 - Transaction Fee
@@ -70,14 +70,14 @@ in this page we review all information about Terra Transaction in three topic:
 - Age of Blocks
 but before deep dive into chart i prepare some statics to see status of network at the glance.
 `}
-        </TextBox>
+        </HeaderSection>
         <Box pt={"4"}></Box>
-        <TextBox hasPattern>
+        <HeaderSection title="Terra Glance">
           {`
 #### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
-        </TextBox>
+        </HeaderSection>
         <SimpleGrid
           my={"6"}
           columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
@@ -141,12 +141,12 @@ according section defined in above, i prepare some of static about these topics.
             link={transactionsBlockAge.key}
           />
         </SimpleGrid>
-        <TextBox hasPattern>
+        <HeaderSection title="Transaction Count and Status">
           {`
-#### Transaction Count and Status 
+####  
 transaction status define as whether a transaction successfully done or transaction doesn't completed of failed. the reasons for failing transaction are varying from lack of gas fee and authorization problem.
 `}
-        </TextBox>
+        </HeaderSection>
         <SimpleGrid
           position={"relative"}
           transition={"all 0.9s ease-in-out"}
@@ -189,12 +189,12 @@ transaction status define as whether a transaction successfully done or transact
             additionalLineKey={["MA7 tx count"]}
             xAxisDataKey="Day"
           />
-          <TextBox hasPattern>
+          <HeaderSection title="Transaction Fee">
             {`
-#### Transaction Fee
+
 one of most important problem blockchain is fee and gas that paid for transaction. amount of transaction fee is very important, some times this fee cause one user goes to another blockchains.
 `}
-          </TextBox>
+          </HeaderSection>
           <LineChartWithBar
             customColor={colors[1]}
             barColor={colors[0]}
@@ -221,31 +221,28 @@ one of most important problem blockchain is fee and gas that paid for transactio
             xAxisDataKey="Day"
           />
 
-          <TextBox hasPattern>
+          <HeaderSection title="Transaction Per Second (TPS)">
             {`
-#### Transaction Per Second (TPS)
 TPS shows speed of blockchain and each this number is higher the blockchain is faster. this number doesn't have relation with number or power validators and defined in protocol and network
 `}
-          </TextBox>
+          </HeaderSection>
           <LineChartWithBar
             customColor={colors[1]}
             barColor={colors[0]}
             data={transactionsTPS.data}
             queryLink={transactionsTPS.key}
             title={transactionsTPSNames[1]}
-            // modelInfo="is this info"
             baseSpan={3}
             infoSizePercentage={25}
             barDataKey={"TPS"}
             lineDataKey="AVG TPS"
             xAxisDataKey="Day"
           />
-          <TextBox hasPattern>
+          <HeaderSection title="Age of Blocks">
             {`
-#### Age of Blocks
 each block contain multiple transactions that these transaction chained together and create blockchain. like TPS, age of blocks defined by protocol and donesn't change so much
 `}
-          </TextBox>
+          </HeaderSection>
           <LineChartWithBar
             customColor={colors[1]}
             barColor={colors[0]}

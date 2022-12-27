@@ -33,6 +33,7 @@ import names from "lib/utility/names";
 import sideMenuItems from "lib/utility/sideMenuItems";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
+import CurrentStatusPage from "./CurrentStatusPage";
 
 export default function SidebarWithHeader({
   children,
@@ -184,23 +185,29 @@ const DesktopLinkNav = () => {
         px={3}
         bg={useColorModeValue("white", "#1919197b")}
         backdropBlur="2xl"
-        justifyContent={"center"}
+        justifyContent={"space-between"}
         overflowX={"auto"}
         experimental_spaceX="2"
         flexWrap="nowrap"
+        display={"flex"}
+        flex="row"
       >
-        {sideMenuItems.map((link, index) => (
-          <Button
-            variant={router.pathname === link.path ? "solid" : "outline"}
-            size={"sm"}
-            onClick={() => {
-              router.push(link.path);
-            }}
-            key={link.name}
-          >
-            {link.name}
-          </Button>
-        ))}
+        <Box>
+          {sideMenuItems.map((link, index) => (
+            <Button
+              variant={router.pathname === link.path ? "solid" : "outline"}
+              size={"sm"}
+              onClick={() => {
+                router.push(link.path);
+              }}
+              key={link.name}
+            >
+              {link.name}
+            </Button>
+          ))}
+        </Box>
+
+        <CurrentStatusPage />
       </Box>
     </Box>
   );

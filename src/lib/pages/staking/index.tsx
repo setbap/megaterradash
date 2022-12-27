@@ -2,13 +2,13 @@ import { Box, SimpleGrid } from "@chakra-ui/react";
 import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
-import TextBox from "lib/components/charts/TextBox";
 import LineChartWithBar from "lib/components/charts/LineChartWithBar";
 import { StakingProps } from "pages/staking";
 import BarGraph from "lib/components/charts/BarGraph";
 import DonutChart from "lib/components/charts/DonutChart";
 import StackedAreaChart from "lib/components/charts/StackedAreaGraph";
 import { StateCardRemoteData } from "lib/components/charts/StateCardRemoteData";
+import HeaderSection from "lib/components/basic/HeaderSection";
 
 const colors = [
   "#ff5722",
@@ -71,21 +71,19 @@ const Staking = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <TextBox hasPattern>
+        <HeaderSection title="Terra Staking ">
           {`
-### Terra Staking 
 in this page we review all information all about staking in Terra. after Terra fall and brith of Terra(2) most of Terra's Airdroped to old user and this airdropd token 
 divided in 4 part and just 1/4 of that availble for user and remaining staked and distributed according schadule
 
 `}
-        </TextBox>
+        </HeaderSection>
         <Box pt={"4"}></Box>
-        <TextBox hasPattern>
+        <HeaderSection title="Glance">
           {`
-#### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
-        </TextBox>
+        </HeaderSection>
         <SimpleGrid
           my={"6"}
           columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
@@ -191,12 +189,11 @@ according section defined in above, i prepare some of static about these topics.
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
-          <TextBox hasPattern>
+          <HeaderSection title="Tops ">
             {`
-#### Tops 
 review top information or actor or validators in Terra
 `}
-          </TextBox>
+          </HeaderSection>
 
           <DonutChart
             queryLink={top10validatorbasedontotalvolumeofdelegatetothem.key}
@@ -321,11 +318,8 @@ review top information or actor or validators in Terra
             )}
           />
 
-          <TextBox hasPattern>
-            {`
-#### IBC Transfer and Bridge Inforamtion
-`}
-          </TextBox>
+          <HeaderSection title="IBC Transfer and Bridge Inforamtion" />
+
           <DonutChart
             queryLink={bridgeTransactions.key}
             data={bridgeTransactions.data.valueChain}
@@ -398,14 +392,8 @@ review top information or actor or validators in Terra
               )}
             />
           ))}
-          <TextBox hasPattern>
-            {`
-#### Staking and Stake Transactions and Rewards
+          <HeaderSection title="Staking and Stake Transactions and Rewards" />
 
-`}
-          </TextBox>
-
-          {/* --- */}
           {[
             "AVG TX volume",
             "AVG tx count",
@@ -477,12 +465,11 @@ review top information or actor or validators in Terra
             xAxisDataKey="Day"
           />
 
-          <TextBox hasPattern>
+          <HeaderSection title="Luna Vesting Schadule">
             {`
-#### Luna Vesting Schadule
 ![luna vesting image](/lunavesting.webp)
 `}
-          </TextBox>
+          </HeaderSection>
         </SimpleGrid>
       </Box>
     </>

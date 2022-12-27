@@ -3,9 +3,10 @@ import ChartBox from "lib/components/charts/LineChart";
 import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
-import TextBox from "lib/components/charts/TextBox";
+
 import LineChartWithBar from "lib/components/charts/LineChartWithBar";
 import { WalletProps } from "pages/wallet";
+import HeaderSection from "lib/components/basic/HeaderSection";
 
 const colors = [
   "#ff5722",
@@ -52,22 +53,20 @@ const Governance = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <TextBox hasPattern>
+        <HeaderSection title="Terra Wallet ">
           {`
-### Terra Wallet 
 in this page we review all information users(addresses) that currently done t transaction in Terra to see what is status of Terra from user side. terra addresses reviewed from two side:
 - Active wallets
 - new wallets
 all of above information calculated as weekly timeframe.
 `}
-        </TextBox>
+        </HeaderSection>
         <Box pt={"4"}></Box>
-        <TextBox hasPattern>
+        <HeaderSection title="Glance">
           {`
-#### Glance
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
-        </TextBox>
+        </HeaderSection>
         <SimpleGrid
           my={"6"}
           columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
@@ -97,12 +96,11 @@ according section defined in above, i prepare some of static about these topics.
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
-          <TextBox hasPattern>
+          <HeaderSection title="Active Wallets">
             {`
-#### Active Wallets
 number of active wallets is one of most important metrics for reviewing is one network work currently and has wired function
 `}
-          </TextBox>
+          </HeaderSection>
           <LineChartWithBar
             customColor={colors[3]}
             barColor={colors[3]}
@@ -122,12 +120,11 @@ Q4 is worst quatre for crypto and Terra isn't only one. in these month's we see 
             lineDataKey="AVG active wallet"
             xAxisDataKey="Day"
           />
-          <TextBox hasPattern>
+          <HeaderSection title="New Wallets">
             {`
-#### New Wallets
 every blockchain to growth and expand and adapted to the real world need new user.
 `}
-          </TextBox>
+          </HeaderSection>
           <ChartBox
             data={walletsNew.data}
             queryLink={walletsNew.key}

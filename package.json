@@ -33,6 +33,7 @@
     "chakra-ui-markdown-renderer": "^4.0.0",
     "fix-date": "^1.1.6",
     "framer-motion": "6.5.0",
+    "lodash": "^4.17.21",
     "millify": "^4.0.0",
     "moment": "^2.29.2",
     "next": "^12.1.0",
