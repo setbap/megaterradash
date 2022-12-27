@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import throttle from "lodash/fp/throttle";
+import { useRouter } from "next/router";
 const offsetInPX = () => {
-  return isClientSide() ? -window.innerHeight / 3 : 100;
+  return -150;
 };
 const WaitInMs = 100;
 function useHeaderLink() {
+  const router = useRouter();
   const [activeSection, setActiveSection] = useState<Element | null>(null);
   const [sectionText, setSectionText] = useState("");
   const [allSections, setAllSections] = useState<string[]>([]);
@@ -37,17 +39,24 @@ function useHeaderLink() {
     elements.forEach((element: any) => data.push(element.dataset.id));
     setAllSections(data);
     return () => {};
-  }, []);
+  }, [router.route]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
+    const delayHandleChange = () => {
+      setTimeout(() => {
+        handle();
+      }, 1500);
+    };
     const scrollable = window;
     scrollable.addEventListener("scroll", handle);
-    handle();
+    router.events.on("routeChangeComplete", delayHandleChange);
+
     return () => {
       scrollable.removeEventListener("scroll", handle);
+      router.events.off("routeChangeComplete", delayHandleChange);
     };
   }, [handle]);
 
@@ -55,10 +64,10 @@ function useHeaderLink() {
     const elements = document.querySelectorAll("[data-type]");
     const data: string[] = [];
     elements.forEach((element: any) => data.push(element.dataset.id));
-    return { sectionText: data[0], allSections: data };
+    return { sectionText: data[0], allSections: data, handler: handle };
   }
 
-  return { sectionText, allSections };
+  return { sectionText, allSections, handler: handle };
 }
 
 export default useHeaderLink;

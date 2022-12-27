@@ -2,9 +2,7 @@ import React, { ReactNode, useEffect } from "react";
 import {
   IconButton,
   Box,
-  CloseButton,
   Flex,
-  HStack,
   Icon,
   useColorModeValue,
   Link,
@@ -15,13 +13,11 @@ import {
   BoxProps,
   FlexProps,
   useColorMode,
-  Tabs,
-  Tab,
-  TabList,
   Button,
   DrawerBody,
   DrawerOverlay,
   DrawerHeader,
+  HStack,
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { FiMenu, FiInfo } from "react-icons/fi";
@@ -34,6 +30,7 @@ import sideMenuItems from "lib/utility/sideMenuItems";
 import Image from "next/image";
 import { motion, useScroll } from "framer-motion";
 import CurrentStatusPage from "./CurrentStatusPage";
+import ThemeToggle from "./ThemeToggle";
 
 export default function SidebarWithHeader({
   children,
@@ -96,8 +93,7 @@ export default function SidebarWithHeader({
       <MobileNav onOpen={onOpen} />
 
       {/* <HStack gap={"2"} spacing={{ base: "0", md: "6" }}>
-        <ConnectWallet />
-        <ThemeToggle /> 
+        <ThemeToggle />
       </HStack> */}
 
       <Box mx="auto">{children}</Box>
@@ -207,7 +203,7 @@ const DesktopLinkNav = () => {
           ))}
         </Box>
 
-        <CurrentStatusPage />
+        <CurrentStatusPage key={router.pathname} />
       </Box>
     </Box>
   );
