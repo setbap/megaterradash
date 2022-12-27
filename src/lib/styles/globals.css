@@ -73,3 +73,14 @@
   -webkit-background-size: 10px 10px;
   background-size: 10px 10px;
 }
+
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  z-index: 10000;
+  background:red;
+  transform-origin: 0%;
+}

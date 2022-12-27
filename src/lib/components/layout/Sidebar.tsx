@@ -32,6 +32,7 @@ import MotionBox from "../motion/Box";
 import names from "lib/utility/names";
 import sideMenuItems from "lib/utility/sideMenuItems";
 import Image from "next/image";
+import { motion, useScroll } from "framer-motion";
 
 export default function SidebarWithHeader({
   children,
@@ -50,6 +51,8 @@ export default function SidebarWithHeader({
     enter: { opacity: 1 },
     exit: { opacity: 0.01 },
   };
+  const { scrollYProgress } = useScroll();
+
   return (
     <MotionBox
       variants={variants} // Pass the variant object into Framer Motion
@@ -63,6 +66,10 @@ export default function SidebarWithHeader({
         "linear-gradient(to top, #090909,#000000)"
       )}
     >
+      <motion.div
+        className="progress-bar"
+        style={{ scaleX: scrollYProgress }}
+      />
       <Drawer
         autoFocus={true}
         isOpen={isOpen}
