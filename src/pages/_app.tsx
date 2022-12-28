@@ -1,4 +1,8 @@
-import { ChakraProvider } from "@chakra-ui/react";
+import {
+  ChakraProvider,
+  localStorageManager,
+  cookieStorageManagerSSR,
+} from "@chakra-ui/react";
 import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
 import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
@@ -11,14 +15,22 @@ import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
 
-const MyApp = ({ Component, pageProps }: AppProps) => {
+const MyApp = ({ Component, pageProps, cookies }: any) => {
   const [queryClient] = useState(() => new QueryClient());
   const router = useRouter();
   const AnyComponent = Component as any;
+
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
-        <ChakraProvider theme={customTheme}>
+        <ChakraProvider
+          theme={customTheme}
+          colorModeManager={
+            typeof cookies === "string"
+              ? cookieStorageManagerSSR(cookies)
+              : localStorageManager
+          }
+        >
           <Head>
             <meta
               name="viewport"

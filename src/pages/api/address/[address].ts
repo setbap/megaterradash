@@ -1,3 +1,4 @@
+// @ts-ignore
 import { QueryResultSet, Flipside, Query } from "@flipsidecrypto/sdk";
 
 const getData = async (

@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
+// @ts-ignore
 import { QueryResultSet, QueryStatusFinished } from "@flipsidecrypto/sdk";
 import { useMutation } from "react-query";
 import { TxBox } from "lib/components/basic/TxBox";
@@ -110,13 +111,14 @@ function Transactions() {
             </TxItemContainer>
           )}
 
-          {mutation.isSuccess && mutation.data.status === QueryStatusFinished && (
-            <Stack direction={"column"} spacing="6" pb={"8"}>
-              {mutation.data.records?.map((record: any) => (
-                <TxBox data={record as any} />
-              ))}
-            </Stack>
-          )}
+          {mutation.isSuccess &&
+            mutation.data.status === QueryStatusFinished && (
+              <Stack direction={"column"} spacing="6" pb={"8"}>
+                {mutation.data.records?.map((record: any) => (
+                  <TxBox data={record as any} />
+                ))}
+              </Stack>
+            )}
 
           {mutation.isSuccess &&
             mutation.data.status === QueryStatusFinished &&
