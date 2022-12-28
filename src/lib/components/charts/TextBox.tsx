@@ -1,15 +1,25 @@
-import { Box, GridItem, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  GridItem,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import MDRenderer from "../basic/MDRenderer";
 import { GRID_ITEM_SIZE } from "./template";
 
 const TextBox = ({ children, hasPattern = false, spanSize = 3 }: any) => {
   const bgCard = useColorModeValue("white", "#191919");
   const textColor = useColorModeValue("gray.900", "gray.100");
+  const { colorMode } = useColorMode();
 
   return (
     <GridItem
       rowSpan={1}
-      className={hasPattern ? "gradient-box" : ""}
+      className={
+        hasPattern && colorMode === "dark"
+          ? "gradient-box"
+          : "gradient-box-light"
+      }
       color={textColor}
       bgColor={bgCard}
       shadow="base"

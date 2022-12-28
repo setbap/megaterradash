@@ -1,4 +1,10 @@
-import { Box, GridItem, Heading, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  GridItem,
+  Heading,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { ReactNode } from "react";
 import { GRID_ITEM_SIZE } from "../charts/template";
 import MDRenderer from "./MDRenderer";
@@ -14,11 +20,11 @@ const HeaderSection = ({
 }) => {
   const bgCard = useColorModeValue("white", "#191919");
   const textColor = useColorModeValue("gray.900", "gray.100");
-
+  const { colorMode } = useColorMode();
   return (
     <GridItem
       rowSpan={1}
-      className={"gradient-box"}
+      className={colorMode === "dark" ? "gradient-box" : "gradient-box-light"}
       color={textColor}
       bgColor={bgCard}
       shadow="base"

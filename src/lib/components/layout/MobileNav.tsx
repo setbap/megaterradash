@@ -12,9 +12,16 @@ import names from "lib/utility/names";
 import { useRef, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import CurrentStatusPage from "./CurrentStatusPage";
+import ThemeToggle from "./ThemeToggle";
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
+
+const terraGradient = "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)";
+const terraGradientDarkOverlay =
+  "linear-gradient(90deg, #17285240 0%, #17285272 100%)";
+const terraGradientLightOverlay =
+  "linear-gradient(90deg, #17285230 0%, #17285222 100%)";
 
 export const MobileNav = ({ onOpen }: MobileProps) => {
   const { scrollY } = useScroll();
@@ -40,7 +47,7 @@ export const MobileNav = ({ onOpen }: MobileProps) => {
       position={"sticky"}
       top={0}
       zIndex="banner"
-      bg={useColorModeValue("white", "#191919")}
+      bg={useColorModeValue("var(--chakra-colors-gray-200)", "#191919")}
       display={{ base: "flex", md: "none" }}
       flexDir="column"
     >
@@ -49,22 +56,25 @@ export const MobileNav = ({ onOpen }: MobileProps) => {
     </Flex>
   );
 };
-const MobileTopNavShow = ({ onOpen }: { onOpen: () => void }) => {
+const MobileTopNavShow = ({}: { onOpen: () => void }) => {
+  const bgColor = useColorModeValue(
+    terraGradientLightOverlay,
+    terraGradientDarkOverlay
+  );
   return (
     <Flex
       w={"full"}
       p={1}
-      bg={useColorModeValue(
-        "white",
-        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
-      )}
+      bg={terraGradient}
       width={"full"}
-      justifyContent={"center"}
+      justifyContent={"space-between"}
       alignItems="center"
       position={"relative"}
       overflow="hidden"
       zIndex="1"
+      px={"6"}
     >
+      <Box width={"8"} />
       <Box mx={"1"} display={"flex"} alignItems="center">
         <Image
           style={{ transform: "scale(1.4)", zIndex: "1" }}
@@ -83,25 +93,28 @@ const MobileTopNavShow = ({ onOpen }: { onOpen: () => void }) => {
           {names.APP_NAME}
         </Text>
       </Box>
+      <ThemeToggle />
+
       <Box
         position={"absolute"}
         inset="0"
         zIndex={"0"}
         filter=""
-        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+        bg={bgColor}
       />
     </Flex>
   );
 };
 const MobileNavRow = ({ onOpen }: { onOpen: () => void }) => {
+  const bgColor = useColorModeValue(
+    terraGradientLightOverlay,
+    terraGradientDarkOverlay
+  );
   return (
     <Flex
       w={"full"}
-      p={1}
-      bg={useColorModeValue(
-        "white",
-        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
-      )}
+      p="2"
+      bg={terraGradient}
       width={"full"}
       justifyContent={"space-between"}
       alignItems="center"
@@ -117,10 +130,11 @@ const MobileNavRow = ({ onOpen }: { onOpen: () => void }) => {
         inset="0"
         zIndex={"0"}
         filter=""
-        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+        bg={bgColor}
       />
-      <Box marginEnd={"4"}>
+      <Box marginEnd={4}>
         <IconButton
+          size={"sm"}
           onClick={onOpen}
           variant="outline"
           aria-label="open menu"

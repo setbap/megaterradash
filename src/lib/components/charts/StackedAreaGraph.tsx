@@ -165,7 +165,7 @@ const StackedAreaChart = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg="#232323">
+            <MenuList bg={useColorModeValue("#eee", "#232323")}>
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />
@@ -259,8 +259,13 @@ const StackedAreaChart = ({
                 }
                 return moment(value).format("MMM DD YYYY");
               }}
-              labelStyle={{ color: "white" }}
-              contentStyle={{ backgroundColor: "black", borderRadius: "5px" }}
+              labelStyle={{
+                color: useColorModeValue("black", "white"),
+              }}
+              contentStyle={{
+                backgroundColor: useColorModeValue("#f1f1f1", "black"),
+                borderRadius: "5px",
+              }}
               formatter={(a: any) => {
                 return (
                   millify(a, {

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 import MDRenderer from "./MDRenderer";
 
 export const ModalInfo = ({
@@ -11,10 +11,10 @@ export const ModalInfo = ({
   infoSizePercentage: number | "full";
 }) => {
   const showExtraInfo: boolean = !(modalInfo === "" || modalInfo === null);
-
+  const bgColor = useColorModeValue("#f2f2f2", "#1c1c1c");
   return showExtraInfo ? (
     <Box
-      bg={"#1c1c1c"}
+      bg={bgColor}
       p={6}
       rounded="lg"
       height={infoSizePercentage === "full" ? "auto" : "full"}

@@ -3,7 +3,6 @@ import ChartBox from "lib/components/charts/LineChart";
 import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
-import TextBox from "lib/components/charts/TextBox";
 import { TransactionsProps } from "pages";
 import LineChartWithBar from "lib/components/charts/LineChartWithBar";
 import HeaderSection from "lib/components/basic/HeaderSection";
@@ -31,11 +30,8 @@ const Governance = ({
 }: TransactionsProps): JSX.Element => {
   const transactionsTxCountAndSuccessNames =
     transactionsTxCountAndSuccess.title.split(",");
-
   const transactionsFeeNames = transactionsFee.title.split(",");
-
   const transactionsTPSNames = transactionsTPS.title.split(",");
-
   const transactionsBlockAgeNames = transactionsBlockAge.title.split(",");
 
   return (
@@ -72,9 +68,9 @@ but before deep dive into chart i prepare some statics to see status of network 
 `}
         </HeaderSection>
         <Box pt={"4"}></Box>
-        <HeaderSection title="Terra Glance">
+        <HeaderSection title="Glance">
           {`
-#### Glance
+
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
         </HeaderSection>

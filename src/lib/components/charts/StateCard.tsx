@@ -34,7 +34,7 @@ interface StatsCardProps {
   changeUnit?: string;
 }
 export const StatsCard = (props: StatsCardProps) => {
-  const bgCard = useColorModeValue("white", "#191919");
+  const bgCard = useColorModeValue("#ffff", "#191919");
   const {
     title,
     change = null,
@@ -50,8 +50,8 @@ export const StatsCard = (props: StatsCardProps) => {
     changeUnit = "%",
   } = props;
   const defaultColor = useColorModeValue("gray.600", "gray.400");
-  const incColor = useColorModeValue("green.800", "green.300");
-  const decColor = useColorModeValue("red.800", "red.500");
+  const incColor = useColorModeValue("green.600", "green.300");
+  const decColor = useColorModeValue("red.600", "red.300");
   const [statusColor, setStatusColor] = useState<any>();
   useEffect(() => {
     if (
@@ -141,7 +141,7 @@ export const StatsCard = (props: StatsCardProps) => {
       overflow={"hidden"}
       transition={"box-shadow 0.4s"}
       _hover={{ boxShadow: "var(--chakra-shadows-xl)" }}
-      backgroundColor={bgCard + "f0"}
+      bg={bgCard}
       border="1px solid"
       borderColor={statusColor}
       rounded="lg"

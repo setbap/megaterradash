@@ -64,7 +64,7 @@ export default function SidebarWithHeader({
         size="xl"
       >
         <DrawerOverlay />
-        <DrawerContent bg={useColorModeValue("#c1c1c1", "#1c1c1c")}>
+        <DrawerContent bg={useColorModeValue("#fff", "#1c1c1c")}>
           <DrawerHeader borderBottomWidth="1px">Pages</DrawerHeader>
           <DrawerBody>
             <MobileNavDrawerContent onClose={onClose} />
@@ -74,10 +74,6 @@ export default function SidebarWithHeader({
 
       <DesktopNav onOpen={onOpen} />
       <MobileNav onOpen={onOpen} />
-
-      {/* <HStack gap={"2"} spacing={{ base: "0", md: "6" }}>
-        <ThemeToggle />
-      </HStack> */}
 
       <Box mx="auto">{children}</Box>
     </MotionBox>

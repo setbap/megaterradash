@@ -65,7 +65,7 @@ function TableBox<T>({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg="#232323">
+            <MenuList bg={useColorModeValue("#eee", "#232323")}>
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />

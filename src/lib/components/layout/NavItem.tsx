@@ -1,4 +1,10 @@
-import { FlexProps, Flex, Icon, Link } from "@chakra-ui/react";
+import {
+  FlexProps,
+  Flex,
+  Icon,
+  Link,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { ReactText } from "react";
 import { IconType } from "react-icons";
 import NextLink from "next/link";
@@ -32,7 +38,9 @@ export const NavItem = ({
           cursor="pointer"
           border={"1.5px solid transparent"}
           shadow={isActive ? "inner" : "none"}
-          borderColor={isActive ? "white" : "transparent"}
+          borderColor={
+            isActive ? useColorModeValue("black", "white") : "transparent"
+          }
           _hover={{
             borderColor: "whiteAlpha.500",
           }}
@@ -55,6 +63,3 @@ export const NavItem = ({
     </NextLink>
   );
 };
-function useColorModeValue(arg0: string, arg1: string) {
-  throw new Error("Function not implemented.");
-}

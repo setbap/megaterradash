@@ -14,9 +14,16 @@ import sideMenuItems from "lib/utility/sideMenuItems";
 import { useRouter } from "next/router";
 import { FiInfo } from "react-icons/fi";
 import CurrentStatusPage from "./CurrentStatusPage";
+import ThemeToggle from "./ThemeToggle";
 interface DesktopProps extends FlexProps {
   onOpen: () => void;
 }
+
+const terraGradient = "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)";
+const terraGradientLightOverlay =
+  "linear-gradient(90deg, #17285240 0%, #17285272 100%)";
+const terraGradientDarkOverlay =
+  "linear-gradient(90deg, #17285210 0%, #17285222 100%)";
 
 export const DesktopNav = ({ onOpen, ...rest }: DesktopProps) => {
   return (
@@ -36,23 +43,25 @@ export const DesktopNav = ({ onOpen, ...rest }: DesktopProps) => {
 };
 const DesktopLinkNav = () => {
   const router = useRouter();
+
   return (
     <Box
       position={"relative"}
       borderBottomRadius={"xl"}
       pb="2px"
       px={"3px"}
-      bg={useColorModeValue(
-        "white",
-        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
-      )}
+      bg={terraGradient}
+      overflow="hidden"
     >
       <Box
         position={"absolute"}
         inset="0"
         zIndex={"0"}
         filter=""
-        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+        bg={useColorModeValue(
+          terraGradientDarkOverlay,
+          terraGradientLightOverlay
+        )}
       />
       <Box
         zIndex={"banner"}
@@ -61,7 +70,7 @@ const DesktopLinkNav = () => {
         borderRadius={"2xl"}
         py={2}
         px={3}
-        bg={useColorModeValue("white", "#1919197b")}
+        bg={useColorModeValue("#a9a9a95b", "#1919197b")}
         backdropBlur="2xl"
         justifyContent={"space-between"}
         experimental_spaceX="2"
@@ -72,8 +81,14 @@ const DesktopLinkNav = () => {
         <Box experimental_spaceX={"1"}>
           {sideMenuItems.map((link, index) => (
             <Button
-              variant={router.pathname === link.path ? "solid" : "outline"}
               size={"sm"}
+              _hover={{
+                bg: useColorModeValue("#2224", "#a9a9a92b"),
+              }}
+              borderWidth="1px"
+              borderColor={useColorModeValue("#0003", "#a9a9a97b")}
+              bg={router.pathname === link.path ? "#0003" : "transparent"}
+              textColor={"white"}
               onClick={() => {
                 router.push(link.path);
               }}
@@ -89,15 +104,14 @@ const DesktopLinkNav = () => {
     </Box>
   );
 };
+
 const DesktopTopNav = () => {
   const router = useRouter();
+  const terraGradient = "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)";
   return (
     <Flex
       p={1}
-      bg={useColorModeValue(
-        "white",
-        "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)"
-      )}
+      bg={terraGradient}
       width={"full"}
       justifyContent={"space-between"}
       alignItems="center"
@@ -118,6 +132,7 @@ const DesktopTopNav = () => {
           fontFamily="'Carter One', cursive"
           fontSize="2xl"
           letterSpacing={"wide"}
+          textColor={"white"}
           fontWeight={"extrabold"}
           zIndex="1"
         >
@@ -129,17 +144,23 @@ const DesktopTopNav = () => {
         inset="0"
         zIndex={"0"}
         filter=""
-        bg={"linear-gradient(90deg, #17285240 0%, #17285272 100%)"}
+        bg={useColorModeValue(
+          terraGradientDarkOverlay,
+          terraGradientLightOverlay
+        )}
       />
 
-      <Box mr={"4"} textAlign="end">
+      <Box experimental_spaceX={"2"} mr={"4"} textAlign="end">
         <IconButton
           zIndex={1}
+          bg="#fff2"
           size={"sm"}
           onClick={() => router.push("/about")}
           aria-label="About"
           icon={<FiInfo />}
         />
+
+        <ThemeToggle />
       </Box>
     </Flex>
   );
