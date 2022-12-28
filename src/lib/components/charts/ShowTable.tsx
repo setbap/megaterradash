@@ -117,7 +117,7 @@ export const ShowTable = React.memo(function TableComponent<T>({
                 {headerGroup.headers.map((header) => (
                   <Th key={header.id}>
                     <Box
-                      d="inline-block"
+                      display="inline-block"
                       cursor={
                         header.column.getCanSort() ? "pointer" : "default"
                       }
@@ -134,12 +134,12 @@ export const ShowTable = React.memo(function TableComponent<T>({
                         {!!header.column.getFilterValue() &&
                           `(${header.column.getFilterValue()})`}
                       </small>
-                      <Box d="inline-block">
+                      <Box display="inline-block">
                         <SortStateIcon data={header.column.getIsSorted()} />
                       </Box>
                     </Box>
                     {header.column.getCanFilter() ? (
-                      <Box ml={2} d="inline-block">
+                      <Box ml={2} display="inline-block">
                         <Filter column={header.column} table={table} />
                       </Box>
                     ) : null}

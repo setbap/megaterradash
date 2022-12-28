@@ -1,7 +1,7 @@
 import { Box, GridItem, SimpleGrid, useColorModeValue } from "@chakra-ui/react";
 import HeaderSection from "lib/components/basic/HeaderSection";
 import TextBox from "lib/components/charts/TextBox";
-
+import Image from "next/image";
 const About = () => {
   return (
     <Box px={6} maxW="container.xl" mx={"auto"}>
@@ -19,6 +19,20 @@ const About = () => {
         borderRadius={"lg"}
         position="relative"
       >
+        <Box
+          position={"absolute"}
+          bottom="70px"
+          zIndex={"1"}
+          right={"20px"}
+          px="8px"
+        >
+          <Image
+            width={75}
+            height={75}
+            src="/og_big.png"
+            alt="terra og iamge big size"
+          />
+        </Box>
         <Box position={"absolute"} bottom="8px" width={"100%"} px="8px">
           <HeaderSection title={"elSina"}>
             {`

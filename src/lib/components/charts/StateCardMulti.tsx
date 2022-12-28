@@ -132,12 +132,12 @@ export const StatsCardMulti = (props: StatsCardMultiProps) => {
       rounded="lg"
     >
       {props.link === undefined ? (
-        <StatLabel fontWeight="medium" isTruncated display={"inline-flex"}>
+        <StatLabel fontWeight="medium" noOfLines={1} display={"flex"}>
           {selectedData.title} {tooltip}
         </StatLabel>
       ) : (
         <Link href={props.link} isExternal>
-          <StatLabel fontWeight="medium" display={"inline-flex"} isTruncated>
+          <StatLabel fontWeight="medium" display={"flex"} noOfLines={1}>
             {selectedData.title}{" "}
             <Box px={"1"}>
               <FiExternalLink />

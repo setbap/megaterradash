@@ -10,8 +10,11 @@ import {
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-// @ts-ignore
-import { QueryResultSet, QueryStatusFinished } from "@flipsidecrypto/sdk";
+
+import {
+  QueryResultSet,
+  QueryStatusFinished,
+} from "@flipsidecrypto/sdk/dist/src";
 import { useMutation } from "react-query";
 import { TxBox } from "lib/components/basic/TxBox";
 import { validateInputAddresses } from "lib/utility/ethAddressChecker";

@@ -99,7 +99,7 @@ const DesktopLinkNav = () => {
           ))}
         </Box>
 
-        <CurrentStatusPage key={router.pathname} />
+        {router.pathname !== "/about" && <CurrentStatusPage />}
       </Box>
     </Box>
   );
@@ -122,6 +122,7 @@ const DesktopTopNav = () => {
     >
       <Box mx={"2"} display={"flex"} alignItems="center">
         <Image
+          alt="terra network image"
           style={{ transform: "scale(1.7)", zIndex: "1" }}
           width={40}
           height={40}

@@ -13,6 +13,7 @@ import { useRef, useEffect } from "react";
 import { FiMenu } from "react-icons/fi";
 import CurrentStatusPage from "./CurrentStatusPage";
 import ThemeToggle from "./ThemeToggle";
+import { useRouter } from "next/router";
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
@@ -77,6 +78,7 @@ const MobileTopNavShow = ({}: { onOpen: () => void }) => {
       <Box width={"8"} />
       <Box mx={"1"} display={"flex"} alignItems="center">
         <Image
+          alt="terra image"
           style={{ transform: "scale(1.4)", zIndex: "1" }}
           width={40}
           height={40}
@@ -86,6 +88,7 @@ const MobileTopNavShow = ({}: { onOpen: () => void }) => {
           mx={"2"}
           fontFamily="'Carter One', cursive"
           fontSize="xl"
+          textColor={"white"}
           letterSpacing={"wide"}
           fontWeight={"extrabold"}
           zIndex="1"
@@ -110,6 +113,7 @@ const MobileNavRow = ({ onOpen }: { onOpen: () => void }) => {
     terraGradientLightOverlay,
     terraGradientDarkOverlay
   );
+  const router = useRouter();
   return (
     <Flex
       w={"full"}
@@ -123,7 +127,7 @@ const MobileNavRow = ({ onOpen }: { onOpen: () => void }) => {
       zIndex="1"
     >
       <Box mx={"1"} zIndex="1" display={"flex"} alignItems="center">
-        <CurrentStatusPage />
+        {router.pathname !== "/about" && <CurrentStatusPage />}
       </Box>
       <Box
         position={"absolute"}

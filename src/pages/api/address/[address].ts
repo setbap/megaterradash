@@ -1,5 +1,4 @@
-// @ts-ignore
-import { QueryResultSet, Flipside, Query } from "@flipsidecrypto/sdk";
+import { QueryResultSet, Flipside, Query } from "@flipsidecrypto/sdk/dist/src";
 
 const getData = async (
   address: string = "0x7c36eb1ef5b94fadbd38fc35df4f3e25f724e43c"
