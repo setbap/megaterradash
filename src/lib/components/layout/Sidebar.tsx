@@ -22,12 +22,7 @@ export default function SidebarWithHeader({
   children: ReactNode;
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { colorMode, toggleColorMode } = useColorMode();
-  useEffect(() => {
-    if (colorMode === "light") {
-      toggleColorMode();
-    }
-  }, []);
+
   const variants = {
     hidden: { opacity: 0.01 },
     enter: { opacity: 1 },

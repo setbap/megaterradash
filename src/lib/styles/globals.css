@@ -82,9 +82,9 @@
   font: normal 100%/normal Arial, Helvetica, sans-serif;
   -o-text-overflow: clip;
   text-overflow: clip;
-  background-image: radial-gradient(#c9a7a7 1px, transparent 1px), radial-gradient(#c9a7a7 1px, transparent 1px);
-  background-size: 4px 4px;
-  background-position: 0 0, 20px 20px;
+  background-image: radial-gradient(#c9a7a715 3px, transparent 2px), radial-gradient(#c9a7a724 2px, transparent 5px);
+  background-size:5px 20px;
+  background-position: 0 0, 10px 30px;
   background-origin: padding-box;
   -webkit-background-clip: border-box;
   background-clip: border-box;

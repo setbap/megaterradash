@@ -1,11 +1,13 @@
 import {
   Box,
+  Flex,
   IconButton,
   Link,
   Stat,
   StatLabel,
   StatNumber,
   Tooltip,
+  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import millify from "millify";
@@ -52,6 +54,7 @@ export const StatsCard = (props: StatsCardProps) => {
   const defaultColor = useColorModeValue("gray.600", "gray.400");
   const incColor = useColorModeValue("green.600", "green.300");
   const decColor = useColorModeValue("red.600", "red.300");
+  const { colorMode } = useColorMode();
   const [statusColor, setStatusColor] = useState<any>();
   useEffect(() => {
     if (
@@ -147,11 +150,11 @@ export const StatsCard = (props: StatsCardProps) => {
       rounded="lg"
     >
       {props.link === undefined ? (
-        <StatLabel fontWeight="medium" isTruncated display={"inline-flex"}>
+        <StatLabel fontWeight="medium" noOfLines={1} display={"inline-flex"}>
           {title} {tooltip}
         </StatLabel>
       ) : (
-        <>
+        <Flex>
           <Link
             href={
               isExternalLink
@@ -160,7 +163,7 @@ export const StatsCard = (props: StatsCardProps) => {
             }
             isExternal
           >
-            <StatLabel fontWeight="medium" display={"inline-flex"} isTruncated>
+            <StatLabel fontWeight="medium" noOfLines={1} display={"flex"}>
               {title}{" "}
               <Box px={"1"}>
                 <FiExternalLink />
@@ -168,7 +171,7 @@ export const StatsCard = (props: StatsCardProps) => {
             </StatLabel>
           </Link>
           {tooltip}
-        </>
+        </Flex>
       )}
 
       <StatNumber
@@ -210,10 +213,15 @@ export const StatsCard = (props: StatsCardProps) => {
           display="flex"
           justifyContent={"center"}
           alignItems="center"
-          color={"blackAlpha.900"}
+          color={"blackAlpha.800"}
           scale="1.75"
         >
-          {hasArrowIcon && <HiArrowSmUp opacity={0.2} fontSize={"11rem"} />}
+          {hasArrowIcon && (
+            <HiArrowSmUp
+              opacity={colorMode === "dark" ? 0.2 : 0.1}
+              fontSize={"11rem"}
+            />
+          )}
         </Box>
       )}
       {splitedChange != null && (
@@ -230,7 +238,7 @@ export const StatsCard = (props: StatsCardProps) => {
           alignItems="center"
           color={statusColor}
         >
-          <Box d="flex" alignItems={"baseline"}>
+          <Box display="flex" flexDir={"row"} alignItems={"baseline"}>
             <Box fontSize={"2xl"} me="1px" fontWeight="bold">
               {splitedChange[0] as string}
             </Box>
