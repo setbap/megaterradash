@@ -86,7 +86,7 @@ const DesktopLinkNav = () => {
                 bg: useColorModeValue("#2224", "#a9a9a92b"),
               }}
               borderWidth="1px"
-              borderColor={useColorModeValue("#0003", "#a9a9a97b")}
+              borderColor={useColorModeValue("#29292929", "#a9a9a91b")}
               bg={router.pathname === link.path ? "#0003" : "transparent"}
               textColor={"white"}
               onClick={() => {
