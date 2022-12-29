@@ -28,35 +28,19 @@ export default function MDRenderer({ children }: any) {
           />
         ),
         h2: (props) => (
-          <Heading
-            as="h2"
-            size="2xl"
-            py={"1.5"}
-            style={{ fontFamily: "'Carter One', cursive" }}
-          >
+          <Heading as="h2" size="2xl" py={"1.5"}>
             {props.children}
           </Heading>
         ),
 
         h3: (props) => (
-          <Heading
-            as="h3"
-            size="xl"
-            pt={"0.5"}
-            pb={"1"}
-            style={{ fontFamily: "'Carter One', cursive" }}
-          >
+          <Heading as="h3" size="xl" pt={"0.5"} pb={"1"}>
             {props.children}
           </Heading>
         ),
 
         h4: (props) => (
-          <Heading
-            py={"0.5"}
-            as="h4"
-            size="lg"
-            style={{ fontFamily: "'Carter One', cursive" }}
-          >
+          <Heading py={"0.5"} as="h4" size="lg">
             {props.children}
           </Heading>
         ),
@@ -68,7 +52,6 @@ export default function MDRenderer({ children }: any) {
             size="md"
             fontWeight={"normal"}
             letterSpacing="wider"
-            style={{ fontFamily: "'Carter One', cursive" }}
           >
             {props.children}
           </Heading>

@@ -59,6 +59,10 @@ function CurrentStatusPage() {
               <MenuItem
                 onClick={() => scrollToItem(section.id)}
                 fontSize={"md"}
+                _hover={{
+                  bg: useColorModeValue("#eee", "#282828"),
+                }}
+                bg={useColorModeValue("white", "#191919")}
                 key={section.id}
               >
                 {section.id}

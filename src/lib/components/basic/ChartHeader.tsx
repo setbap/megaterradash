@@ -11,11 +11,8 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { AiOutlineInfoCircle } from "react-icons/ai";
 import { FiSettings } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 
@@ -30,13 +27,6 @@ export default function ChartHeader({
   title: string;
   chartMenu: any;
 }) {
-  const OverlayOne = () => (
-    <ModalOverlay
-      bg="blackAlpha.700"
-      backdropFilter="blur(10px) hue-rotate(20deg)"
-    />
-  );
-  const [overlay, setOverlay] = useState(<OverlayOne />);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -46,21 +36,6 @@ export default function ChartHeader({
       alignItems="center"
       justifyContent={"space-between"}
     >
-      {/* {!(modalInfo === "" || modalInfo === null) ? ( */}
-      {false ? (
-        <IconButton
-          size={"sm"}
-          variant={"outline"}
-          aria-label="open info about chart"
-          onClick={() => {
-            setOverlay(<OverlayOne />);
-            onOpen();
-          }}
-          icon={<AiOutlineInfoCircle />}
-        />
-      ) : (
-        <Box></Box>
-      )}
       <Box>
         <chakra.h6 textAlign={"center"} noOfLines={1} textOverflow="ellipsis">
           {title}
@@ -78,8 +53,7 @@ export default function ChartHeader({
         />
         {chartMenu}
       </Menu>
-      <Modal size={"xl"} isCentered isOpen={isOpen} onClose={onClose}>
-        {overlay}
+      {/* <Modal size={"xl"} isCentered isOpen={isOpen} onClose={onClose}>
         <ModalContent bg={"#232323"}>
           <ModalHeader>Chart Information</ModalHeader>
           <ModalCloseButton />
@@ -92,7 +66,7 @@ export default function ChartHeader({
             <Button onClick={onClose}>Close</Button>
           </ModalFooter>
         </ModalContent>
-      </Modal>
+      </Modal> */}
     </Box>
   );
 }

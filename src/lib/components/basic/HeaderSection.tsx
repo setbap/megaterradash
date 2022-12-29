@@ -36,14 +36,7 @@ const HeaderSection = ({
       colSpan={GRID_ITEM_SIZE[spanSize - 1]}
     >
       <Box px="4" pb="3" pt={"1"}>
-        <Heading
-          as="h2"
-          size={"xl"}
-          py={"1.5"}
-          id={title}
-          data-section
-          style={{ fontFamily: "'Carter One', cursive" }}
-        >
+        <Heading as="h2" size={"xl"} py={"1.5"} id={title} data-section>
           {title}
         </Heading>
         <MDRenderer>{children}</MDRenderer>
