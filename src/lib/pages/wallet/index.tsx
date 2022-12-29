@@ -108,7 +108,7 @@ number of active wallets is one of most important metrics for reviewing is one n
             queryLink={walletsActive.key}
             title={walletsActiveNames[1]}
             baseSpan={3}
-            infoSizePercentage={25}
+            infoSizePercentage={"full"}
             modelInfo={`as we see in data clearly shows number of users reduces in last month like other blockchains and (all platform in web3) but in two point number of active user go up. 
 
 - first in start of Terra and this is usually and people want to try new Terra and 

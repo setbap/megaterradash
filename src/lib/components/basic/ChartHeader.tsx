@@ -36,6 +36,7 @@ export default function ChartHeader({
       alignItems="center"
       justifyContent={"space-between"}
     >
+      <Box width={"4"} />
       <Box>
         <chakra.h6 textAlign={"center"} noOfLines={1} textOverflow="ellipsis">
           {title}
@@ -53,20 +54,6 @@ export default function ChartHeader({
         />
         {chartMenu}
       </Menu>
-      {/* <Modal size={"xl"} isCentered isOpen={isOpen} onClose={onClose}>
-        <ModalContent bg={"#232323"}>
-          <ModalHeader>Chart Information</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Box px={4}>
-              <ReactMarkdown>{modalInfo}</ReactMarkdown>
-            </Box>
-          </ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal> */}
     </Box>
   );
 }

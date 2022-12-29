@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -299,7 +299,7 @@ const BarGraph = ({
               />
             )}
             {labels.map((label, index) => (
-              <>
+              <Fragment key={index}>
                 <defs>
                   <linearGradient
                     id={`color${index}bargraph`}
@@ -339,7 +339,7 @@ const BarGraph = ({
                       />
                     ))}
                 </Bar>
-              </>
+              </Fragment>
             ))}
           </BarChart>
         </ResponsiveContainer>
