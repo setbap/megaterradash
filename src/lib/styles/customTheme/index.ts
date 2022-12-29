@@ -5,8 +5,8 @@ import Button from "./components/button";
 import fonts from "./fonts";
 
 const config: ThemeConfig = {
-  useSystemColorMode: true,
-  initialColorMode: "dark",
+  useSystemColorMode: false,
+  initialColorMode: "light",
 };
 
 const customTheme = extendTheme({

@@ -1,8 +1,11 @@
-import { CgImage } from "react-icons/cg";
+import { CiWallet } from "react-icons/ci";
+import { GiProfit } from "react-icons/gi";
+import { BsCodeSquare } from "react-icons/bs";
+import { BiTransferAlt } from "react-icons/bi";
 
 export default [
-  { name: "Transactions", path: "/", icon: CgImage },
-  { name: "Wallet", path: "/wallet", icon: CgImage },
-  { name: "Staking", path: "/staking", icon: CgImage },
-  { name: "Development", path: "/development", icon: CgImage },
+  { name: "Transactions", path: "/", icon: BiTransferAlt },
+  { name: "Wallet", path: "/wallet", icon: CiWallet },
+  { name: "Staking", path: "/staking", icon: GiProfit },
+  { name: "Development", path: "/development", icon: BsCodeSquare },
 ];

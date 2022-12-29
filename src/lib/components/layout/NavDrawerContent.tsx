@@ -12,7 +12,13 @@ interface DrawerContent extends BoxProps {
 export const MobileNavDrawerContent = ({ onClose, ...rest }: DrawerContent) => {
   const router = useRouter();
   return (
-    <Box overflowX={"hidden"} transition="0.7s ease" w="full" {...rest}>
+    <Box
+      overflowX={"hidden"}
+      experimental_spaceY="2"
+      transition="0.7s ease"
+      w="full"
+      {...rest}
+    >
       {sideMenuItems.map((link) => (
         <NavItem
           isActive={router.pathname === link.path}

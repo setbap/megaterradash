@@ -42,7 +42,7 @@ export const NavItem = ({
             isActive ? useColorModeValue("black", "white") : "transparent"
           }
           _hover={{
-            borderColor: "whiteAlpha.500",
+            borderColor: "gray.300",
           }}
           {...rest}
         >
