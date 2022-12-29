@@ -19,12 +19,6 @@ interface DesktopProps extends FlexProps {
   onOpen: () => void;
 }
 
-const terraGradient = "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)";
-const terraGradientLightOverlay =
-  "linear-gradient(90deg, #17285240 0%, #17285272 100%)";
-const terraGradientDarkOverlay =
-  "linear-gradient(90deg, #17285210 0%, #17285222 100%)";
-
 export const DesktopNav = ({ onOpen, ...rest }: DesktopProps) => {
   return (
     <Box
@@ -44,13 +38,17 @@ export const DesktopNav = ({ onOpen, ...rest }: DesktopProps) => {
 const DesktopLinkNav = () => {
   const router = useRouter();
 
+  const bgColor = useColorModeValue(
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_LIGHT,
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_DARK
+  );
   return (
     <Box
       position={"relative"}
       borderBottomRadius={"xl"}
       pb="2px"
       px={"3px"}
-      bg={terraGradient}
+      bg={names.BLOCKCHAIN_HEADER_GRADIENT}
       overflow="hidden"
     >
       <Box
@@ -58,10 +56,7 @@ const DesktopLinkNav = () => {
         inset="0"
         zIndex={"0"}
         filter=""
-        bg={useColorModeValue(
-          terraGradientDarkOverlay,
-          terraGradientLightOverlay
-        )}
+        bg={bgColor}
       />
       <Box
         zIndex={"banner"}
@@ -107,7 +102,11 @@ const DesktopLinkNav = () => {
 
 const DesktopTopNav = () => {
   const router = useRouter();
-  const terraGradient = "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)";
+  const bgColor = useColorModeValue(
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_LIGHT,
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_DARK
+  );
+  const terraGradient = names.BLOCKCHAIN_HEADER_GRADIENT;
   return (
     <Flex
       p={1}
@@ -126,7 +125,7 @@ const DesktopTopNav = () => {
           style={{ transform: "scale(1.7)", zIndex: "1" }}
           width={40}
           height={40}
-          src={"/terra.svg"}
+          src={names.BLOCKCHAIN_HEADER_IMAGE_URL}
         />
         <Text
           mx={"2"}
@@ -145,10 +144,7 @@ const DesktopTopNav = () => {
         inset="0"
         zIndex={"0"}
         filter=""
-        bg={useColorModeValue(
-          terraGradientDarkOverlay,
-          terraGradientLightOverlay
-        )}
+        bg={bgColor}
       />
 
       <Box experimental_spaceX={"2"} mr={"4"} textAlign="end">

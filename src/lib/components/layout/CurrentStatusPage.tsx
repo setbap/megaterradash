@@ -32,6 +32,9 @@ function CurrentStatusPage() {
 
     window.scrollTo({ top: y, behavior: "smooth" });
   };
+  if (sectionText === "") {
+    return <></>;
+  }
   return (
     <Menu isLazy strategy="fixed">
       <MenuButton

@@ -18,12 +18,6 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 
-const terraGradient = "linear-gradient(90deg, #ff6f03 0%, #ffd83d 100%)";
-const terraGradientDarkOverlay =
-  "linear-gradient(90deg, #17285240 0%, #17285272 100%)";
-const terraGradientLightOverlay =
-  "linear-gradient(90deg, #17285230 0%, #17285222 100%)";
-
 export const MobileNav = ({ onOpen }: MobileProps) => {
   const { scrollY } = useScroll();
   const ref = useRef<HTMLDivElement | null>(null);
@@ -59,14 +53,14 @@ export const MobileNav = ({ onOpen }: MobileProps) => {
 };
 const MobileTopNavShow = ({}: { onOpen: () => void }) => {
   const bgColor = useColorModeValue(
-    terraGradientLightOverlay,
-    terraGradientDarkOverlay
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_LIGHT,
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_DARK
   );
   return (
     <Flex
       w={"full"}
       p={1}
-      bg={terraGradient}
+      bg={names.BLOCKCHAIN_HEADER_GRADIENT}
       width={"full"}
       justifyContent={"space-between"}
       alignItems="center"
@@ -78,11 +72,11 @@ const MobileTopNavShow = ({}: { onOpen: () => void }) => {
       <Box width={"8"} />
       <Box mx={"1"} display={"flex"} alignItems="center">
         <Image
-          alt="terra image"
+          alt={`logo of ${names.BLOCKCHAIN}`}
           style={{ transform: "scale(1.4)", zIndex: "1" }}
           width={40}
           height={40}
-          src={"/terra.svg"}
+          src={names.BLOCKCHAIN_HEADER_IMAGE_URL}
         />
         <Text
           mx={"2"}
@@ -110,15 +104,15 @@ const MobileTopNavShow = ({}: { onOpen: () => void }) => {
 };
 const MobileNavRow = ({ onOpen }: { onOpen: () => void }) => {
   const bgColor = useColorModeValue(
-    terraGradientLightOverlay,
-    terraGradientDarkOverlay
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_LIGHT,
+    names.BLOCKCHAIN_HEADER_GRADIENT_OVERLAY_DARK
   );
   const router = useRouter();
   return (
     <Flex
       w={"full"}
       p="2"
-      bg={terraGradient}
+      bg={names.BLOCKCHAIN_HEADER_GRADIENT}
       width={"full"}
       justifyContent={"space-between"}
       alignItems="center"
