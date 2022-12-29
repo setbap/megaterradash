@@ -232,7 +232,7 @@ const LineChartWithBar = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("#eee", "#232323")}>
+            <MenuList bg={useColorModeValue("white", "#232323")}>
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />

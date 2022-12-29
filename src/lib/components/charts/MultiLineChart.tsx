@@ -134,7 +134,7 @@ const MultiChartBox = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("#eee", "#232323")}>
+            <MenuList bg={useColorModeValue("white", "#232323")}>
               <ChartSpanMenu
                 onChange={(span) =>
                   setSpanItem(GRID_ITEM_SIZE[Number(span) - 1])

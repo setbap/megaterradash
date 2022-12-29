@@ -164,7 +164,7 @@ const MultiLineChartSeprate = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("#eee", "#232323")}>
+            <MenuList bg={useColorModeValue("white", "#232323")}>
               <LinkToSourceMenuItem queryLink={queryLink} />
               <MenuDivider />
               <ChartSpanMenu
