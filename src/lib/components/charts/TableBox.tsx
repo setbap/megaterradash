@@ -1,10 +1,17 @@
-import { Box, useColorModeValue, GridItem, MenuList } from "@chakra-ui/react";
-import { useState } from "react";
+import {
+  Box,
+  useColorModeValue,
+  GridItem,
+  MenuList,
+  MenuDivider,
+} from "@chakra-ui/react";
+import { useRef, useState } from "react";
 import { GRID_ITEM_SIZE } from "./template";
 import ChartHeader from "../basic/ChartHeader";
 import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
 import { IShowTableProps, ShowTable } from "./ShowTable";
 import { ModalInfo } from "../basic/ModalInfo";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
 
 interface Props<T> extends IShowTableProps<T> {
   modalInfo: string;
@@ -26,7 +33,7 @@ function TableBox<T>({
   onRowClick,
 }: Props<T>) {
   const [spanItem, _] = useState(GRID_ITEM_SIZE[baseSpan - 1]);
-
+  const tableRef = useRef<HTMLDivElement | null>(null);
   const bgTooltip = useColorModeValue("gray.300", "gray.700");
   const bgCard = useColorModeValue("white", "#191919");
   const textColor = useColorModeValue("gray.900", "gray.100");
@@ -34,7 +41,7 @@ function TableBox<T>({
   return (
     <GridItem
       rowSpan={1}
-      ref={chartRef}
+      ref={tableRef}
       color={textColor}
       bgColor={bgCard}
       shadow="base"
@@ -73,8 +80,13 @@ function TableBox<T>({
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />
+                  <MenuDivider />
                 </>
               )}
+              <>
+                <ChartImageExportMenu ref={tableRef} title={title} />
+                <MenuDivider />
+              </>
             </MenuList>
           }
           modalInfo={modalInfo}
