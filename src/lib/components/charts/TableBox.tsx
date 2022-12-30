@@ -34,6 +34,7 @@ function TableBox<T>({
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       color={textColor}
       bgColor={bgCard}
       shadow="base"
@@ -65,7 +66,10 @@ function TableBox<T>({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />

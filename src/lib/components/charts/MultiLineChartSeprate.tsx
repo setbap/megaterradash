@@ -5,7 +5,7 @@ import {
   MenuList,
   MenuDivider,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import millify from "millify";
 import {
   LineChart,
@@ -24,6 +24,7 @@ import ChartHeader from "../basic/ChartHeader";
 import { FilterDayBarBox } from "../basic/FilterDayBar";
 import { YAxixOption } from "../basic/YAxiesOption";
 import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
 
 interface Props {
   baseSpan?: number;
@@ -61,7 +62,7 @@ const MultiLineChartSeprate = ({
   const bgTooltip = useColorModeValue("gray.300", "gray.700");
   const bgCard = useColorModeValue("white", "#191919");
   const textColor = useColorModeValue("gray.900", "gray.100");
-
+  const chartRef = useRef<null | HTMLDivElement>(null);
   const [selectedDate, setSelectedDate] = useState<number | string>(
     defultSelectedRange
   );
@@ -142,6 +143,7 @@ const MultiLineChartSeprate = ({
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       colSpan={spanItem}
       color={textColor}
       bgColor={bgCard}
@@ -164,9 +166,16 @@ const MultiLineChartSeprate = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
               <LinkToSourceMenuItem queryLink={queryLink} />
               <MenuDivider />
+              <>
+                <ChartImageExportMenu ref={chartRef} title={title} />
+                <MenuDivider />
+              </>
               <ChartSpanMenu
                 onChange={(span) =>
                   setSpanItem(GRID_ITEM_SIZE[Number(span) - 1])

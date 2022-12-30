@@ -107,7 +107,35 @@
   transform: translateY(-38px);
 }
 
+.box:before {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(10deg, #fff95b 0%, #ff930f 100%);
+  transform: translate3d(0px, 0px, 0) scale(1.09);
+  filter: blur(20px);
+  opacity: var(0.54);
+  transition: opacity 0.3s;
+  border-radius: inherit;
+}
 
-.base-anime {
-  transition: all 0.7s cubic-bezier(0.075, 0.82, 0.165, 1) ;
+/* 
+* Prevents issues when the parent creates a 
+* stacking context. (For example, using the transform
+* property )
+*/
+.box::after {
+  content: "";
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: inherit;
+  border-radius: inherit;
 }

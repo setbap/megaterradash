@@ -7,7 +7,7 @@ import {
   MenuItemOption,
   MenuOptionGroup,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import millify from "millify";
 import {
@@ -29,6 +29,7 @@ import { AnimatePresence } from "framer-motion";
 import MotionBox from "../motion/Box";
 import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
 import { ModalInfo } from "../basic/ModalInfo";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
 
 interface Props {
   modelInfo?: string;
@@ -76,6 +77,7 @@ const LineChartWithBar = ({
   infoSizePercentage = 50,
   customColor = "var(--chakra-colors-green-300)",
 }: Props) => {
+  const chartRef = useRef<null | HTMLDivElement>(null);
   const [spanItem, setSpanItem] = useState(GRID_ITEM_SIZE[baseSpan - 1]);
   const [defultViewSetting, setDefultViewSetting] = useState(defultDateView);
   const [chartData, setChartData] = useState(data);
@@ -195,6 +197,7 @@ const LineChartWithBar = ({
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       color={textColor}
       bgColor={bgCard}
       shadow="base"
@@ -232,13 +235,20 @@ const LineChartWithBar = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />
                   <MenuDivider />
                 </>
               )}
+              <>
+                <ChartImageExportMenu ref={chartRef} title={title} />
+                <MenuDivider />
+              </>
               {showMonthly && (
                 <>
                   <MenuOptionGroup

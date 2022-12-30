@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import {
   BarChart,
   Bar,
@@ -28,6 +28,7 @@ import ChartSpanMenu from "../basic/ChartSpanMenu";
 import ChartHeader from "../basic/ChartHeader";
 import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
 import { ModalInfo } from "../basic/ModalInfo";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
 
 const BarGraph = ({
   title,
@@ -74,6 +75,7 @@ const BarGraph = ({
   const [chartTimeFrame, setChartTimeFrame] = useState<"day" | "month">(
     defualtTime
   );
+  const chartRef = useRef<null | HTMLDivElement>(null);
   const [spanItem, setSpanItem] = useState(GRID_ITEM_SIZE[baseSpan - 1]);
   const [barProps, setBarProps] = useState(
     labels.reduce(
@@ -137,6 +139,7 @@ const BarGraph = ({
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       color={textColor}
       bgColor={bgCard}
       shadow="base"
@@ -176,13 +179,20 @@ const BarGraph = ({
         <ChartHeader
           disclaimer={disclaimer}
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />
                   <MenuDivider />
                 </>
               )}
+              <>
+                <ChartImageExportMenu ref={chartRef} title={title} />
+                <MenuDivider />
+              </>
               {hasMonthly && (
                 <>
                   <MenuOptionGroup

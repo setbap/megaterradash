@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   AreaChart,
   Bar,
@@ -27,6 +27,7 @@ import ChartSpanMenu from "../basic/ChartSpanMenu";
 import ChartHeader from "../basic/ChartHeader";
 import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
 import { ModalInfo } from "../basic/ModalInfo";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
 
 const StackedAreaChart = ({
   title,
@@ -61,6 +62,7 @@ const StackedAreaChart = ({
   labels: { key: string; color: string }[];
   infoSizePercentage?: number | "full";
 }) => {
+  const chartRef = useRef<null | HTMLDivElement>(null);
   const hasMonthly = !isNotDate && monthlyValues && monthlyValues.length > 0;
   const [chartData, setChartData] = useState(
     defualtTime === "day" ? values : monthlyValues
@@ -131,6 +133,7 @@ const StackedAreaChart = ({
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       colSpan={spanItem}
       color={textColor}
       bgColor={bgCard}
@@ -165,13 +168,20 @@ const StackedAreaChart = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />
                   <MenuDivider />
                 </>
               )}
+              <>
+                <ChartImageExportMenu ref={chartRef} title={title} />
+                <MenuDivider />
+              </>
               {hasMonthly && (
                 <>
                   <MenuOptionGroup

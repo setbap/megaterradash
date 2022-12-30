@@ -6,12 +6,13 @@ import {
   MenuDivider,
 } from "@chakra-ui/react";
 import { ResponsiveSankey } from "@nivo/sankey";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { GRID_ITEM_SIZE } from "./template";
 import ChartSpanMenu from "../basic/ChartSpanMenu";
 import ChartHeader from "../basic/ChartHeader";
 import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
 import { ModalInfo } from "../basic/ModalInfo";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
 
 export interface ISankeyChart {
   nodes: {
@@ -45,7 +46,7 @@ const FlowChart = ({
   customColor = "var(--chakra-colors-green-300)",
 }: Props) => {
   const [spanItem, setSpanItem] = useState(GRID_ITEM_SIZE[baseSpan - 1]);
-
+  const chartRef = useRef<null | HTMLDivElement>(null);
   const bgTooltip = useColorModeValue("gray.300", "gray.700");
   const bgCard = useColorModeValue("white", "#191919");
   const textColor = useColorModeValue("gray.900", "gray.100");
@@ -53,6 +54,7 @@ const FlowChart = ({
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       color={textColor}
       bgColor={bgCard}
       shadow="base"
@@ -90,13 +92,20 @@ const FlowChart = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />
                   <MenuDivider />
                 </>
               )}
+              <>
+                <ChartImageExportMenu ref={chartRef} title={title} />
+                <MenuDivider />
+              </>
 
               <ChartSpanMenu
                 onChange={(span) =>

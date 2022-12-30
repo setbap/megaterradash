@@ -5,8 +5,9 @@ import {
   useColorModeValue,
   GridItem,
   MenuList,
+  MenuDivider,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import millify from "millify";
 
 import {
@@ -24,6 +25,8 @@ import ChartSpanMenu from "../basic/ChartSpanMenu";
 import { GRID_ITEM_SIZE } from "./template";
 import ChartHeader from "../basic/ChartHeader";
 import { FilterDayBarBox } from "../basic/FilterDayBar";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
+import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
 
 interface Props {
   baseSpan?: number;
@@ -32,6 +35,7 @@ interface Props {
   areaDataKey: string[];
   title: string;
   data: any[];
+  queryLink?: string;
   chartColors?: string[];
   multiOff?: boolean;
   isNotDate?: boolean;
@@ -41,6 +45,7 @@ interface Props {
 const MultiChartBox = ({
   isNotDate = false,
   baseSpan = 1,
+  queryLink,
   multiOff = false,
   areaDataKey,
   xAxisDataKey,
@@ -54,7 +59,7 @@ const MultiChartBox = ({
   const bgTooltip = useColorModeValue("gray.300", "gray.700");
   const bgCard = useColorModeValue("white", "#191919");
   const textColor = useColorModeValue("gray.900", "gray.100");
-
+  const chartRef = useRef<null | HTMLDivElement>(null);
   const [selectedDate, setSelectedDate] = useState<number | string>(
     defultSelectedRange
   );
@@ -111,6 +116,7 @@ const MultiChartBox = ({
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       colSpan={spanItem}
       color={textColor}
       bgColor={bgCard}
@@ -134,7 +140,20 @@ const MultiChartBox = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
+              {queryLink && (
+                <>
+                  <LinkToSourceMenuItem queryLink={queryLink} />
+                  <MenuDivider />
+                </>
+              )}
+              <>
+                <ChartImageExportMenu ref={chartRef} title={title} />
+                <MenuDivider />
+              </>
               <ChartSpanMenu
                 onChange={(span) =>
                   setSpanItem(GRID_ITEM_SIZE[Number(span) - 1])

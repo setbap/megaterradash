@@ -7,7 +7,7 @@ import {
   MenuItemOption,
   MenuOptionGroup,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import moment from "moment";
 import millify from "millify";
 import {
@@ -29,6 +29,7 @@ import MotionBox from "../motion/Box";
 import LinkToSourceMenuItem from "../basic/LinkToSourceMenuItem";
 import TrendLine from "./TrendLine";
 import { ModalInfo } from "../basic/ModalInfo";
+import ChartImageExportMenu from "../basic/ChartImageExportMenu";
 
 interface Props {
   modelInfo?: string;
@@ -69,6 +70,7 @@ const ChartBox = ({
   showMonthly = false,
   customColor = "var(--chakra-colors-green-300)",
 }: Props) => {
+  const chartRef = useRef<null | HTMLDivElement>(null);
   const [spanItem, setSpanItem] = useState(GRID_ITEM_SIZE[baseSpan - 1]);
   const [defultViewSetting, setDefultViewSetting] = useState(defultDateView);
   const getMaxDate = () => {
@@ -162,9 +164,11 @@ const ChartBox = ({
   const textColor = useColorModeValue("gray.900", "gray.100");
   const chartColor = customColor;
   const chartUniquKey = `${areaDataKey}-${xAxisDataKey}-${additionalDumpTextToAddKeyToKeyBeUnique}`;
+
   return (
     <GridItem
       rowSpan={1}
+      ref={chartRef}
       color={textColor}
       bgColor={bgCard}
       shadow="base"
@@ -202,13 +206,20 @@ const ChartBox = ({
       >
         <ChartHeader
           chartMenu={
-            <MenuList bg={useColorModeValue("white", "#232323")}>
+            <MenuList
+              data-html2canvas-ignore
+              bg={useColorModeValue("white", "#232323")}
+            >
               {queryLink && (
                 <>
                   <LinkToSourceMenuItem queryLink={queryLink} />
                   <MenuDivider />
                 </>
               )}
+              <>
+                <ChartImageExportMenu ref={chartRef} title={title} />
+                <MenuDivider />
+              </>
               {showMonthly && (
                 <>
                   <MenuOptionGroup
