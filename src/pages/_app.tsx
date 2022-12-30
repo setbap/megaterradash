@@ -14,6 +14,7 @@ import "lib/styles/globals.css";
 import { AnimatePresence } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import PageLoading from "lib/components/basic/PageLoading";
 
 const MyApp = ({ Component, pageProps, cookies }: any) => {
   const [queryClient] = useState(() => new QueryClient());
@@ -38,7 +39,13 @@ const MyApp = ({ Component, pageProps, cookies }: any) => {
             />
           </Head>
           <DefaultSeo {...defaultSEOConfig} />
-          <AnimatePresence>
+
+          <PageLoading />
+
+          <AnimatePresence
+            initial={false}
+            onExitComplete={() => window.scrollTo(0, 0)}
+          >
             <Layout key={router.route}>
               <AnyComponent {...pageProps} />
             </Layout>
