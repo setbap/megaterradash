@@ -11,8 +11,10 @@ function PageLoading() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const handleStart = (url: string) =>
-      url !== router.asPath && setLoading(true);
+    const handleStart = (url: string) => {
+      console.log(url);
+      return url !== router.asPath && url !== "/about" && setLoading(true);
+    };
     const handleComplete = (url: string) =>
       url === router.asPath && setLoading(false);
 
