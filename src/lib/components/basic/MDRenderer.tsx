@@ -73,9 +73,7 @@ const CustomMarkDownLink = (props: any) => {
       display={"inline-flex"}
     >
       {props.children}{" "}
-      <Box ps={"1"}>
-        <FiExternalLink />
-      </Box>
+      <FiExternalLink style={{ paddingInline: "1px", marginLeft: "2px" }} />
     </Link>
   );
 };

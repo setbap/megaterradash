@@ -39,7 +39,7 @@ function PageLogoWithLoading() {
   return (
     <motion.div
       style={{
-        position: "absolute",
+        position: "fixed",
         height: "100vh",
         width: "100vw",
         zIndex: 100000,

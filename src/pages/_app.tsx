@@ -44,7 +44,7 @@ const MyApp = ({ Component, pageProps, cookies }: any) => {
 
           <AnimatePresence
             initial={false}
-            onExitComplete={() => window.scrollTo(0, 0)}
+            onExitComplete={() => setTimeout(() => window.scrollTo(0, 10), 100)}
           >
             <Layout key={router.route}>
               <AnyComponent {...pageProps} />
