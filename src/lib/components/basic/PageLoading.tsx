@@ -1,4 +1,4 @@
-import { Box, Heading, Progress } from "@chakra-ui/react";
+import { Box, Heading, Progress, useColorModeValue } from "@chakra-ui/react";
 import { AnimatePresence, m, motion } from "framer-motion";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
@@ -45,7 +45,7 @@ function PageLogoWithLoading() {
         height: "100vh",
         width: "100vw",
         zIndex: 100000,
-        background: "#f1f1d120",
+        background: useColorModeValue("#f1f1d190", "#f1f1f140"),
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
