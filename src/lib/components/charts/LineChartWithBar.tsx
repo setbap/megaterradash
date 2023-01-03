@@ -116,8 +116,8 @@ const LineChartWithBar = ({
   const [selectedDate, setSelectedDate] = useState<number | string>(
     Math.round(
       (maxDate!.toDate().getTime() -
-        new Date(maxDate!.toDate().getFullYear(), 0, 1).getTime()) /
-        (1000 * 60 * 60 * 24)
+        new Date(2022, 0, 1).getTime()) /
+      (1000 * 60 * 60 * 24)
     ) + 1
   );
 
@@ -171,8 +171,8 @@ const LineChartWithBar = ({
     filterDateAccordingDay(
       Math.round(
         (maxDate!.toDate().getTime() -
-          new Date(maxDate!.toDate().getFullYear(), 0, 1).getTime()) /
-          (1000 * 60 * 60 * 24)
+          new Date(2022, 0, 1).getTime()) /
+        (1000 * 60 * 60 * 24)
       ) + 1
     );
   };
@@ -433,13 +433,13 @@ const LineChartWithBar = ({
                       Math.round(
                         (maxDate!.toDate().getTime() -
                           new Date(
-                            maxDate!.toDate().getFullYear(),
+                            2022,
                             0,
                             1
                           ).getTime()) /
-                          (1000 * 60 * 60 * 24)
+                        (1000 * 60 * 60 * 24)
                       ) + 1,
-                    name: maxDate!.toDate().getFullYear().toString(),
+                    name: "2022",
                   },
                   { day: 365, name: "1Y" },
                 ]}
