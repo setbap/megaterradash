@@ -149,14 +149,15 @@ const DesktopTopNav = () => {
 
       <Box experimental_spaceX={"2"} mr={"4"} textAlign="end">
         {router.pathname !== "/about" && <CurrentStatusPage />}
-
-        <IconButton
+        <Button
           zIndex={1}
           size={"sm"}
           onClick={() => router.push("/about")}
           aria-label="About"
-          icon={<FiInfo />}
-        />
+          rightIcon={<FiInfo />}
+        >
+          About
+        </Button>
 
         <ThemeToggle />
       </Box>
