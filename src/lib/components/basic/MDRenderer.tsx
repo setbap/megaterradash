@@ -10,9 +10,14 @@ export default function MDRenderer({ children }: any) {
       components={Renderer({
         a: CustomMarkDownLink,
         p: (props) => (
-          <chakra.p fontWeight={"light"} lineHeight={"8"}>
+          <chakra.p fontWeight={"normal"} lineHeight={"8"}>
             {props.children}
           </chakra.p>
+        ),
+        li: (props) => (
+          <chakra.li fontWeight={"normal"} lineHeight={"5"}>
+            {props.children}
+          </chakra.li>
         ),
         img: (props) => (
           <Image

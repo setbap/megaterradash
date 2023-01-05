@@ -72,10 +72,10 @@ const LineChartWithBar = ({
   title,
   modelInfo = "",
   additionalDumpTextToAddKeyToKeyBeUnique = "",
-  defultSelectedRange = "2022",
   showMonthly = false,
   infoSizePercentage = 50,
   customColor = "var(--chakra-colors-green-300)",
+  defultSelectedRange = 2022
 }: Props) => {
   const chartRef = useRef<null | HTMLDivElement>(null);
   const [spanItem, setSpanItem] = useState(GRID_ITEM_SIZE[baseSpan - 1]);
@@ -114,11 +114,10 @@ const LineChartWithBar = ({
   };
   const minDate = isNotDate ? null : getMinDate();
   const [selectedDate, setSelectedDate] = useState<number | string>(
-    Math.round(
-      (maxDate!.toDate().getTime() -
-        new Date(2022, 0, 1).getTime()) /
-      (1000 * 60 * 60 * 24)
-    ) + 1
+    defultSelectedRange === 2022 ?
+      Math.round(
+        (maxDate!.toDate().getTime() - new Date(2022, 0, 1).getTime()) / (1000 * 60 * 60 * 24)
+      ) + 1 : 'all'
   );
 
   const changeDataToMonethly = () => {
@@ -168,6 +167,10 @@ const LineChartWithBar = ({
     if (isNotDate) {
       return;
     }
+    if (defultSelectedRange === 'all') {
+      setChartData(data)
+      return;
+    }
     filterDateAccordingDay(
       Math.round(
         (maxDate!.toDate().getTime() -
@@ -177,10 +180,12 @@ const LineChartWithBar = ({
     );
   };
 
-  const setChartToAll = () => {
-    setChartData(data);
-    setSelectedDate("all");
-  };
+  const resetToAll = () => {
+    setChartData(data)
+    setSelectedDate('all')
+    return;
+  }
+
 
   useEffect(() => {
     resetChartData();
@@ -422,7 +427,7 @@ const LineChartWithBar = ({
                 selecteRange={selectedDate}
                 onSelectLastNthDay={filterDateAccordingDay}
                 onSelectRangeDay={filterDateAccordingRange}
-                onResetClick={setChartToAll}
+                onResetClick={resetToAll}
                 minDate={minDate!.toDate()!}
                 maxDate={maxDate!.toDate()}
                 filters={[
@@ -439,7 +444,7 @@ const LineChartWithBar = ({
                           ).getTime()) /
                         (1000 * 60 * 60 * 24)
                       ) + 1,
-                    name: "2022",
+                    name: "2022".toString(),
                   },
                   { day: 365, name: "1Y" },
                 ]}

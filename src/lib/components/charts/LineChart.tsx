@@ -7,7 +7,7 @@ import {
   MenuItemOption,
   MenuOptionGroup,
 } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import moment from "moment";
 import millify from "millify";
 import {
@@ -66,7 +66,7 @@ const ChartBox = ({
   modelInfo = "",
   infoSizePercentage = 50,
   additionalDumpTextToAddKeyToKeyBeUnique = "",
-  defultSelectedRange = "all",
+  defultSelectedRange = 2022,
   showMonthly = false,
   customColor = "var(--chakra-colors-green-300)",
 }: Props) => {
@@ -86,11 +86,10 @@ const ChartBox = ({
   const [selectedDate, setSelectedDate] = useState<number | string>(
     isNotDate
       ? ""
-      : Math.round(
-        (maxDate!.toDate().getTime() -
-          new Date(2022, 0, 1).getTime()) /
-        (1000 * 60 * 60 * 24)
-      ) + 1
+      : defultSelectedRange === 2022 ?
+        Math.round(
+          (maxDate!.toDate().getTime() - new Date(2022, 0, 1).getTime()) / (1000 * 60 * 60 * 24)
+        ) + 1 : 'all'
   );
   const [chartData, setChartData] = useState(data);
   const [savedDailyChart, setSavedDailyChart] = useState(data);
@@ -155,8 +154,21 @@ const ChartBox = ({
   };
 
   const resetChartData = () => {
-    setSelectedDate("all");
-    setChartData(data);
+    if (isNotDate) {
+      return;
+    }
+    if (defultSelectedRange === 'all') {
+      setChartData(data)
+      setSelectedDate('all')
+      return;
+    }
+    filterDateAccordingDay(
+      Math.round(
+        (maxDate!.toDate().getTime() -
+          new Date(2022, 0, 1).getTime()) /
+        (1000 * 60 * 60 * 24)
+      ) + 1
+    );
   };
 
   const bgTooltip = useColorModeValue("gray.300", "gray.700");
@@ -164,6 +176,16 @@ const ChartBox = ({
   const textColor = useColorModeValue("gray.900", "gray.100");
   const chartColor = customColor;
   const chartUniquKey = `${areaDataKey}-${xAxisDataKey}-${additionalDumpTextToAddKeyToKeyBeUnique}`;
+
+  useEffect(() => {
+    resetChartData();
+  }, []);
+
+  const resetToAll = () => {
+    setChartData(data)
+    setSelectedDate('all')
+    return;
+  }
 
   return (
     <GridItem
@@ -379,7 +401,7 @@ const ChartBox = ({
                 selecteRange={selectedDate}
                 onSelectLastNthDay={filterDateAccordingDay}
                 onSelectRangeDay={filterDateAccordingRange}
-                onResetClick={resetChartData}
+                onResetClick={resetToAll}
                 minDate={minDate!.toDate()!}
                 maxDate={maxDate!.toDate()}
                 filters={[
@@ -396,7 +418,7 @@ const ChartBox = ({
                           ).getTime()) /
                         (1000 * 60 * 60 * 24)
                       ) + 1,
-                    name: "2022",
+                    name: "2022".toString(),
                   },
                   { day: 365, name: "1Y" },
                 ]}
