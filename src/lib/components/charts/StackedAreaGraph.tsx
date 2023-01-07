@@ -222,7 +222,7 @@ const StackedAreaChart = ({
         />
         <Box p={"1"} />
 
-        <ResponsiveContainer width={"100%"}>
+        <ResponsiveContainer height={425} width={"100%"}>
           <AreaChart data={chartData} className="mt-1 mb-2">
             <CartesianGrid
               style={{ stroke: "rgba(110,110,110,1)", opacity: 0.15 }}
