@@ -12,25 +12,8 @@ import {
   getTop100Richlist,
   getDistributionOfStakingRewards,
   getStakingrewards,
-  getBridgeTransactions,
   getTotalInfo,
 } from "lib/requests/staking";
-import { ReturnDataType } from "lib/types/base";
-import {
-  Top10validatorbasedontotalvolumeofdelegatetothem,
-  Top10validatorbasedonuniqueuserdelegatetothem,
-  Top10validatorbasedontotalnumberofdelegatetothem,
-  Weeklytop10validatorbasedonnumberofdelegatetothem,
-  Weeklytop10validatorbasedonuniqueuserdelegatetothem,
-  Weeklytop10validatorbasedonvolumeofdelegatetothem,
-  Averageweeklytxcounttxvolumeanduniqueusers,
-  Weeklytxcounttxvolumeanduniqueusers,
-  Top30validatorsbasedoncurrentbalance,
-  DistributionOfStakingRewards,
-  Stakingrewards,
-  Top100Richlist,
-} from "lib/types/types/staking";
-import Transaction from "pages";
 
 export async function getStaticProps() {
   const [
@@ -46,7 +29,6 @@ export async function getStaticProps() {
     stakingrewards,
     distributionOfStakingRewards,
     top100Richlist,
-    bridgeTransactions,
     totalInfo,
   ] = await Promise.all([
     getTop30ValidatorBasedOnCurrentBalance(),
@@ -58,12 +40,9 @@ export async function getStaticProps() {
     getWeeklytop10validatorbasedonvolumeofdelegatetothem(),
     getAverageweeklytxcounttxvolumeanduniqueusers(),
     getWeeklytxcounttxvolumeanduniqueusers(),
-
     getStakingrewards(),
     getDistributionOfStakingRewards(),
     getTop100Richlist(),
-    getBridgeTransactions(),
-
     getTotalInfo(),
   ]);
   return {
@@ -77,49 +56,16 @@ export async function getStaticProps() {
       weeklytop10validatorbasedonvolumeofdelegatetothem,
       averageweeklytxcounttxvolumeanduniqueusers,
       weeklytxcounttxvolumeanduniqueusers,
-
       stakingrewards,
       distributionOfStakingRewards,
       top100Richlist,
-      bridgeTransactions,
-
       totalInfo,
     },
     revalidate: 10 * 60,
   };
 }
 export default Staking;
-export interface StakingProps {
-  top100Richlist: ReturnDataType<Top100Richlist[]>;
-  distributionOfStakingRewards: ReturnDataType<DistributionOfStakingRewards[]>;
-  stakingrewards: ReturnDataType<Stakingrewards[]>;
-  top30ValidatorBasedOnCurrentBalance: ReturnDataType<
-    Top30validatorsbasedoncurrentbalance[]
-  >;
-  top10validatorbasedontotalvolumeofdelegatetothem: ReturnDataType<
-    Top10validatorbasedontotalvolumeofdelegatetothem[]
-  >;
-  top10validatorbasedonuniqueuserdelegatetothem: ReturnDataType<
-    Top10validatorbasedonuniqueuserdelegatetothem[]
-  >;
-  top10validatorbasedontotalnumberofdelegatetothem: ReturnDataType<
-    Top10validatorbasedontotalnumberofdelegatetothem[]
-  >;
-  weeklytop10validatorbasedonnumberofdelegatetothem: ReturnDataType<any>;
-
-  weeklytop10validatorbasedonuniqueuserdelegatetothem: ReturnDataType<any>;
-  weeklytop10validatorbasedonvolumeofdelegatetothem: ReturnDataType<any>;
-  averageweeklytxcounttxvolumeanduniqueusers: ReturnDataType<
-    Averageweeklytxcounttxvolumeanduniqueusers[]
-  >;
-  weeklytxcounttxvolumeanduniqueusers: ReturnDataType<any>;
-  bridgeTransactions: ReturnDataType<any>;
-  totalInfo: ReturnDataType<{
-    supplyTotal: number;
-    bonded: number;
-    stakingRatio: number;
-    communityPool: number;
-    stakingReturn: number;
-    stakingReturnChange: number;
-  }>;
-}
+export type StakingProps = Pick<
+  Awaited<ReturnType<typeof getStaticProps>>,
+  "props"
+>["props"];

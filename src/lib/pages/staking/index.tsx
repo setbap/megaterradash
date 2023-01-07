@@ -38,7 +38,7 @@ const Staking = ({
   distributionOfStakingRewards,
   stakingrewards,
   top100Richlist,
-  bridgeTransactions,
+
   totalInfo,
 }: StakingProps): JSX.Element => {
   const averageweeklytxcounttxvolumeanduniqueusersNames =
@@ -46,7 +46,6 @@ const Staking = ({
 
   const weeklytxcounttxvolumeanduniqueusersNames =
     weeklytxcounttxvolumeanduniqueusers.title.split(",");
-  const bridgeTransactionsNames = bridgeTransactions.title.split(",");
 
   return (
     <>
@@ -318,80 +317,6 @@ review top information or actor or validators in Terra
             )}
           />
 
-          <HeaderSection title="IBC Transfer and Bridge Inforamtion" />
-
-          <DonutChart
-            queryLink={bridgeTransactions.key}
-            data={bridgeTransactions.data.valueChain}
-            modalInfo=""
-            baseSpan={2}
-            title={bridgeTransactionsNames[0]}
-            nameKey="Destination chain"
-            dataKey="Volume"
-          />
-
-          <DonutChart
-            queryLink={bridgeTransactions.key}
-            data={bridgeTransactions.data.txChain}
-            modalInfo=""
-            baseSpan={1}
-            title={bridgeTransactionsNames[1]}
-            nameKey="Destination chain"
-            dataKey="tx count"
-          />
-
-          <BarGraph
-            values={bridgeTransactions.data.dailyValueChain}
-            queryLink={bridgeTransactions.key}
-            modalInfo=""
-            title={bridgeTransactionsNames[2]}
-            baseSpan={3}
-            dataKey="Day"
-            oyLabel="$Luna"
-            oxLabel=""
-            labels={[
-              {
-                key: "Volume",
-                color: colors[0],
-              },
-            ]}
-          />
-          <LineChartWithBar
-            data={bridgeTransactions.data.dailyTXAndUnique}
-            queryLink={bridgeTransactions.key}
-            title={bridgeTransactionsNames[3]}
-            baseSpan={3}
-            customColor={colors[3]}
-            barColor={colors[3]}
-            hideLine
-            xAxisDataKey="Day"
-            barDataKey={"tx count"}
-            additionalLineKey={["Unique wallet"]}
-            lineDataKey="fake"
-          />
-
-          {[
-            { name: "outflowEachChainTxCount", label: "TX count" },
-            { name: "outflowEachChainVolume", label: "$Luna" },
-          ].map((item, index) => (
-            <StackedAreaChart
-              key={item.name}
-              values={bridgeTransactions.data[item.name]}
-              queryLink={bridgeTransactions.key}
-              modalInfo=""
-              title={bridgeTransactionsNames[4 + index]}
-              baseSpan={3}
-              dataKey="Name"
-              oyLabel={item.label}
-              oxLabel="Action"
-              labels={bridgeTransactions.data.chains.map(
-                (item: string, index: number) => ({
-                  key: item,
-                  color: colors[index % colors.length],
-                })
-              )}
-            />
-          ))}
           <HeaderSection title="Staking and Stake Transactions and Rewards" />
 
           {[

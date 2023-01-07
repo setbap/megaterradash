@@ -1,10 +1,14 @@
-import names from "lib/utility/names";
-import LineChartWithBar from "lib/components/charts/LineChartWithBar";
-import HeaderSection from "lib/components/basic/HeaderSection";
 import { Box, SimpleGrid } from "@chakra-ui/react";
 import { StatsCard } from "lib/components/charts/StateCard";
+import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
-import { TransactionsProps } from "pages/index";
+import LineChartWithBar from "lib/components/charts/LineChartWithBar";
+import { IBCProps } from "pages/ibc";
+import BarGraph from "lib/components/charts/BarGraph";
+import DonutChart from "lib/components/charts/DonutChart";
+import StackedAreaChart from "lib/components/charts/StackedAreaGraph";
+import { StateCardRemoteData } from "lib/components/charts/StateCardRemoteData";
+import HeaderSection from "lib/components/basic/HeaderSection";
 
 const colors = [
   "#ff5722",
@@ -21,29 +25,17 @@ const colors = [
   "#607d8b",
 ];
 
-const Governance = ({
-  transactionsAVGInfo,
-  transactionsTotalInfo,
-  transactionsTPS,
-  transactionsBlockAge,
-  transactionsTodayInfo,
-  transactionsFee,
-}: TransactionsProps): JSX.Element => {
-  const transactionsAVGInfoNames = transactionsAVGInfo.title.split(",");
-  const transactionsTotalInfoNames = transactionsTotalInfo.title.split(",");
-  const transactionsTPSNames = transactionsTPS.title.split(",");
-  const transactionsBlockAgeNames = transactionsBlockAge.title.split(",");
-  const transactionsTodayInfoNames = transactionsTodayInfo.title.split(",");
-  const transactionsFeeNames = transactionsFee.title.split(",");
+const Staking = ({ bridgeTransactions }: IBCProps): JSX.Element => {
+  const bridgeTransactionsNames = bridgeTransactions.title.split(",");
 
   return (
     <>
       <NextSeo
-        title={`Terra | Transactions`}
+        title={`Terra | IBC`}
         description={`Track the latest stats and trends on ${names.BLOCKCHAIN}`}
         openGraph={{
           url: `https://${names.SITE_URL}/`,
-          title: `Terra  | Transactions`,
+          title: `Terra | IBC`,
           description: `Track the latest stats and trends on ${names.BLOCKCHAIN}`,
           images: [
             {
@@ -59,151 +51,6 @@ const Governance = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <HeaderSection title="Terra Transaction">
-          {`
-The following topics are shown on this page:
-* __Transactions__ : Number of transactions made on a blockchain.
-* __Fee__ : A transaction fee is a small fee that is charged when a transaction is made. This fee is used to reward miners or validators who help confirm the transaction and secure the network. Total fee is the total USD spent during a certain period. Transaction fee is the average USD spent to made a transaction.
-* __Transactions Per Second (TPS)__ : Using this metric, we can determine how quickly a blockchain network processes transactions. Count the number of transactions per second.
-* __Block time__ : Block time is the average time it takes for a new block of transactions to be added to a blockchain. So we measure the time (in sec) between two consecutive blocks.
-`}
-        </HeaderSection>
-        <Box pt={"4"}></Box>
-
-        <HeaderSection title="Glance">
-          {`
-according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
-`}
-        </HeaderSection>
-        <SimpleGrid
-          my={"6"}
-          columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
-          spacing={{ base: 5, lg: 8 }}
-        >
-          <StatsCard
-            stat={transactionsTotalInfo.data["tx count"]}
-            title={transactionsTotalInfoNames[2]}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsTotalInfo.key}
-          />
-
-          <StatsCard
-            stat={transactionsTotalInfo.data.fee}
-            title={transactionsTotalInfoNames[0]}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsTotalInfo.key}
-          />
-
-          <StatsCard
-            stat={transactionsAVGInfo.data["AVG tx count"]}
-            title={transactionsAVGInfoNames[3]}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsAVGInfo.key}
-          />
-
-          <StatsCard
-            stat={transactionsAVGInfo.data["AVG fee"]}
-            title={transactionsAVGInfoNames[1]}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsAVGInfo.key}
-          />
-          <StatsCard
-            stat={transactionsAVGInfo.data["AVG success rate"]}
-            title={transactionsAVGInfoNames[4]}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsAVGInfo.key}
-          />
-          <StatsCard
-            stat={transactionsAVGInfo.data["AVG tx fee per day"]}
-            title={transactionsAVGInfoNames[2]}
-            decimal={3}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsAVGInfo.key}
-          />
-
-          <StatsCard
-            stat={transactionsTPS.data.at(-1)?.["AVG TPS"] ?? 6}
-            title={transactionsTPSNames[1]}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsTPS.key}
-          />
-
-          <StatsCard
-            stat={transactionsBlockAge.data.at(-1)?.["AVG block tx"] ?? 6.7}
-            title={transactionsBlockAgeNames[3]}
-            status="inc"
-            unit=""
-            hasArrowIcon={false}
-            link={transactionsBlockAge.key}
-          />
-
-          <StatsCard
-            stat={transactionsBlockAge.data.at(-1)?.["AVG block age"] ?? 1.2}
-            title={transactionsBlockAgeNames[1]}
-            status="inc"
-            unit=" s"
-            hasArrowIcon={false}
-            link={transactionsBlockAge.key}
-          />
-        </SimpleGrid>
-
-        <HeaderSection title="24H Changes" />
-        <SimpleGrid
-          my={"6"}
-          columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
-          spacing={{ base: 5, lg: 8 }}
-        >
-          <StatsCard
-            stat={transactionsTodayInfo.data["24h Transactions"]}
-            title={transactionsTodayInfoNames[0]}
-            status={
-              transactionsTodayInfo.data["change (%) Transactions"] >= 0
-                ? "inc"
-                : "dec"
-            }
-            change={transactionsTodayInfo.data["change (%) Transactions"]}
-            changeUnit={"%"}
-            hasArrowIcon
-            link={transactionsTodayInfo.key}
-          />
-
-          <StatsCard
-            stat={transactionsTodayInfo.data["24h TX Fee"]}
-            title={transactionsTodayInfoNames[2]}
-            decimal={3}
-            status={
-              transactionsTodayInfo.data["change (%) TX Fee"] >= 0
-                ? "inc"
-                : "dec"
-            }
-            change={transactionsTodayInfo.data["change (%) TX Fee"]}
-            changeUnit={"%"}
-            hasArrowIcon
-            link={transactionsTodayInfo.key}
-          />
-
-          <StatsCard
-            stat={transactionsTodayInfo.data["24h Success Rate"]}
-            title={transactionsTodayInfoNames[3]}
-            status={
-              transactionsTodayInfo.data["change (%) Success Rate"] >= 0
-                ? "inc"
-                : "dec"
-            }
-            change={transactionsTodayInfo.data["change (%) Success Rate"]}
-            changeUnit={"%"}
-            hasArrowIcon
-            link={transactionsTodayInfo.key}
-          />
-        </SimpleGrid>
-
         <SimpleGrid
           position={"relative"}
           transition={"all 0.9s ease-in-out"}
@@ -213,67 +60,82 @@ according section defined in above, i prepare some of static about these topics.
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
-          <HeaderSection title="Fee" />
-          <LineChartWithBar
-            data={transactionsFee.data}
-            queryLink={transactionsFee.key}
-            title={transactionsFeeNames[0]}
+          <HeaderSection title="IBC" />
+
+          <HeaderSection title="IBC Transferring Over time" />
+
+          <BarGraph
+            values={bridgeTransactions.data.dailyValueChain}
+            queryLink={bridgeTransactions.key}
+            modalInfo=""
+            title={bridgeTransactionsNames[2]}
             baseSpan={3}
-            customColor={colors[0]}
-            barColor={colors[2]}
-            xAxisDataKey="Day"
-            barDataKey={"Avg tx fee"}
-            lineDataKey="AVG tx fee per day"
+            dataKey="Day"
+            oyLabel="$Luna"
+            oxLabel=""
+            labels={[
+              {
+                key: "Volume",
+                color: colors[0],
+              },
+            ]}
           />
           <LineChartWithBar
-            data={transactionsFee.data}
-            queryLink={transactionsFee.key}
-            title={transactionsFeeNames[0]}
+            data={bridgeTransactions.data.dailyTXAndUnique}
+            queryLink={bridgeTransactions.key}
+            title={bridgeTransactionsNames[3]}
             baseSpan={3}
-            customColor={colors[0]}
-            barColor={colors[2]}
+            customColor={colors[3]}
+            barColor={colors[3]}
+            hideLine
             xAxisDataKey="Day"
-            barDataKey={"fee"}
-            additionalLineKey={["MA7 fee"]}
-            lineDataKey="AVG fee"
+            barDataKey={"tx count"}
+            additionalLineKey={["Unique wallet"]}
+            lineDataKey="fake"
+          />
+          <HeaderSection title="IBC Out over time" />
+          {[
+            { name: "outflowEachChainTxCount", label: "TX count" },
+            { name: "outflowEachChainVolume", label: "$Luna" },
+          ].map((item, index) => (
+            <StackedAreaChart
+              key={item.name}
+              values={bridgeTransactions.data[item.name]}
+              queryLink={bridgeTransactions.key}
+              modalInfo=""
+              title={bridgeTransactionsNames[4 + index]}
+              baseSpan={3}
+              dataKey="Name"
+              oyLabel={item.label}
+              oxLabel="Action"
+              labels={bridgeTransactions.data.chains.map(
+                (item: string, index: number) => ({
+                  key: item,
+                  color: colors[index % colors.length],
+                })
+              )}
+            />
+          ))}
+          <HeaderSection title="Popular Destinations from Terra" />
+
+          <DonutChart
+            queryLink={bridgeTransactions.key}
+            data={bridgeTransactions.data.valueChain}
+            modalInfo=""
+            baseSpan={2}
+            title={bridgeTransactionsNames[0]}
+            nameKey="Destination chain"
+            dataKey="Volume"
           />
 
-          <HeaderSection title="Transactions Per Second (TPS)" />
-          <LineChartWithBar
-            data={transactionsTPS.data}
-            queryLink={transactionsTPS.key}
-            title={transactionsTPSNames[0]}
-            baseSpan={3}
-            customColor={colors[0]}
-            barColor={colors[2]}
-            xAxisDataKey="Day"
-            barDataKey={"TPS"}
-            lineDataKey="AVG TPS"
-          />
-
-          <HeaderSection title="Block Time" />
-          <LineChartWithBar
-            data={transactionsBlockAge.data}
-            queryLink={transactionsBlockAge.key}
-            title={transactionsBlockAgeNames[0]}
-            baseSpan={3}
-            customColor={colors[0]}
-            barColor={colors[2]}
-            xAxisDataKey="Day"
-            barDataKey={"Block tx"}
-            additionalLineKey={["MA7 block tx"]}
-            lineDataKey="AVG Block tx"
-          />
-          <LineChartWithBar
-            data={transactionsBlockAge.data}
-            queryLink={transactionsBlockAge.key}
-            title={transactionsBlockAgeNames[2]}
-            baseSpan={3}
-            customColor={colors[0]}
-            barColor={colors[2]}
-            xAxisDataKey="Day"
-            barDataKey={"block age"}
-            lineDataKey="AVG block age"
+          <DonutChart
+            queryLink={bridgeTransactions.key}
+            data={bridgeTransactions.data.txChain}
+            modalInfo=""
+            baseSpan={1}
+            title={bridgeTransactionsNames[1]}
+            nameKey="Destination chain"
+            dataKey="tx count"
           />
         </SimpleGrid>
       </Box>
@@ -281,4 +143,4 @@ according section defined in above, i prepare some of static about these topics.
   );
 };
 
-export default Governance;
+export default Staking;
