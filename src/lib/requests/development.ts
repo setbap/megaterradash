@@ -240,18 +240,3 @@ export const getDevelopmentWeeklyOutflowTransaction = async () =>
   await complexInOutFlowDataGetter(
     _getDevelopmentWeeklyOutflowTransactionDataGetter
   );
-// START: development: Weekly inflow transactions
-
-// export const getTransactionsTPS = () =>
-//   getSimpleArrayData<TransactionsTPS, TransactionsTPS>(
-//     "9e90c8b3-cbdc-4d1d-971f-522b5c15459d",
-//     "Average number of transactions per second (TPS),Weekly number of transactions per second (TPS)",
-//     "Day"
-//   );
-
-// export const getTransactionsBlockAge = () =>
-//   getSimpleArrayData<TransactionsBlockAge, TransactionsBlockAge>(
-//     "fdae1ff3-372d-4325-be6d-8a8f20fb59e4",
-//     "Average number of transactions per block,Weekly number of transactions per block,Average block age,Weekly block age",
-//     "Day"
-//   );

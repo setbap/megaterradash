@@ -11,14 +11,13 @@ import {
   Weeklytxcounttxvolumeanduniqueusers,
   DistributionOfStakingRewards,
   Stakingrewards,
+  StakingTopStakers,
 
 } from "lib/types/types/staking";
 import {
   getSimpleArrayData,
   getSimpleOutSourceData,
   pivotData,
-  summerizeRow,
-  summerizeRow2Item,
 } from "./utils";
 
 export const getTop30ValidatorBasedOnCurrentBalance = () =>
@@ -344,3 +343,8 @@ export const getWeeklytxcounttxvolumeanduniqueusers: () => Promise<any> =
   };
 
 
+export const getStakingTopWallets = () =>
+  getSimpleArrayData<StakingTopStakers, StakingTopStakers>(
+    "ee9298d3-58d1-471c-a9ed-12cb2f6b9c69",
+    "Top stakers"
+  );

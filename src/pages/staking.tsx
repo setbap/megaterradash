@@ -12,6 +12,7 @@ import {
   getDistributionOfStakingRewards,
   getStakingrewards,
   getTotalInfo,
+  getStakingTopWallets,
 } from "lib/requests/staking";
 
 export async function getStaticProps() {
@@ -28,6 +29,7 @@ export async function getStaticProps() {
     stakingrewards,
     distributionOfStakingRewards,
     totalInfo,
+    stakingTopWallets,
   ] = await Promise.all([
     getTop30ValidatorBasedOnCurrentBalance(),
     getTop10validatorbasedontotalvolumeofdelegatetothem(),
@@ -41,6 +43,7 @@ export async function getStaticProps() {
     getStakingrewards(),
     getDistributionOfStakingRewards(),
     getTotalInfo(),
+    getStakingTopWallets(),
   ]);
   return {
     props: {
@@ -56,6 +59,7 @@ export async function getStaticProps() {
       stakingrewards,
       distributionOfStakingRewards,
       totalInfo,
+      stakingTopWallets,
     },
     revalidate: 10 * 60,
   };

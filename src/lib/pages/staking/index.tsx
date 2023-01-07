@@ -9,6 +9,10 @@ import DonutChart from "lib/components/charts/DonutChart";
 import StackedAreaChart from "lib/components/charts/StackedAreaGraph";
 import { StateCardRemoteData } from "lib/components/charts/StateCardRemoteData";
 import HeaderSection from "lib/components/basic/HeaderSection";
+import TableBox from "lib/components/charts/TableBox";
+import { StakingTopStakers } from "lib/types/types/staking";
+import { ColumnDef } from "@tanstack/react-table";
+import millify from "millify";
 
 const colors = [
   "#ff5722",
@@ -25,6 +29,32 @@ const colors = [
   "#607d8b",
 ];
 
+const colDef: ColumnDef<StakingTopStakers>[] = [
+  {
+    accessorFn: (row) => row.Staker,
+    enableSorting: false,
+    id: "Staker",
+    cell: (info) => info.getValue(),
+    header: () => <span>Staker</span>,
+  },
+  {
+    accessorFn: (row) => row["Staked Balance"],
+    id: "Staked Balance",
+    cell: (info) =>
+      millify(info.getValue() as number, {
+        precision: 2,
+        decimalSeparator: ".",
+      }),
+    header: () => <span>Staked Balance</span>,
+  },
+  {
+    accessorFn: (row) => row["Staking validators"],
+    id: "Staking validators",
+    cell: (info) => info.getValue(),
+    header: (props) => <span>{props.header.id}</span>,
+  },
+];
+
 const Staking = ({
   top30ValidatorBasedOnCurrentBalance,
   top10validatorbasedontotalvolumeofdelegatetothem,
@@ -37,7 +67,7 @@ const Staking = ({
   weeklytxcounttxvolumeanduniqueusers,
   distributionOfStakingRewards,
   stakingrewards,
-
+  stakingTopWallets,
   totalInfo,
 }: StakingProps): JSX.Element => {
   const averageweeklytxcounttxvolumeanduniqueusersNames =
@@ -357,6 +387,17 @@ according section defined in above, i prepare some of static about these topics.
             lineDataKey="FAKEFIELD"
             hideLine
             xAxisDataKey="Day"
+          />
+          <HeaderSection title="Top stakers" />
+          <TableBox
+            customHeaderColor={colors[2]}
+            queryLink={stakingTopWallets.key}
+            title={stakingTopWallets.title}
+            baseSpan={3}
+            tablePageSize={10}
+            modalInfo={``}
+            data={stakingTopWallets.data}
+            columnsDef={colDef}
           />
         </SimpleGrid>
       </Box>
