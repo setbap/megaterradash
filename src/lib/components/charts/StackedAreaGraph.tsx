@@ -136,14 +136,17 @@ const StackedAreaChart = ({
     <GridItem
       rowSpan={1}
       ref={chartRef}
-      colSpan={spanItem}
       color={textColor}
       bgColor={bgCard}
       shadow="base"
       transition={"all 0.5s "}
-      _hover={{ boxShadow: "var(--chakra-shadows-lg)" }}
+      border={"2px solid transparent"}
+      _hover={{ boxShadow: "var(--chakra-shadows-lg)", borderColor: "#444" }}
       borderRadius={"2xl"}
       width="100%"
+      colSpan={spanItem}
+      minHeight="auto"
+      display="flex"
       flex={2}
       flexDir={
         spanItem["2xl"] !== 3 || infoSizePercentage === "full"
@@ -156,9 +159,11 @@ const StackedAreaChart = ({
         infoSizePercentage={infoSizePercentage}
         largeSpanSize={baseSpan}
       />
+
       <Box
         flex={1}
-        px="4"
+        pe="4"
+        ps="2"
         pt="4"
         pb={"2"}
         _hover={{ boxShadow: `0px 0px 4px ${bgTooltip}` }}

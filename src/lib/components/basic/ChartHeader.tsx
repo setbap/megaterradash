@@ -30,7 +30,7 @@ export default function ChartHeader({
         </chakra.h6>
         {disclaimer && <chakra.sub>{disclaimer}</chakra.sub>}
       </Box>
-      <Box w={"4"}>
+      <Box me="4" pb="2" w={"4"}>
         <Menu closeOnSelect={false}>
           <MenuButton
             data-html2canvas-ignore

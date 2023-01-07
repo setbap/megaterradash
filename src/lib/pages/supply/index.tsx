@@ -156,7 +156,10 @@ according section defined in above, i prepare some of static about these topics.
             oxLabel={""}
             oyLabel={"$Terra"}
             values={vestingSchedul}
-            modalInfo={""}
+            modalInfo={
+              "Source : [Terra Announcement](https://agora.terra.money/t/terra-ecosystem-revival-plan-2-passed-gov/18498) and implementation inspired from [Anton Yip | Terra Dashboard](https://github.com/antonyip/terra-dashboard) "
+            }
+            infoSizePercentage="full"
             baseSpan={3}
             labels={[
               { key: "Community Pool", color: colors[0] },
