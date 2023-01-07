@@ -37,7 +37,6 @@ const Staking = ({
   weeklytxcounttxvolumeanduniqueusers,
   distributionOfStakingRewards,
   stakingrewards,
-  top100Richlist,
 
   totalInfo,
 }: StakingProps): JSX.Element => {
@@ -222,24 +221,6 @@ review top information or actor or validators in Terra
             title={top10validatorbasedontotalnumberofdelegatetothem.title}
             nameKey="Validator name"
             dataKey="Volume"
-          />
-
-          <BarGraph
-            isNotDate
-            values={top100Richlist.data}
-            queryLink={top100Richlist.key}
-            modalInfo=""
-            title={top100Richlist.title}
-            baseSpan={3}
-            dataKey="Wallet"
-            oyLabel="$Luna"
-            oxLabel=""
-            labels={[
-              {
-                key: "Balance",
-                color: colors[0],
-              },
-            ]}
           />
 
           <BarGraph

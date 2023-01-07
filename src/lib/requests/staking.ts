@@ -11,8 +11,7 @@ import {
   Weeklytxcounttxvolumeanduniqueusers,
   DistributionOfStakingRewards,
   Stakingrewards,
-  Top100Richlist,
-  BridgeTransactions,
+
 } from "lib/types/types/staking";
 import {
   getSimpleArrayData,
@@ -127,13 +126,6 @@ export const getDistributionOfStakingRewards = () =>
     "ac813125-c5f2-4dac-83c6-f3f704eef44d",
     "Distribution of staking rewards",
     "Count"
-  );
-
-export const getTop100Richlist = () =>
-  getSimpleArrayData<Top100Richlist, Top100Richlist>(
-    "d5e35fae-75a5-4008-8a7b-3c076ce0eaff",
-    "Top 100 LUNA holders",
-    "Balance"
   );
 
 export const getTotalInfo = async () => {

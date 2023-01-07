@@ -9,7 +9,6 @@ import {
   getWeeklytop10validatorbasedonvolumeofdelegatetothem,
   getAverageweeklytxcounttxvolumeanduniqueusers,
   getWeeklytxcounttxvolumeanduniqueusers,
-  getTop100Richlist,
   getDistributionOfStakingRewards,
   getStakingrewards,
   getTotalInfo,
@@ -28,7 +27,6 @@ export async function getStaticProps() {
     weeklytxcounttxvolumeanduniqueusers,
     stakingrewards,
     distributionOfStakingRewards,
-    top100Richlist,
     totalInfo,
   ] = await Promise.all([
     getTop30ValidatorBasedOnCurrentBalance(),
@@ -42,7 +40,6 @@ export async function getStaticProps() {
     getWeeklytxcounttxvolumeanduniqueusers(),
     getStakingrewards(),
     getDistributionOfStakingRewards(),
-    getTop100Richlist(),
     getTotalInfo(),
   ]);
   return {
@@ -58,7 +55,6 @@ export async function getStaticProps() {
       weeklytxcounttxvolumeanduniqueusers,
       stakingrewards,
       distributionOfStakingRewards,
-      top100Richlist,
       totalInfo,
     },
     revalidate: 10 * 60,
