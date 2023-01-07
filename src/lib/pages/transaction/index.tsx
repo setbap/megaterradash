@@ -223,7 +223,7 @@ according section defined in above, i prepare some of static about these topics.
             data={transactionsTXInfo.data}
             queryLink={transactionsTXInfo.key}
             title={transactionsTXInfoNames[3]}
-            baseSpan={3}
+            baseSpan={2}
             customColor={colors[0]}
             barColor={colors[2]}
             xAxisDataKey="Day"
@@ -235,7 +235,7 @@ according section defined in above, i prepare some of static about these topics.
             data={transactionsTXInfo.data}
             queryLink={transactionsTXInfo.key}
             title={transactionsTXInfoNames[4]}
-            baseSpan={3}
+            baseSpan={1}
             customColor={colors[0]}
             xAxisDataKey="Day"
             areaDataKey="Cum tx count"
@@ -269,7 +269,7 @@ according section defined in above, i prepare some of static about these topics.
           <LineChartWithBar
             data={transactionsFee.data}
             queryLink={transactionsFee.key}
-            title={transactionsFeeNames[0]}
+            title={transactionsFeeNames[1]}
             baseSpan={3}
             customColor={colors[0]}
             barColor={colors[2]}
