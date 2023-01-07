@@ -154,7 +154,7 @@ according section defined in above, i prepare some of static about these topics.
             title={"Terra Vesting Schedule"}
             dataKey={"dates"}
             oxLabel={""}
-            oyLabel={""}
+            oyLabel={"$Terra"}
             values={vestingSchedul}
             modalInfo={""}
             baseSpan={3}

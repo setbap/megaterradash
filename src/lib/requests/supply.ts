@@ -20,7 +20,7 @@ export const getVestingSchedule = (): SupplyVestingSchadule[] => [{ dates: '2022
   "Community Pool": data.communityPool,
   "Pre Lunc": data.preLunc,
   "Pre Aust": data.preAust,
-  "PostLunc": data.postLunc,
+  "Post Lunc": data.postLunc,
   "Post Aust": data.postAust,
   "Dev": data.dev,
 }))

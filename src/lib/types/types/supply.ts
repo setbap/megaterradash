@@ -17,7 +17,7 @@ export interface SupplyVestingSchadule {
   "Community Pool": number;
   "Pre Lunc": number;
   "Pre Aust": number;
-  "PostLunc": number;
+  "Post Lunc": number;
   "Post Aust": number;
   "Dev": number;
 } 
