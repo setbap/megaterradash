@@ -39,6 +39,7 @@ const StackedAreaChart = ({
   labels,
   modalInfo,
   isNotDate = false,
+  isSeprate = false,
   monthlyValues,
   extraInfoToTooltip,
   defualtTime = "day",
@@ -55,6 +56,7 @@ const StackedAreaChart = ({
   monthlyValues?: any[];
   values: any[];
   modalInfo: string;
+  isSeprate?: boolean;
   baseSpan?: number;
   queryLink?: string;
   extraInfoToTooltip?: string;
@@ -301,7 +303,7 @@ const StackedAreaChart = ({
                 dataKey={label.key}
                 fill={label.color}
                 stroke={label.color}
-                stackId={index}
+                stackId={isSeprate ? index : dataKey}
                 hide={barProps[label.key] === true}
                 fillOpacity={Number(
                   barProps.hover === label.key || !barProps.hover ? 0.3 : 0.1

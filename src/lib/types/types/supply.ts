@@ -10,3 +10,14 @@ export interface SupplySingleNumber {
   "Circulating Supply": number;
   "Ratio of Circulation Supply from Total Supply (%)": number;
 }
+
+
+export interface SupplyVestingSchadule {
+  dates: string;
+  "Community Pool": number;
+  "Pre Lunc": number;
+  "Pre Aust": number;
+  "PostLunc": number;
+  "Post Aust": number;
+  "Dev": number;
+} 

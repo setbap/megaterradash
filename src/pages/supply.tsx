@@ -1,15 +1,21 @@
 import Supply from "lib/pages/supply";
-import { getSupplyInfo, getTop100Richlist } from "lib/requests/supply";
+import {
+  getSupplyInfo,
+  getTop100Richlist,
+  getVestingSchedule,
+} from "lib/requests/supply";
 
 export async function getStaticProps() {
-  const [top100Richlist, supplyInfo] = await Promise.all([
+  const [top100Richlist, supplyInfo, vestingSchedul] = await Promise.all([
     getTop100Richlist(),
     getSupplyInfo(),
+    getVestingSchedule(),
   ]);
   return {
     props: {
       top100Richlist,
       supplyInfo,
+      vestingSchedul,
     },
     revalidate: 10 * 60,
   };

@@ -1,4 +1,4 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
+import { Box, color, SimpleGrid } from "@chakra-ui/react";
 import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
@@ -10,6 +10,7 @@ import millify from "millify";
 import { Top100Richlist } from "lib/types/types/supply";
 import { ColumnDef } from "@tanstack/react-table";
 import TableBox from "lib/components/charts/TableBox";
+import StackedAreaChart from "lib/components/charts/StackedAreaGraph";
 
 const colors = [
   "#ff5722",
@@ -46,7 +47,11 @@ const colDef: ColumnDef<Top100Richlist>[] = [
   },
 ];
 
-const Staking = ({ top100Richlist, supplyInfo }: SupplyProps): JSX.Element => {
+const Staking = ({
+  top100Richlist,
+  supplyInfo,
+  vestingSchedul,
+}: SupplyProps): JSX.Element => {
   const supplyInfoNames = supplyInfo.title.split(",");
   return (
     <>
@@ -144,6 +149,23 @@ according section defined in above, i prepare some of static about these topics.
             modalInfo={``}
             data={top100Richlist.data}
             columnsDef={colDef}
+          />
+          <StackedAreaChart
+            title={"Terra Vesting Schedule"}
+            dataKey={"dates"}
+            oxLabel={""}
+            oyLabel={""}
+            values={vestingSchedul}
+            modalInfo={""}
+            baseSpan={3}
+            labels={[
+              { key: "Community Pool", color: colors[0] },
+              { key: "Pre Aust", color: colors[1] },
+              { key: "Pre Lunc", color: colors[2] },
+              { key: "Post Lunc", color: colors[3] },
+              { key: "Post Aust", color: colors[4] },
+              { key: "Dev", color: colors[5] },
+            ]}
           />
         </SimpleGrid>
       </Box>
