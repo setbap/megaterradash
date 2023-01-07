@@ -5,6 +5,7 @@ import {
   TransactionsTodayInfo,
   TransactionsTotalInfo,
   TransactionsTPS,
+  TransactionsTXInfo,
 } from "lib/types/types/transaction";
 import { getSimpleArrayData, getSimpleInfo } from "./utils";
 
@@ -47,12 +48,12 @@ export const getTransactionsBlockAge = () =>
     "Day"
   );
 
-// export const getTransactionsTXInfo = () =>
-//   getSimpleArrayData<TransactionsTXInfo, TransactionsTXInfo>(
-//     "29370a1d-f3f2-4c53-b34a-bcfaff888569",
-//     " , ,Weekly number of active wallets,Weekly number of transactions,Cumulative number of transaction,Weekly transaction success rate",
-//     "Day"
-//   );
+export const getTransactionsTXInfo = () =>
+  getSimpleArrayData<TransactionsTXInfo, TransactionsTXInfo>(
+    "29370a1d-f3f2-4c53-b34a-bcfaff888569",
+    " , ,Weekly number of active wallets,Weekly number of transactions,Cumulative number of transaction,Weekly transaction success rate",
+    "Day"
+  );
 
 // export const getTransactionsNewWallet = () =>
 //   getSimpleArrayData<TransactionsNewWallet, TransactionsNewWallet>(
