@@ -1,10 +1,11 @@
-import names from "lib/utility/names";
-import LineChartWithBar from "lib/components/charts/LineChartWithBar";
-import HeaderSection from "lib/components/basic/HeaderSection";
 import { Box, SimpleGrid } from "@chakra-ui/react";
+import ChartBox from "lib/components/charts/LineChart";
 import { StatsCard } from "lib/components/charts/StateCard";
+import names from "lib/utility/names";
 import { NextSeo } from "next-seo";
 import { TransactionsProps } from "pages/index";
+import LineChartWithBar from "lib/components/charts/LineChartWithBar";
+import HeaderSection from "lib/components/basic/HeaderSection";
 
 const colors = [
   "#ff5722",
@@ -26,6 +27,8 @@ const Governance = ({
   transactionsTotalInfo,
   transactionsTPS,
   transactionsBlockAge,
+  transactionsTXInfo,
+
   transactionsTodayInfo,
   transactionsFee,
 }: TransactionsProps): JSX.Element => {
@@ -33,17 +36,18 @@ const Governance = ({
   const transactionsTotalInfoNames = transactionsTotalInfo.title.split(",");
   const transactionsTPSNames = transactionsTPS.title.split(",");
   const transactionsBlockAgeNames = transactionsBlockAge.title.split(",");
+  const transactionsTXInfoNames = transactionsTXInfo.title.split(",");
   const transactionsTodayInfoNames = transactionsTodayInfo.title.split(",");
   const transactionsFeeNames = transactionsFee.title.split(",");
 
   return (
     <>
       <NextSeo
-        title={`Terra | Transactions`}
+        title={`Osmosis | Transactions`}
         description={`Track the latest stats and trends on ${names.BLOCKCHAIN}`}
         openGraph={{
           url: `https://${names.SITE_URL}/`,
-          title: `Terra  | Transactions`,
+          title: `Osmosis  | Transactions`,
           description: `Track the latest stats and trends on ${names.BLOCKCHAIN}`,
           images: [
             {
@@ -59,10 +63,11 @@ const Governance = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <HeaderSection title="Terra Transaction">
+        <HeaderSection title="Osmosis Transaction">
           {`
 The following topics are shown on this page:
 * __Transactions__ : Number of transactions made on a blockchain.
+* __Success Rate__ : The ratio of successful to unsuccessful transactions in a blockchain. That is, the number of successful transactions divided by the total number of transactions multiplied by 100.
 * __Fee__ : A transaction fee is a small fee that is charged when a transaction is made. This fee is used to reward miners or validators who help confirm the transaction and secure the network. Total fee is the total USD spent during a certain period. Transaction fee is the average USD spent to made a transaction.
 * __Transactions Per Second (TPS)__ : Using this metric, we can determine how quickly a blockchain network processes transactions. Count the number of transactions per second.
 * __Block time__ : Block time is the average time it takes for a new block of transactions to be added to a blockchain. So we measure the time (in sec) between two consecutive blocks.
@@ -72,6 +77,7 @@ The following topics are shown on this page:
 
         <HeaderSection title="Glance">
           {`
+
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
         </HeaderSection>
@@ -87,7 +93,6 @@ according section defined in above, i prepare some of static about these topics.
             hasArrowIcon={false}
             link={transactionsTotalInfo.key}
           />
-
           <StatsCard
             stat={transactionsTotalInfo.data.fee}
             title={transactionsTotalInfoNames[0]}
@@ -213,6 +218,42 @@ according section defined in above, i prepare some of static about these topics.
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
+          <HeaderSection title="Transactions" />
+          <LineChartWithBar
+            data={transactionsTXInfo.data}
+            queryLink={transactionsTXInfo.key}
+            title={transactionsTXInfoNames[3]}
+            baseSpan={3}
+            customColor={colors[0]}
+            barColor={colors[2]}
+            xAxisDataKey="Day"
+            barDataKey={"tx count"}
+            lineDataKey="AVG tx count"
+            additionalLineKey={["MA7 tx count"]}
+          />
+          <ChartBox
+            data={transactionsTXInfo.data}
+            queryLink={transactionsTXInfo.key}
+            title={transactionsTXInfoNames[4]}
+            baseSpan={3}
+            customColor={colors[0]}
+            xAxisDataKey="Day"
+            areaDataKey="Cum tx count"
+          />
+
+          <HeaderSection title="Success Rate" />
+          <LineChartWithBar
+            data={transactionsTXInfo.data}
+            queryLink={transactionsTXInfo.key}
+            title={transactionsTXInfoNames[5]}
+            baseSpan={3}
+            customColor={colors[0]}
+            barColor={colors[2]}
+            xAxisDataKey="Day"
+            barDataKey={"Success Rate"}
+            lineDataKey="AVG Success Rate"
+          />
+
           <HeaderSection title="Fee" />
           <LineChartWithBar
             data={transactionsFee.data}

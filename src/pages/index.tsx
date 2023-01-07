@@ -6,6 +6,7 @@ import {
   getTransactionsTodayInfo,
   getTransactionsTotalInfo,
   getTransactionsTPS,
+  getTransactionsTXInfo,
 } from "lib/requests/transaction";
 import { ReturnDataType } from "lib/types/base";
 import {
@@ -24,7 +25,7 @@ export async function getStaticProps() {
     transactionsTotalInfo,
     transactionsTPS,
     transactionsBlockAge,
-
+    transactionsTXInfo,
     transactionsTodayInfo,
     transactionsFee,
   ] = await Promise.all([
@@ -32,6 +33,7 @@ export async function getStaticProps() {
     getTransactionsTotalInfo(),
     getTransactionsTPS(),
     getTransactionsBlockAge(),
+    getTransactionsTXInfo(),
     getTransactionsTodayInfo(),
     getTransactionsFee(),
   ]);
@@ -41,6 +43,7 @@ export async function getStaticProps() {
       transactionsTotalInfo,
       transactionsTPS,
       transactionsBlockAge,
+      transactionsTXInfo,
       transactionsTodayInfo,
       transactionsFee,
     },
