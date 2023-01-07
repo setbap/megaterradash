@@ -1,24 +1,11 @@
 import Development from "lib/pages/development";
 import {
-  getDevelopmentAXLUSDCestination,
-  getDevelopmentAXLUSDTestination,
   getDevelopmentMostUniqueUser,
   getDevelopmentMostUsedContracts,
-  getDevelopmentStablecoinsDestination,
   getDevelopmentTotalNumberOfContracts,
   getDevelopmentWeeklyActiveContract,
-  getDevelopmentWeeklyInflowTransaction,
   getDevelopmentWeeklyNewContracts,
-  getDevelopmentWeeklyOutflowTransaction,
 } from "lib/requests/development";
-import { ReturnDataType } from "lib/types/base";
-import {
-  DevelopmentAXLUSDDestination,
-  DevelopmentMostUniqueUser,
-  DevelopmentMostUsedContracts,
-  DevelopmentWeeklyActiveContract,
-  DevelopmentWeeklyNewContract,
-} from "lib/types/types/development";
 
 export async function getStaticProps() {
   const [
@@ -27,22 +14,12 @@ export async function getStaticProps() {
     developmentWeeklyNewContracts,
     developmentTotalNumberOfContracts,
     developmentMostUniqueUser,
-    developmentWeeklyInflowTransaction,
-    developmentWeeklyOutflowTransaction,
-    developmentAXLUSDCestination,
-    developmentAXLUSDTestination,
-    developmentStablecoinsDestination,
   ] = await Promise.all([
     getDevelopmentWeeklyActiveContract(),
     getDevelopmentMostUsedContracts(),
     getDevelopmentWeeklyNewContracts(),
     getDevelopmentTotalNumberOfContracts(),
     getDevelopmentMostUniqueUser(),
-    getDevelopmentWeeklyInflowTransaction(),
-    getDevelopmentWeeklyOutflowTransaction(),
-    getDevelopmentAXLUSDTestination(),
-    getDevelopmentAXLUSDCestination(),
-    getDevelopmentStablecoinsDestination(),
   ]);
 
   return {
@@ -52,29 +29,14 @@ export async function getStaticProps() {
       developmentWeeklyNewContracts,
       developmentTotalNumberOfContracts,
       developmentMostUniqueUser,
-      developmentWeeklyInflowTransaction,
-      developmentWeeklyOutflowTransaction,
-      developmentAXLUSDCestination,
-      developmentAXLUSDTestination,
-      developmentStablecoinsDestination,
     },
     revalidate: 10 * 60,
   };
 }
 
-export interface DevelopmentProps {
-  developmentWeeklyActiveContract: ReturnDataType<
-    DevelopmentWeeklyActiveContract[]
-  >;
-  developmentMostUsedContracts: ReturnDataType<DevelopmentMostUsedContracts[]>;
-  developmentWeeklyNewContracts: ReturnDataType<DevelopmentWeeklyNewContract[]>;
-  developmentTotalNumberOfContracts: ReturnDataType<unknown>;
-  developmentMostUniqueUser: ReturnDataType<DevelopmentMostUniqueUser[]>;
-  developmentWeeklyInflowTransaction: ReturnDataType<any>;
-  developmentWeeklyOutflowTransaction: ReturnDataType<any>;
-  developmentAXLUSDCestination: ReturnDataType<DevelopmentAXLUSDDestination[]>;
-  developmentAXLUSDTestination: ReturnDataType<DevelopmentAXLUSDDestination[]>;
-  developmentStablecoinsDestination: ReturnDataType<any>;
-}
+export type DevelopmentProps = Pick<
+  Awaited<ReturnType<typeof getStaticProps>>,
+  "props"
+>["props"];
 
 export default Development;

@@ -9,6 +9,10 @@ import DonutChart from "lib/components/charts/DonutChart";
 import StackedAreaChart from "lib/components/charts/StackedAreaGraph";
 import { StateCardRemoteData } from "lib/components/charts/StateCardRemoteData";
 import HeaderSection from "lib/components/basic/HeaderSection";
+import TableBox from "lib/components/charts/TableBox";
+import { StakingTopStakers } from "lib/types/types/staking";
+import { ColumnDef } from "@tanstack/react-table";
+import millify from "millify";
 
 const colors = [
   "#ff5722",
@@ -25,6 +29,32 @@ const colors = [
   "#607d8b",
 ];
 
+const colDef: ColumnDef<StakingTopStakers>[] = [
+  {
+    accessorFn: (row) => row.Staker,
+    enableSorting: false,
+    id: "Staker",
+    cell: (info) => info.getValue(),
+    header: () => <span>Staker</span>,
+  },
+  {
+    accessorFn: (row) => row["Staked Balance"],
+    id: "Staked Balance",
+    cell: (info) =>
+      millify(info.getValue() as number, {
+        precision: 2,
+        decimalSeparator: ".",
+      }),
+    header: () => <span>Staked Balance</span>,
+  },
+  {
+    accessorFn: (row) => row["Staking validators"],
+    id: "Staking validators",
+    cell: (info) => info.getValue(),
+    header: (props) => <span>{props.header.id}</span>,
+  },
+];
+
 const Staking = ({
   top30ValidatorBasedOnCurrentBalance,
   top10validatorbasedontotalvolumeofdelegatetothem,
@@ -37,8 +67,7 @@ const Staking = ({
   weeklytxcounttxvolumeanduniqueusers,
   distributionOfStakingRewards,
   stakingrewards,
-  top100Richlist,
-  bridgeTransactions,
+  stakingTopWallets,
   totalInfo,
 }: StakingProps): JSX.Element => {
   const averageweeklytxcounttxvolumeanduniqueusersNames =
@@ -46,7 +75,6 @@ const Staking = ({
 
   const weeklytxcounttxvolumeanduniqueusersNames =
     weeklytxcounttxvolumeanduniqueusers.title.split(",");
-  const bridgeTransactionsNames = bridgeTransactions.title.split(",");
 
   return (
     <>
@@ -74,7 +102,7 @@ const Staking = ({
         <HeaderSection title="Terra Staking ">
           {`
 in this page we review all information all about staking in Terra. after Terra fall and brith of Terra(2) most of Terra's Airdroped to old user and this airdropd token 
-divided in 4 part and just 1/4 of that availble for user and remaining staked and distributed according schadule
+divided in 4 part and just 1/4 of that available for user and remaining staked and distributed according schadule
 
 `}
         </HeaderSection>
@@ -112,30 +140,12 @@ according section defined in above, i prepare some of static about these topics.
             title={"Inflation Rate"}
             getStat={(data) => data.inflation}
           />
-
-          <StateCardRemoteData
-            url="https://node-api.flipsidecrypto.com/api/v2/queries/97433b80-49d0-45d6-8e2a-b1a23adb06cb/data/latest"
-            link="https://app.flipsidecrypto.com/velocity/queries/97433b80-49d0-45d6-8e2a-b1a23adb06cb"
-            status="unchanged"
-            title={"Circulate supply"}
-            getStat={(data) => data[0]["Total supply"]}
-          />
         </SimpleGrid>
         <SimpleGrid
           my={"6"}
           columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
           spacing={{ base: 5, lg: 8 }}
         >
-          <StatsCard
-            stat={totalInfo.data.supplyTotal}
-            title={"Total Supply"}
-            status="inc"
-            unit=""
-            isExternalLink
-            hasArrowIcon={false}
-            link={totalInfo.key}
-          />
-
           <StatsCard
             stat={totalInfo.data.bonded}
             title={"Staked Amount"}
@@ -189,11 +199,73 @@ according section defined in above, i prepare some of static about these topics.
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
-          <HeaderSection title="Tops ">
-            {`
-review top information or actor or validators in Terra
-`}
-          </HeaderSection>
+          <HeaderSection title="Staking Over time" />
+
+          {[
+            ["tXCount", 4],
+            ["volume", 1],
+            ["uniqueWallet", 2],
+            ["cumTXCount", 3],
+            ["cumVolume", 0],
+          ].map(([item, type], index) => (
+            <StackedAreaChart
+              key={item}
+              values={weeklytxcounttxvolumeanduniqueusers.data[item]}
+              queryLink={weeklytxcounttxvolumeanduniqueusers.key}
+              modalInfo=""
+              title={weeklytxcounttxvolumeanduniqueusersNames[type]}
+              baseSpan={1}
+              dataKey="Name"
+              oyLabel="$Luna"
+              oxLabel="Action"
+              labels={weeklytxcounttxvolumeanduniqueusers.data.actions.map(
+                (item: string, index: number) => ({
+                  key: item,
+                  color: colors[index % colors.length],
+                })
+              )}
+            />
+          ))}
+
+          <HeaderSection title="Daily average" />
+          {[
+            ["AVG tx count", 1],
+            ["AVG volume", 3],
+            ["AVG unique wallet", 2],
+            ["AVG TX volume", 0],
+          ].map(([item, type], index) => (
+            <BarGraph
+              key={item}
+              values={averageweeklytxcounttxvolumeanduniqueusers.data}
+              queryLink={averageweeklytxcounttxvolumeanduniqueusers.key}
+              modalInfo=""
+              isNotDate
+              title={
+                averageweeklytxcounttxvolumeanduniqueusersNames[type as number]
+              }
+              baseSpan={1}
+              dataKey="Actions"
+              oyLabel="$Luna"
+              oxLabel="Action"
+              labels={[
+                {
+                  key: item as string,
+                  color: colors[index],
+                },
+              ]}
+            />
+          ))}
+
+          <HeaderSection title="Top Validators" />
+          <DonutChart
+            queryLink={top10validatorbasedontotalnumberofdelegatetothem.key}
+            data={top10validatorbasedontotalnumberofdelegatetothem.data}
+            modalInfo=""
+            baseSpan={1}
+            title={top10validatorbasedontotalnumberofdelegatetothem.title}
+            nameKey="Validator name"
+            dataKey="Volume"
+          />
 
           <DonutChart
             queryLink={top10validatorbasedontotalvolumeofdelegatetothem.key}
@@ -215,53 +287,7 @@ review top information or actor or validators in Terra
             dataKey="Volume"
           />
 
-          <DonutChart
-            queryLink={top10validatorbasedontotalnumberofdelegatetothem.key}
-            data={top10validatorbasedontotalnumberofdelegatetothem.data}
-            modalInfo=""
-            baseSpan={1}
-            title={top10validatorbasedontotalnumberofdelegatetothem.title}
-            nameKey="Validator name"
-            dataKey="Volume"
-          />
-
-          <BarGraph
-            isNotDate
-            values={top100Richlist.data}
-            queryLink={top100Richlist.key}
-            modalInfo=""
-            title={top100Richlist.title}
-            baseSpan={3}
-            dataKey="Wallet"
-            oyLabel="$Luna"
-            oxLabel=""
-            labels={[
-              {
-                key: "Balance",
-                color: colors[0],
-              },
-            ]}
-          />
-
-          <BarGraph
-            isNotDate
-            values={top30ValidatorBasedOnCurrentBalance.data}
-            queryLink={top30ValidatorBasedOnCurrentBalance.key}
-            modalInfo="show data of top 30 validators in Terra and Amount Delegate Luna"
-            title={top30ValidatorBasedOnCurrentBalance.title}
-            baseSpan={3}
-            dataKey="Validators"
-            oyLabel="Current delegate amount"
-            oxLabel="Validator Name"
-            infoSizePercentage={25}
-            labels={[
-              {
-                key: "Current delegate amount",
-                color: colors[0],
-              },
-            ]}
-          />
-
+          <HeaderSection title="Weekly top 10 validators" />
           <BarGraph
             values={weeklytop10validatorbasedonnumberofdelegatetothem.data.info}
             queryLink={weeklytop10validatorbasedonnumberofdelegatetothem.key}
@@ -273,6 +299,24 @@ review top information or actor or validators in Terra
             oxLabel="Day"
             hideLegend
             labels={weeklytop10validatorbasedonnumberofdelegatetothem.data.actions.map(
+              (item: string, index: number) => ({
+                key: item,
+                color: colors[index % colors.length],
+              })
+            )}
+          />
+
+          <BarGraph
+            values={weeklytop10validatorbasedonvolumeofdelegatetothem.data.info}
+            queryLink={weeklytop10validatorbasedonvolumeofdelegatetothem.key}
+            modalInfo=""
+            title={weeklytop10validatorbasedonvolumeofdelegatetothem.title}
+            baseSpan={3}
+            dataKey="Name"
+            oyLabel="Current delegate Count"
+            hideLegend
+            oxLabel="Day"
+            labels={weeklytop10validatorbasedonvolumeofdelegatetothem.data.actions.map(
               (item: string, index: number) => ({
                 key: item,
                 color: colors[index % colors.length],
@@ -300,162 +344,42 @@ review top information or actor or validators in Terra
             )}
           />
 
+          <HeaderSection title="Top validators based on current power" />
           <BarGraph
-            values={weeklytop10validatorbasedonvolumeofdelegatetothem.data.info}
-            queryLink={weeklytop10validatorbasedonvolumeofdelegatetothem.key}
-            modalInfo=""
-            title={weeklytop10validatorbasedonvolumeofdelegatetothem.title}
+            isNotDate
+            values={top30ValidatorBasedOnCurrentBalance.data}
+            queryLink={top30ValidatorBasedOnCurrentBalance.key}
+            modalInfo="show data of top 30 validators in Terra and Amount Delegate Luna"
+            title={top30ValidatorBasedOnCurrentBalance.title}
             baseSpan={3}
-            dataKey="Name"
-            oyLabel="Current delegate Count"
-            hideLegend
-            oxLabel="Day"
-            labels={weeklytop10validatorbasedonvolumeofdelegatetothem.data.actions.map(
-              (item: string, index: number) => ({
-                key: item,
-                color: colors[index % colors.length],
-              })
-            )}
-          />
-
-          <HeaderSection title="IBC Transfer and Bridge Inforamtion" />
-
-          <DonutChart
-            queryLink={bridgeTransactions.key}
-            data={bridgeTransactions.data.valueChain}
-            modalInfo=""
-            baseSpan={2}
-            title={bridgeTransactionsNames[0]}
-            nameKey="Destination chain"
-            dataKey="Volume"
-          />
-
-          <DonutChart
-            queryLink={bridgeTransactions.key}
-            data={bridgeTransactions.data.txChain}
-            modalInfo=""
-            baseSpan={1}
-            title={bridgeTransactionsNames[1]}
-            nameKey="Destination chain"
-            dataKey="tx count"
-          />
-
-          <BarGraph
-            values={bridgeTransactions.data.dailyValueChain}
-            queryLink={bridgeTransactions.key}
-            modalInfo=""
-            title={bridgeTransactionsNames[2]}
-            baseSpan={3}
-            dataKey="Day"
-            oyLabel="$Luna"
-            oxLabel=""
+            dataKey="Validators"
+            oyLabel="Current delegate amount"
+            oxLabel="Validator Name"
+            infoSizePercentage={"full"}
             labels={[
               {
-                key: "Volume",
+                key: "Current delegate amount",
                 color: colors[0],
               },
             ]}
           />
-          <LineChartWithBar
-            data={bridgeTransactions.data.dailyTXAndUnique}
-            queryLink={bridgeTransactions.key}
-            title={bridgeTransactionsNames[3]}
-            baseSpan={3}
-            customColor={colors[3]}
-            barColor={colors[3]}
-            hideLine
-            xAxisDataKey="Day"
-            barDataKey={"tx count"}
-            additionalLineKey={["Unique wallet"]}
-            lineDataKey="fake"
-          />
-
-          {[
-            { name: "outflowEachChainTxCount", label: "TX count" },
-            { name: "outflowEachChainVolume", label: "$Luna" },
-          ].map((item, index) => (
-            <StackedAreaChart
-              key={item.name}
-              values={bridgeTransactions.data[item.name]}
-              queryLink={bridgeTransactions.key}
-              modalInfo=""
-              title={bridgeTransactionsNames[4 + index]}
-              baseSpan={3}
-              dataKey="Name"
-              oyLabel={item.label}
-              oxLabel="Action"
-              labels={bridgeTransactions.data.chains.map(
-                (item: string, index: number) => ({
-                  key: item,
-                  color: colors[index % colors.length],
-                })
-              )}
-            />
-          ))}
-          <HeaderSection title="Staking and Stake Transactions and Rewards" />
-
-          {[
-            "AVG TX volume",
-            "AVG tx count",
-            "AVG unique wallet",
-            "AVG volume",
-          ].map((item, index) => (
-            <BarGraph
-              key={item}
-              values={averageweeklytxcounttxvolumeanduniqueusers.data}
-              queryLink={averageweeklytxcounttxvolumeanduniqueusers.key}
-              modalInfo=""
-              isNotDate
-              title={averageweeklytxcounttxvolumeanduniqueusersNames[index]}
-              baseSpan={1}
-              dataKey="Actions"
-              oyLabel="$Luna"
-              oxLabel="Action"
-              labels={[
-                {
-                  key: item,
-                  color: colors[index],
-                },
-              ]}
-            />
-          ))}
+          <HeaderSection title="Staking rewards" />
           <DonutChart
             queryLink={distributionOfStakingRewards.key}
             data={distributionOfStakingRewards.data}
             modalInfo=""
-            baseSpan={2}
+            baseSpan={1}
             title={distributionOfStakingRewards.title}
             nameKey="category"
             dataKey="Count"
           />
-          {["cumVolume", "volume", "uniqueWallet", "cumTXCount", "tXCount"].map(
-            (item, index) => (
-              <StackedAreaChart
-                key={item}
-                values={weeklytxcounttxvolumeanduniqueusers.data[item]}
-                queryLink={weeklytxcounttxvolumeanduniqueusers.key}
-                modalInfo=""
-                title={weeklytxcounttxvolumeanduniqueusersNames[index]}
-                baseSpan={1}
-                dataKey="Name"
-                oyLabel="$Luna"
-                oxLabel="Action"
-                labels={weeklytxcounttxvolumeanduniqueusers.data.actions.map(
-                  (item: string, index: number) => ({
-                    key: item,
-                    color: colors[index % colors.length],
-                  })
-                )}
-              />
-            )
-          )}
           <LineChartWithBar
             customColor={colors[3]}
             barColor={colors[3]}
             data={stakingrewards.data}
             queryLink={stakingrewards.key}
             title={stakingrewards.title}
-            baseSpan={3}
+            baseSpan={2}
             infoSizePercentage={25}
             modelInfo={``}
             barDataKey={"Staking rewards $LUNA"}
@@ -464,12 +388,17 @@ review top information or actor or validators in Terra
             hideLine
             xAxisDataKey="Day"
           />
-
-          <HeaderSection title="Luna Vesting Schadule">
-            {`
-![luna vesting image](/lunavesting.webp)
-`}
-          </HeaderSection>
+          <HeaderSection title="Top stakers" />
+          <TableBox
+            customHeaderColor={colors[2]}
+            queryLink={stakingTopWallets.key}
+            title={stakingTopWallets.title}
+            baseSpan={3}
+            tablePageSize={10}
+            modalInfo={``}
+            data={stakingTopWallets.data}
+            columnsDef={colDef}
+          />
         </SimpleGrid>
       </Box>
     </>

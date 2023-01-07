@@ -107,8 +107,3 @@ export interface BridgeTransactions {
   Volume: number;
   "AVG volume": number;
 }
-export interface StakingTopStakers {
-  "Staker": string;
-  "Staked Balance": number;
-  "Staking validators": string;
-}

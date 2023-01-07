@@ -1,11 +1,10 @@
-import { Box, SimpleGrid } from "@chakra-ui/react";
-import ChartBox from "lib/components/charts/LineChart";
-import { StatsCard } from "lib/components/charts/StateCard";
 import names from "lib/utility/names";
-import { NextSeo } from "next-seo";
-import { TransactionsProps } from "pages";
 import LineChartWithBar from "lib/components/charts/LineChartWithBar";
 import HeaderSection from "lib/components/basic/HeaderSection";
+import { Box, SimpleGrid } from "@chakra-ui/react";
+import { StatsCard } from "lib/components/charts/StateCard";
+import { NextSeo } from "next-seo";
+import { TransactionsProps } from "pages/index";
 
 const colors = [
   "#ff5722",
@@ -23,16 +22,19 @@ const colors = [
 ];
 
 const Governance = ({
-  transactionsTxCountAndSuccess,
-  transactionsFee,
+  transactionsAVGInfo,
+  transactionsTotalInfo,
   transactionsTPS,
   transactionsBlockAge,
+  transactionsTodayInfo,
+  transactionsFee,
 }: TransactionsProps): JSX.Element => {
-  const transactionsTxCountAndSuccessNames =
-    transactionsTxCountAndSuccess.title.split(",");
-  const transactionsFeeNames = transactionsFee.title.split(",");
+  const transactionsAVGInfoNames = transactionsAVGInfo.title.split(",");
+  const transactionsTotalInfoNames = transactionsTotalInfo.title.split(",");
   const transactionsTPSNames = transactionsTPS.title.split(",");
   const transactionsBlockAgeNames = transactionsBlockAge.title.split(",");
+  const transactionsTodayInfoNames = transactionsTodayInfo.title.split(",");
+  const transactionsFeeNames = transactionsFee.title.split(",");
 
   return (
     <>
@@ -61,18 +63,15 @@ const Governance = ({
           {`
 The following topics are shown on this page:
 * __Transactions__ : Number of transactions made on a blockchain.
-* __Active Wallets__ : Number of those wallets made at least a transaction during curtain period.
-* __New Wallets__ : Number of those wallets made their first transactions.
-* __Success Rate__ : The ratio of successful to unsuccessful transactions in a blockchain. That is, the number of successful transactions divided by the total number of transactions multiplied by 100.
 * __Fee__ : A transaction fee is a small fee that is charged when a transaction is made. This fee is used to reward miners or validators who help confirm the transaction and secure the network. Total fee is the total USD spent during a certain period. Transaction fee is the average USD spent to made a transaction.
 * __Transactions Per Second (TPS)__ : Using this metric, we can determine how quickly a blockchain network processes transactions. Count the number of transactions per second.
 * __Block time__ : Block time is the average time it takes for a new block of transactions to be added to a blockchain. So we measure the time (in sec) between two consecutive blocks.
 `}
         </HeaderSection>
         <Box pt={"4"}></Box>
+
         <HeaderSection title="Glance">
           {`
-
 according section defined in above, i prepare some of static about these topics. all data came from Flipside data and with click of title of each item can see query these data in Flipside Crypto
 `}
         </HeaderSection>
@@ -82,196 +81,199 @@ according section defined in above, i prepare some of static about these topics.
           spacing={{ base: 5, lg: 8 }}
         >
           <StatsCard
-            stat={
-              transactionsTxCountAndSuccess.data.at(-1)?.["AVG success rate"]!
-            }
-            title={transactionsTxCountAndSuccessNames[0]}
+            stat={transactionsTotalInfo.data["tx count"]}
+            title={transactionsTotalInfoNames[2]}
             status="inc"
             hasArrowIcon={false}
-            link={transactionsTxCountAndSuccess.key}
-          />
-          <StatsCard
-            stat={transactionsTxCountAndSuccess.data.at(-1)?.["AVG tx count"]!}
-            title={transactionsTxCountAndSuccessNames[3]}
-            status="inc"
-            hasArrowIcon={false}
-            link={transactionsTxCountAndSuccess.key}
+            link={transactionsTotalInfo.key}
           />
 
           <StatsCard
-            stat={transactionsFee.data.at(-1)?.["AVG tx fee"]!}
-            title={transactionsFeeNames[0]}
+            stat={transactionsTotalInfo.data.fee}
+            title={transactionsTotalInfoNames[0]}
             status="inc"
             hasArrowIcon={false}
-            link={transactionsFee.key}
+            link={transactionsTotalInfo.key}
           />
 
           <StatsCard
-            stat={transactionsFee.data.at(-1)?.["AVG fee"]!}
-            title={transactionsFeeNames[2]}
+            stat={transactionsAVGInfo.data["AVG tx count"]}
+            title={transactionsAVGInfoNames[3]}
             status="inc"
             hasArrowIcon={false}
-            link={transactionsFee.key}
+            link={transactionsAVGInfo.key}
           />
 
           <StatsCard
-            stat={transactionsTPS.data.at(-1)?.["AVG TPS"]!}
-            title={transactionsTPSNames[0]}
+            stat={transactionsAVGInfo.data["AVG fee"]}
+            title={transactionsAVGInfoNames[1]}
+            status="inc"
+            hasArrowIcon={false}
+            link={transactionsAVGInfo.key}
+          />
+          <StatsCard
+            stat={transactionsAVGInfo.data["AVG success rate"]}
+            title={transactionsAVGInfoNames[4]}
+            status="inc"
+            hasArrowIcon={false}
+            link={transactionsAVGInfo.key}
+          />
+          <StatsCard
+            stat={transactionsAVGInfo.data["AVG tx fee per day"]}
+            title={transactionsAVGInfoNames[2]}
+            decimal={3}
+            status="inc"
+            hasArrowIcon={false}
+            link={transactionsAVGInfo.key}
+          />
+
+          <StatsCard
+            stat={transactionsTPS.data.at(-1)?.["AVG TPS"] ?? 6}
+            title={transactionsTPSNames[1]}
             status="inc"
             hasArrowIcon={false}
             link={transactionsTPS.key}
           />
 
           <StatsCard
-            stat={transactionsBlockAge.data.at(-1)?.["block age"]!}
-            title={transactionsBlockAgeNames[0]}
+            stat={transactionsBlockAge.data.at(-1)?.["AVG block tx"] ?? 6.7}
+            title={transactionsBlockAgeNames[3]}
             status="inc"
+            unit=""
             hasArrowIcon={false}
             link={transactionsBlockAge.key}
           />
 
           <StatsCard
-            stat={transactionsBlockAge.data.at(-1)?.["AVG block age"]!}
-            title={transactionsBlockAgeNames[2]}
+            stat={transactionsBlockAge.data.at(-1)?.["AVG block age"] ?? 1.2}
+            title={transactionsBlockAgeNames[1]}
             status="inc"
-            unit="&nbsp;Sec"
+            unit=" s"
             hasArrowIcon={false}
             link={transactionsBlockAge.key}
           />
         </SimpleGrid>
-        <HeaderSection title="Transaction Count and Status">
-          {`
-####  
-transaction status define as whether a transaction successfully done or transaction doesn't completed of failed. the reasons for failing transaction are varying from lack of gas fee and authorization problem.
-`}
-        </HeaderSection>
+
+        <HeaderSection title="24H Changes" />
+        <SimpleGrid
+          my={"6"}
+          columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
+          spacing={{ base: 5, lg: 8 }}
+        >
+          <StatsCard
+            stat={transactionsTodayInfo.data["24h Transactions"]}
+            title={transactionsTodayInfoNames[0]}
+            status={
+              transactionsTodayInfo.data["change (%) Transactions"] >= 0
+                ? "inc"
+                : "dec"
+            }
+            change={transactionsTodayInfo.data["change (%) Transactions"]}
+            changeUnit={"%"}
+            hasArrowIcon
+            link={transactionsTodayInfo.key}
+          />
+
+          <StatsCard
+            stat={transactionsTodayInfo.data["24h TX Fee"]}
+            title={transactionsTodayInfoNames[2]}
+            decimal={3}
+            status={
+              transactionsTodayInfo.data["change (%) TX Fee"] >= 0
+                ? "inc"
+                : "dec"
+            }
+            change={transactionsTodayInfo.data["change (%) TX Fee"]}
+            changeUnit={"%"}
+            hasArrowIcon
+            link={transactionsTodayInfo.key}
+          />
+
+          <StatsCard
+            stat={transactionsTodayInfo.data["24h Success Rate"]}
+            title={transactionsTodayInfoNames[3]}
+            status={
+              transactionsTodayInfo.data["change (%) Success Rate"] >= 0
+                ? "inc"
+                : "dec"
+            }
+            change={transactionsTodayInfo.data["change (%) Success Rate"]}
+            changeUnit={"%"}
+            hasArrowIcon
+            link={transactionsTodayInfo.key}
+          />
+        </SimpleGrid>
+
         <SimpleGrid
           position={"relative"}
           transition={"all 0.9s ease-in-out"}
-          py={"6"}
+          pb={"6"}
           gap={4}
           zIndex={100}
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
+          <HeaderSection title="Fee" />
           <LineChartWithBar
-            customColor={colors[1]}
-            barColor={colors[0]}
-            data={transactionsTxCountAndSuccess.data}
-            queryLink={transactionsTxCountAndSuccess.key}
-            title={transactionsTxCountAndSuccessNames[1]}
-            baseSpan={2}
-            barDataKey={"Success Rate"}
-            lineDataKey="AVG success rate"
-            xAxisDataKey="Day"
-          />
-          <ChartBox
-            data={transactionsTxCountAndSuccess.data}
-            queryLink={transactionsTxCountAndSuccess.key}
-            areaDataKey="Cum tx count"
-            xAxisDataKey="Day"
-            oyLabel="Count"
-            title={transactionsTxCountAndSuccessNames[2]}
-          />
-          <LineChartWithBar
-            customColor={colors[1]}
-            barColor={colors[0]}
-            data={transactionsTxCountAndSuccess.data}
-            queryLink={transactionsTxCountAndSuccess.key}
-            title={transactionsTxCountAndSuccessNames[1]}
-            // modelInfo="is this info"
-            baseSpan={3}
-            infoSizePercentage={25}
-            barDataKey={"tx count"}
-            lineDataKey="AVG tx count"
-            additionalLineKey={["MA7 tx count"]}
-            xAxisDataKey="Day"
-          />
-          <HeaderSection title="Transaction Fee">
-            {`
-
-one of most important problem blockchain is fee and gas that paid for transaction. amount of transaction fee is very important, some times this fee cause one user goes to another blockchains.
-`}
-          </HeaderSection>
-          <LineChartWithBar
-            customColor={colors[1]}
-            barColor={colors[0]}
             data={transactionsFee.data}
             queryLink={transactionsFee.key}
-            title={transactionsFeeNames[3]}
+            title={transactionsFeeNames[0]}
             baseSpan={3}
+            customColor={colors[0]}
+            barColor={colors[2]}
+            xAxisDataKey="Day"
+            barDataKey={"Avg tx fee"}
+            lineDataKey="AVG tx fee per day"
+          />
+          <LineChartWithBar
+            data={transactionsFee.data}
+            queryLink={transactionsFee.key}
+            title={transactionsFeeNames[0]}
+            baseSpan={3}
+            customColor={colors[0]}
+            barColor={colors[2]}
+            xAxisDataKey="Day"
             barDataKey={"fee"}
-            lineDataKey="AVG fee"
             additionalLineKey={["MA7 fee"]}
-            xAxisDataKey="Day"
-          />
-          <LineChartWithBar
-            customColor={colors[1]}
-            barColor={colors[0]}
-            data={transactionsFee.data}
-            queryLink={transactionsFee.key}
-            title={transactionsFeeNames[1]}
-            // modelInfo="is this info"
-            baseSpan={3}
-            infoSizePercentage={25}
-            barDataKey={"AVG tx fee"}
-            lineDataKey="AVG tx fee per week"
-            xAxisDataKey="Day"
+            lineDataKey="AVG fee"
           />
 
-          <HeaderSection title="Transaction Per Second (TPS)">
-            {`
-TPS shows speed of blockchain and each this number is higher the blockchain is faster. this number doesn't have relation with number or power validators and defined in protocol and network
-`}
-          </HeaderSection>
+          <HeaderSection title="Transactions Per Second (TPS)" />
           <LineChartWithBar
-            customColor={colors[1]}
-            barColor={colors[0]}
             data={transactionsTPS.data}
             queryLink={transactionsTPS.key}
-            title={transactionsTPSNames[1]}
+            title={transactionsTPSNames[0]}
             baseSpan={3}
-            infoSizePercentage={25}
+            customColor={colors[0]}
+            barColor={colors[2]}
+            xAxisDataKey="Day"
             barDataKey={"TPS"}
             lineDataKey="AVG TPS"
-            xAxisDataKey="Day"
           />
-          <HeaderSection title="Age of Blocks">
-            {`
-each block contain multiple transactions that these transaction chained together and create blockchain. like TPS, age of blocks defined by protocol and donesn't change so much
-`}
-          </HeaderSection>
+
+          <HeaderSection title="Block Time" />
           <LineChartWithBar
-            customColor={colors[1]}
-            barColor={colors[0]}
             data={transactionsBlockAge.data}
             queryLink={transactionsBlockAge.key}
-            title={transactionsBlockAgeNames[1]}
+            title={transactionsBlockAgeNames[0]}
             baseSpan={3}
+            customColor={colors[0]}
+            barColor={colors[2]}
+            xAxisDataKey="Day"
             barDataKey={"Block tx"}
-            lineDataKey="AVG block tx"
             additionalLineKey={["MA7 block tx"]}
-            xAxisDataKey="Day"
+            lineDataKey="AVG Block tx"
           />
-
           <LineChartWithBar
-            customColor={colors[1]}
-            barColor={colors[0]}
             data={transactionsBlockAge.data}
             queryLink={transactionsBlockAge.key}
-            title={transactionsBlockAgeNames[3]}
-            modelInfo={`
-blockchains like Bitcoin that working Proof of Work need solve a mathematic problem to solve and this problem maybe to much 
-time to solve and we can certainly say time that one block closed.
-
-in Proof of Work Blockchains like Terra we don't have competition for solving problem and the blockchain say witch block
-created by witch validator and so block age in these blockchains is fixed time and There is a small amount of difference, which is due to the distribution and speed of the Internet and lack of concentration
-`}
+            title={transactionsBlockAgeNames[2]}
             baseSpan={3}
-            infoSizePercentage={50}
+            customColor={colors[0]}
+            barColor={colors[2]}
+            xAxisDataKey="Day"
             barDataKey={"block age"}
             lineDataKey="AVG block age"
-            xAxisDataKey="Day"
           />
         </SimpleGrid>
       </Box>

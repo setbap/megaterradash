@@ -4,7 +4,6 @@ import {
   FormControl,
   Input,
   Popover,
-  PopoverArrow,
   PopoverCloseButton,
   PopoverContent,
   PopoverTrigger,
@@ -26,6 +25,7 @@ import {
   InputRightAddon,
   HStack,
   Td,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import FocusLock from "react-focus-lock";
 
@@ -104,8 +104,13 @@ export const ShowTable = React.memo(function TableComponent<T>({
   });
   return (
     <>
-      <TableContainer pt={"2"} pb="4" w="full">
-        <ChTable overflow={"hidden"} variant="simple">
+      <TableContainer
+        ml={"0"}
+        width={{ base: "calc(100vw - 80px)", md: "calc(100vw - 132px)" }}
+        pt={"2"}
+        pb="4"
+      >
+        <ChTable variant="simple">
           <Thead
             borderTopRadius={"sm"}
             overflow="hidden"
@@ -157,11 +162,12 @@ export const ShowTable = React.memo(function TableComponent<T>({
                   }
                   return onRowClick(row.original as T);
                 }}
-                _hover={{ bg: "#242424" }}
+                height="40px"
+                _hover={{ bg: useColorModeValue("#eee", "#282828") }}
                 key={row.id}
               >
                 {row.getVisibleCells().map((cell) => (
-                  <Td border={"none"} p="1" key={cell.id}>
+                  <Td border={"none"} key={cell.id}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Td>
                 ))}
@@ -188,9 +194,11 @@ export const ShowTable = React.memo(function TableComponent<T>({
       </TableContainer>
 
       <HStack
-        width={"full"}
+        data-html2canvas-ignore
+        flexDir={{ base: "column", md: "row" }}
+        gap={"4"}
         mt="4"
-        justifyContent={"space-between"}
+        justifyContent={"start"}
         spacing={4}
       >
         <InputGroup w={"160px"} rounded={"lg"} overflow="hidden" size="sm">
@@ -300,7 +308,7 @@ function DebouncedInput({
   }, [value]);
 
   return (
-    <FormControl>
+    <FormControl data-html2canvas-ignore>
       <FormLabel htmlFor={label}>{label}</FormLabel>
       <Input
         type={type}
@@ -319,6 +327,7 @@ const FilterContainer = ({ children }: { children: JSX.Element }) => {
   return (
     <>
       <Popover
+        data-html2canvas-ignore
         isOpen={isOpen}
         initialFocusRef={firstFieldRef}
         onOpen={onOpen}
@@ -329,16 +338,21 @@ const FilterContainer = ({ children }: { children: JSX.Element }) => {
       >
         <PopoverTrigger>
           <IconButton
+            data-html2canvas-ignore
             aria-label="open filter column"
             size="sm"
             variant={"ghost"}
             icon={<AiFillSetting />}
           />
         </PopoverTrigger>
-        <PopoverContent bg="#191919" p={3}>
+        <PopoverContent
+          data-html2canvas-ignore
+          bg={useColorModeValue("white", "#232323")}
+          p={3}
+        >
           <FocusLock returnFocus persistentFocus={false}>
             <PopoverCloseButton p={2} />
-            <Stack mt={2} spacing={3}>
+            <Stack data-html2canvas-ignore mt={2} spacing={3}>
               {children}
               <Button onClick={onClose}>Close</Button>
             </Stack>
