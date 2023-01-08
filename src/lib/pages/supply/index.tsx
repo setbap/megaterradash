@@ -101,7 +101,6 @@ according section defined in above, i prepare some of static about these topics.
             title={supplyInfoNames[0]}
             status="inc"
             unit=""
-            isExternalLink
             hasArrowIcon={false}
             link={supplyInfo.key}
           />
@@ -111,7 +110,6 @@ according section defined in above, i prepare some of static about these topics.
             title={supplyInfoNames[1]}
             status="inc"
             unit=""
-            isExternalLink
             hasArrowIcon={false}
             link={supplyInfo.key}
           />
@@ -125,7 +123,6 @@ according section defined in above, i prepare some of static about these topics.
             title={supplyInfoNames[2]}
             status="inc"
             unit="%"
-            isExternalLink
             hasArrowIcon={false}
             link={supplyInfo.key}
           />
