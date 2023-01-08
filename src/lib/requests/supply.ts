@@ -5,8 +5,7 @@ import { getSimpleArrayData, getSimpleInfo } from "./utils";
 export const getTop100Richlist = () =>
   getSimpleArrayData<Top100Richlist, Top100Richlist>(
     "d5e35fae-75a5-4008-8a7b-3c076ce0eaff",
-    "Top 100 LUNA holders",
-    "Balance"
+    "Top 100 LUNA holders"
   );
 export const getSupplyInfo = () =>
   getSimpleInfo<SupplySingleNumber>(
