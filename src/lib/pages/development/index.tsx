@@ -76,7 +76,7 @@ according section defined in above, i prepare some of static about these topics.
 `}
         </HeaderSection>
         <SimpleGrid
-          my={"6"}
+          my={"4"}
           columns={{ base: 1, md: 2, lg: 2, "2xl": 3 }}
           spacing={{ base: 5, lg: 8 }}
         >
@@ -92,50 +92,17 @@ according section defined in above, i prepare some of static about these topics.
             link={developmentTotalNumberOfContracts.key}
           />
         </SimpleGrid>
-        <HeaderSection title="Development Contracts ">
-          {`
-Development of Contracts show how much of compebility of one network is used by developers. increasing number of new smart contract show windwos of new idea in network and help growth faster 
-`}
-        </HeaderSection>
+
         <SimpleGrid
           position={"relative"}
           transition={"all 0.9s ease-in-out"}
-          py={"6"}
           gap={4}
+          pb="6"
           zIndex={100}
           columns={{ sm: 1, md: 1, lg: 2, "2xl": 3 }}
           spacing={{ base: 1, md: 2, lg: 4 }}
         >
-          <DonutChart
-            queryLink={developmentMostUsedContracts.key}
-            data={developmentMostUsedContracts.data}
-            modalInfo=""
-            baseSpan={1}
-            title={developmentMostUsedContractsNames[0]}
-            nameKey="Contract Name"
-            dataKey="Count"
-          />
-
-          <BarGraph
-            isNotDate
-            values={developmentMostUsedContracts.data}
-            queryLink={developmentMostUsedContracts.key}
-            modalInfo=""
-            title={developmentMostUsedContractsNames[1]}
-            baseSpan={2}
-            dataKey="Contract Name"
-            oyLabel=""
-            oxLabel=""
-            labels={[
-              {
-                key: "Count",
-                color: colors[0],
-              },
-            ]}
-          />
-
           <HeaderSection title="Weekly Active Contract" />
-
           <BarGraph
             values={developmentWeeklyActiveContract.data}
             queryLink={developmentWeeklyActiveContract.key}
@@ -154,7 +121,6 @@ Development of Contracts show how much of compebility of one network is used by 
           />
 
           <HeaderSection title="Weekly New Contract" />
-
           <ChartBox
             data={developmentWeeklyNewContracts.data}
             queryLink={developmentWeeklyNewContracts.key}
@@ -162,27 +128,48 @@ Development of Contracts show how much of compebility of one network is used by 
             xAxisDataKey="Day"
             oyLabel=""
             customColor={colors[2]}
+            title={developmentWeeklyNewContractsNames[1]}
+          />
+          <ChartBox
+            data={developmentWeeklyNewContracts.data}
+            queryLink={developmentWeeklyNewContracts.key}
+            areaDataKey="Cum New Contract"
+            xAxisDataKey="Day"
+            oyLabel=""
+            baseSpan={2}
+            customColor={colors[2]}
             title={developmentWeeklyNewContractsNames[0]}
           />
-          <BarGraph
-            values={developmentWeeklyNewContracts.data}
-            queryLink={developmentWeeklyNewContracts.key}
+
+          <HeaderSection title="Most used contracts" />
+          <DonutChart
+            queryLink={developmentMostUsedContracts.key}
+            data={developmentMostUsedContracts.data}
             modalInfo=""
-            title={developmentWeeklyNewContractsNames[1]}
+            baseSpan={1}
+            title={developmentMostUsedContractsNames[0]}
+            nameKey="Contract Name"
+            dataKey="Count"
+          />
+          <BarGraph
+            isNotDate
+            values={developmentMostUsedContracts.data}
+            queryLink={developmentMostUsedContracts.key}
+            modalInfo=""
+            title={developmentMostUsedContractsNames[1]}
             baseSpan={2}
-            dataKey="Day"
+            dataKey="Contract Name"
             oyLabel=""
             oxLabel=""
             labels={[
               {
-                key: "Cum New Contract",
-                color: colors[2],
+                key: "Count",
+                color: colors[0],
               },
             ]}
           />
 
           <HeaderSection title="Contract With Most Unique User" />
-
           <DonutChart
             queryLink={developmentMostUniqueUser.key}
             data={developmentMostUniqueUser.data}
@@ -200,6 +187,7 @@ Development of Contracts show how much of compebility of one network is used by 
             modalInfo=""
             title={developmentMostUniqueUserNames[0]}
             baseSpan={2}
+            hideLegend
             dataKey="Contract Name"
             oyLabel=""
             oxLabel=""

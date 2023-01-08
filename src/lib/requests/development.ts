@@ -22,7 +22,8 @@ export const getDevelopmentMostUsedContracts = () =>
     DevelopmentMostUsedContracts
   >(
     "c889da2a-01fa-496a-831a-c1eff5f22130",
-    "Share of each Contract in total transactions,Total number of contracts deployed"
+    "Share of each Contract in total transactions,Total number of transactions done by each contract",
+    'Count'
   );
 
 export const getDevelopmentTotalNumberOfContracts = () =>
@@ -52,7 +53,8 @@ export const getDevelopmentWeeklyNewContracts = () =>
 export const getDevelopmentMostUniqueUser = () =>
   getSimpleArrayData<DevelopmentMostUniqueUser, DevelopmentMostUniqueUser>(
     "a97b554c-e64f-48f7-a367-1d383f10373a",
-    "Total number of unique users interacting with each contract so far,Share of each contract in total unique users"
+    "Total number of unique users interacting with each contract,Share of each contract in total unique users",
+    'Unique user'
   );
 
 // START: development: Weekly inflow transactions
