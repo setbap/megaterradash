@@ -41,11 +41,11 @@ const Development = ({
   return (
     <>
       <NextSeo
-        title={`Terra | Development`}
+        title={`Optimism | Development`}
         description={`Track the latest stats and trends on ${names.BLOCKCHAIN}`}
         openGraph={{
           url: `https://${names.SITE_URL}/`,
-          title: `Terra  | Development`,
+          title: `Optimism  | Development`,
           description: `Track the latest stats and trends on ${names.BLOCKCHAIN}`,
           images: [
             {
@@ -61,9 +61,9 @@ const Development = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <HeaderSection title="Terra Development ">
+        <HeaderSection title="Optimism Development ">
           {`
-in this page we review all information about Terra Smart Contract Development and increase usage of different smart contract in Terra Network 
+in this page we review all information about Optimism Smart Contract Development and increase usage of different smart contract in Optimism Network 
 
 
 but before deep dive into chart i prepare some statics to see status of network at the glance.
