@@ -65,7 +65,32 @@ const Development = ({
         }}
       />
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
-        <HeaderSection title="Stablecoins" />
+        <HeaderSection title="Stablecoins">
+          {`
+
+Terra 2.0 currently supports axlUSDC and axlUSDT stablecoins. Here we are going to focus on stablecoins transactions on this network.
+
+  
+
+Now I describe each section:
+
+  
+
+- **Inflow transactions:** This section shows simple metrics include number of stablecoins transactions and users, and volume of stablecoin transactions into Terra.
+
+  
+
+- **Outflow transactions:** This section shows simple metrics include number of stablecoins transactions and users, and volume of stablecoin transactions that exit from Terra.
+
+  
+
+- **axlUSDC Destination:** This section shows the axlUSDCs that leave Terra most often go to what chains.
+
+  
+
+- **axlUSDT Destination:** This section shows the axlUSDTs that leave Terra most often go to what chains
+`}
+        </HeaderSection>
 
         <SimpleGrid
           position={"relative"}
