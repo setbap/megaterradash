@@ -255,9 +255,9 @@ according section defined in above, i prepare some of static about these topics.
           <HeaderSection title="Daily average" />
           {[
             ["AVG tx count", 1, ""],
-            ["AVG volume", 3, "$Terra"],
+            ["AVG volume", 3, "$Luna"],
             ["AVG unique wallet", 2, ""],
-            ["AVG TX volume", 0, "$Terra"],
+            ["AVG TX volume", 0, "$Luna"],
           ].map(([item, type, yLabel], index) => (
             <BarGraph
               key={item}
@@ -378,7 +378,7 @@ according section defined in above, i prepare some of static about these topics.
             title={top30ValidatorBasedOnCurrentBalance.title}
             baseSpan={3}
             dataKey="Validators"
-            oyLabel="Current delegate amount"
+            oyLabel=""
             oxLabel="Validator Name"
             infoSizePercentage={"full"}
             labels={[
