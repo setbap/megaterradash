@@ -57,10 +57,11 @@ const Governance = ({
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
         <HeaderSection title="Terra Wallet ">
           {`
-in this page we review all information users(addresses) that currently done t transaction in Terra to see what is status of Terra from user side. terra addresses reviewed from two side:
-- Active wallets
-- new wallets
-all of above information calculated as weekly timeframe.
+In this page we review all information users (addresses) that currently done t transaction in Terra to see what is status of Terra from user side. Terra addresses reviewed from two side:
+
+* **Active Wallets:** Number of those wallets made at least a transaction during curtain period.
+
+* **New Wallets:** Number of those wallets made their first transactions.
 `}
         </HeaderSection>
         <Box pt={"4"}></Box>
