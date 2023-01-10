@@ -10,3 +10,12 @@ export interface WalletsNew {
   "Cum new wallet": number;
   "AVG New wallet": number;
 }
+
+export interface WalletsNewSingleNumber {
+  "AVG New wallet": number
+}
+
+
+export interface ActiveWalletSingleNumber {
+  "AVG active wallet": number
+}

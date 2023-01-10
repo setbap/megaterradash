@@ -26,6 +26,8 @@ const colors = [
 const Governance = ({
   walletsActive,
   walletsNew,
+  activeWalletSingleNumber,
+  walletsNewSingleNumber,
 }: WalletProps): JSX.Element => {
   const walletsActiveNames = walletsActive.title.split(",");
   const walletsNewNames = walletsNew.title.split(",");
@@ -73,18 +75,18 @@ according section defined in above, i prepare some of static about these topics.
           spacing={{ base: 5, lg: 8 }}
         >
           <StatsCard
-            stat={walletsNew.data.at(-1)?.["AVG New wallet"]!}
-            title={walletsNewNames[2]}
+            stat={walletsNewSingleNumber.data["AVG New wallet"]}
+            title={walletsNewSingleNumber.title}
             status="inc"
             hasArrowIcon={false}
-            link={walletsNew.key}
+            link={walletsNewSingleNumber.key}
           />
           <StatsCard
-            stat={walletsActive.data.at(-1)?.["AVG active wallet"]!}
-            title={walletsActiveNames[0]}
+            stat={activeWalletSingleNumber.data["AVG active wallet"]}
+            title={activeWalletSingleNumber.title}
             status="inc"
             hasArrowIcon={false}
-            link={walletsActive.key}
+            link={activeWalletSingleNumber.key}
           />
         </SimpleGrid>
         <SimpleGrid

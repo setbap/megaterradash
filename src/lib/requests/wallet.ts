@@ -1,5 +1,5 @@
-import { WalletsActive, WalletsNew } from "lib/types/types/wallet";
-import { getSimpleArrayData } from "./utils";
+import { ActiveWalletSingleNumber, WalletsActive, WalletsNew, WalletsNewSingleNumber } from "lib/types/types/wallet";
+import { getSimpleArrayData, getSimpleInfo } from "./utils";
 
 export const getWalletsNew = () =>
   getSimpleArrayData<WalletsNew, WalletsNew>(
@@ -14,3 +14,6 @@ export const getWalletsActive = () =>
     "Average number of active wallets per week,Weekly number of active wallets",
     "Day"
   );
+
+export const getWalletsNewSingleNumber = () => getSimpleInfo<WalletsNewSingleNumber>("410f2174-e6b8-467e-83fe-a5e003430e1a", "Daily new wallets")
+export const getActiveWalletSingleNumber = () => getSimpleInfo<ActiveWalletSingleNumber>("80550158-3bff-40c8-83a8-841d6cda5933", "Daily active wallets")
