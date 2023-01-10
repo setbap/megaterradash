@@ -101,9 +101,34 @@ const Staking = ({
       <Box mx={"auto"} pt="4" px={{ base: 3, sm: 2, md: 8 }}>
         <HeaderSection title="Terra Staking ">
           {`
-in this page we review all information all about staking in Terra. after Terra fall and brith of Terra(2) most of Terra's Airdroped to old user and this airdropd token 
-divided in 4 part and just 1/4 of that available for user and remaining staked and distributed according schadule
 
+  
+
+Staking on Terra 2.0 is a process in which holders of LUNA tokens can lock up their tokens in order to help secure the Terra network. By locking up their tokens, stakers receive rewards in the form of additional LUNA tokens.
+
+  
+
+Unstaking $Luna tokens take a total of 21 days. During the first 14 days, the tokens are in the "unbonding" phase, where the tokens are still locked, but the user is able to see them in their wallet. After the 14 day period has elapsed, the tokens enter the "withdraw" phase, which lasts for 7 days. During this time, the user is able to withdraw their tokens from the network. Once the 7 day period has ended, the user is able to access their tokens and transfer them to other wallets or exchanges.
+
+  
+
+Now I describe each section:
+
+- **Staking Over time:**  In this section, you could see some simple metrics include number of staking transactions and stakers, volume of staking transactions, and also total $NEAR staked over time.
+
+- **Daily average:**  In this section, you can see on average, how much $LUNA was staked per day. how many staked their $LUNA per day. How many staking transactions were made per day. Only the last three months are considered.
+
+- **Top validators:**  Tried to find top validators in terms of number of transactions, number of users and volume of transactions.
+
+- **Weekly top 10 validators:**  Tried to find weekly top 10 validators in terms of number of transactions, number of users and volume of transactions.
+
+- **Top validators based on current power:**  Validator power is a measure of the amount of stake that is delegated to a validator. In this section, tried to find top validators in terms of current amount of stake they have.
+
+  
+
+- **Staking rewards:** In this section, find the staking reward transactions and their distribution of them. In addition, tried to find weekly total rewards that were distributed among users.
+
+- **Top stakers:**  This section show the most active stakers, those who staked the most amount of token. Also, I showed the validators they use.
 `}
         </HeaderSection>
         <Box pt={"4"}></Box>
@@ -202,12 +227,12 @@ according section defined in above, i prepare some of static about these topics.
           <HeaderSection title="Staking Over time" />
 
           {[
-            ["tXCount", 4],
-            ["volume", 1],
-            ["uniqueWallet", 2],
-            ["cumTXCount", 3],
-            ["cumVolume", 0],
-          ].map(([item, type], index) => (
+            ["tXCount", 4, ""],
+            ["volume", 1, "$Luna"],
+            ["uniqueWallet", 2, ""],
+            ["cumTXCount", 3, ""],
+            ["cumVolume", 0, "$Luna"],
+          ].map(([item, type, yLabel], index) => (
             <StackedAreaChart
               key={item}
               values={weeklytxcounttxvolumeanduniqueusers.data[item]}
@@ -216,7 +241,7 @@ according section defined in above, i prepare some of static about these topics.
               title={weeklytxcounttxvolumeanduniqueusersNames[type]}
               baseSpan={1}
               dataKey="Name"
-              oyLabel="$Luna"
+              oyLabel={yLabel as string}
               oxLabel="Action"
               labels={weeklytxcounttxvolumeanduniqueusers.data.actions.map(
                 (item: string, index: number) => ({
@@ -229,11 +254,11 @@ according section defined in above, i prepare some of static about these topics.
 
           <HeaderSection title="Daily average" />
           {[
-            ["AVG tx count", 1],
-            ["AVG volume", 3],
-            ["AVG unique wallet", 2],
-            ["AVG TX volume", 0],
-          ].map(([item, type], index) => (
+            ["AVG tx count", 1, ""],
+            ["AVG volume", 3, "$Terra"],
+            ["AVG unique wallet", 2, ""],
+            ["AVG TX volume", 0, "$Terra"],
+          ].map(([item, type, yLabel], index) => (
             <BarGraph
               key={item}
               values={averageweeklytxcounttxvolumeanduniqueusers.data}
@@ -245,7 +270,7 @@ according section defined in above, i prepare some of static about these topics.
               }
               baseSpan={1}
               dataKey="Actions"
-              oyLabel="$Luna"
+              oyLabel={yLabel as string}
               oxLabel="Action"
               labels={[
                 {
@@ -295,7 +320,7 @@ according section defined in above, i prepare some of static about these topics.
             title={weeklytop10validatorbasedonnumberofdelegatetothem.title}
             baseSpan={3}
             dataKey="Name"
-            oyLabel="Current delegate Count"
+            oyLabel=""
             oxLabel="Day"
             hideLegend
             labels={weeklytop10validatorbasedonnumberofdelegatetothem.data.actions.map(
@@ -313,7 +338,7 @@ according section defined in above, i prepare some of static about these topics.
             title={weeklytop10validatorbasedonvolumeofdelegatetothem.title}
             baseSpan={3}
             dataKey="Name"
-            oyLabel="Current delegate Count"
+            oyLabel="$Luna"
             hideLegend
             oxLabel="Day"
             labels={weeklytop10validatorbasedonvolumeofdelegatetothem.data.actions.map(
@@ -333,7 +358,7 @@ according section defined in above, i prepare some of static about these topics.
             title={weeklytop10validatorbasedonuniqueuserdelegatetothem.title}
             baseSpan={3}
             dataKey="Name"
-            oyLabel="Current delegate Count"
+            oyLabel=""
             oxLabel="Day"
             hideLegend
             labels={weeklytop10validatorbasedonuniqueuserdelegatetothem.data.actions.map(

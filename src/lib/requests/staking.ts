@@ -26,7 +26,7 @@ export const getTop30ValidatorBasedOnCurrentBalance = () =>
     Top30validatorsbasedoncurrentbalance
   >(
     "07a4656d-7f81-4126-b6f6-c31cbde7b505",
-    "Top 30 validators based on current balance",
+    "Top validators based on current power",
     "Current delegate amount"
   );
 
@@ -36,7 +36,7 @@ export const getTop10validatorbasedontotalvolumeofdelegatetothem = () =>
     Top10validatorbasedontotalvolumeofdelegatetothem
   >(
     "ac0805f3-0919-475d-bcd2-f8334c070ce0",
-    "Top 10 validator based on total volume of delegate to them",
+    "Top validator based on total volume of delegate to them",
     "Volume"
   );
 
@@ -46,7 +46,7 @@ export const getTop10validatorbasedonuniqueuserdelegatetothem = () =>
     Top10validatorbasedonuniqueuserdelegatetothem
   >(
     "4f6568d6-a6e6-4e89-a871-0a3e58d0cfb5",
-    "Top 10 validator based on total unique user delegate to them",
+    "Top validator based on total unique user delegate to them",
     "Volume"
   );
 
@@ -56,7 +56,7 @@ export const getTop10validatorbasedontotalnumberofdelegatetothem = () =>
     Top10validatorbasedontotalnumberofdelegatetothem
   >(
     "6ef77d4c-252b-4026-80eb-8313ee91ec0e",
-    "Top 10 validator based on total number of delegate to them",
+    "Top validator based on total number of delegate to them",
     "Volume"
   );
 
@@ -96,7 +96,7 @@ export const getAverageweeklytxcounttxvolumeanduniqueusers = () =>
     Averageweeklytxcounttxvolumeanduniqueusers
   >(
     "a24aa648-28b5-47c8-b6d0-a4a8cbe7391b",
-    "Average transactions volume of each staking action,Average weekly number of transactions of each staking action,Average weekly number of unique users of each action,Average weekly total volume of transactions of each staking action",
+    "Average transactions size,Daily number of staking transactions,Daily number of unique users,Daily volume of staking transactions",
     "Actions"
   );
 
