@@ -109,7 +109,7 @@ function Transactions() {
             <TxItemContainer>
               <Text textAlign={"center"} fontSize={["md", "xl"]}>
                 Enter an ETH address and click the search button to get All
-                Optimism Transaction History From FlipSide Crypto
+                Terra Transaction History From FlipSide Crypto
               </Text>
             </TxItemContainer>
           )}
@@ -128,7 +128,7 @@ function Transactions() {
             !mutation.data.records?.length && (
               <TxItemContainer>
                 <Text textAlign={"center"} fontSize={["md", "xl"]}>
-                  We Don't Find Any Optimism Transaction From This Address.
+                  We Don't Find Any terra Transaction From This Address.
                 </Text>
               </TxItemContainer>
             )}
